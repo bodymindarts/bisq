@@ -123,31 +123,31 @@ public class BsqFormatter extends BSFormatter {
     }
 
     public String formatBSQSatoshis(long satoshi) {
-        return super.formatCoin(satoshi, coinFormat);
+        return FormattingUtils.formatCoin(satoshi, coinFormat);
     }
 
     public String formatBSQSatoshisWithCode(long satoshi) {
-        return super.formatCoinWithCode(satoshi, coinFormat);
+        return FormattingUtils.formatCoinWithCode(satoshi, coinFormat);
     }
 
     public String formatBTCSatoshis(long satoshi) {
-        return super.formatCoin(satoshi, btcCoinFormat);
+        return FormattingUtils.formatCoin(satoshi, btcCoinFormat);
     }
 
     public String formatBTCWithCode(long satoshi) {
-        return super.formatCoinWithCode(satoshi, btcCoinFormat);
+        return FormattingUtils.formatCoinWithCode(satoshi, btcCoinFormat);
     }
 
     public String formatBTCWithCode(Coin coin) {
-        return super.formatCoinWithCode(coin, btcCoinFormat);
+        return FormattingUtils.formatCoinWithCode(coin, btcCoinFormat);
     }
 
     public String formatBTC(Coin coin) {
-        return super.formatCoin(coin.value, btcCoinFormat);
+        return FormattingUtils.formatCoin(coin.value, btcCoinFormat);
     }
 
     public Coin parseToBTC(String input) {
-        return super.parseToCoin(input, btcCoinFormat);
+        return ParsingUtils.parseToCoin(input, btcCoinFormat);
     }
 
     public void validateBtcInput(String input) throws ProposalValidationException {

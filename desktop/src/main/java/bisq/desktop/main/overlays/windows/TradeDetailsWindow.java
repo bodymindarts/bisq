@@ -149,8 +149,8 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.btcAmount") + btcDirectionInfo,
                 formatter.formatCoinWithCode(trade.getTradeAmount()));
         addConfirmationLabelLabel(gridPane, ++rowIndex,
-                formatter.formatVolumeLabel(offer.getCurrencyCode()) + fiatDirectionInfo,
-                formatter.formatVolumeWithCode(trade.getTradeVolume()));
+                DisplayUtils.formatVolumeLabel(offer.getCurrencyCode()) + fiatDirectionInfo,
+                DisplayUtils.formatVolumeWithCode(trade.getTradeVolume()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradePrice"),
                 FormattingUtils.formatPrice(trade.getTradePrice()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.paymentMethod"),

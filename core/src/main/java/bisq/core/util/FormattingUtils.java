@@ -8,6 +8,7 @@ import bisq.core.monetary.Price;
 
 import bisq.common.util.MathUtils;
 
+import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.Monetary;
 import org.bitcoinj.utils.Fiat;
 import org.bitcoinj.utils.MonetaryFormat;
@@ -35,8 +36,74 @@ public class FormattingUtils {
     private static final MonetaryFormat fiatPriceFormat = new MonetaryFormat().shift(0).minDecimals(4).repeatOptionalDecimals(0, 0);
     private static final DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
+    public static String formatCoinWithCode(long value, MonetaryFormat coinFormat) {
+        return formatCoinWithCode(Coin.valueOf(value), coinFormat);
+    }
 
-    static String formatFiat(Fiat fiat, MonetaryFormat format, boolean appendCurrencyCode) {
+    public static String formatCoinWithCode(Coin coin, MonetaryFormat coinFormat) {
+        if (coin != null) {
+            try {
+                // we don't use the code feature from coinFormat as it does automatic switching between mBTC and BTC and
+                // pre and post fixing
+                return coinFormat.postfixCode().format(coin).toString();
+            } catch (Throwable t) {
+                log.warn("Exception at formatBtcWithCode: " + t.toString());
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    public static String formatCoin(long value, MonetaryFormat coinFormat) {
+        return formatCoin(Coin.valueOf(value), -1, false, 0, coinFormat);
+    }
+
+    public static String formatCoin(Coin coin,
+                                    int decimalPlaces,
+                                    boolean decimalAligned,
+                                    int maxNumberOfDigits,
+                                    MonetaryFormat coinFormat) {
+        String formattedCoin = "";
+
+        if (coin != null) {
+            try {
+                if (decimalPlaces < 0 || decimalPlaces > 4) {
+                    formattedCoin = coinFormat.noCode().format(coin).toString();
+                } else {
+                    formattedCoin = coinFormat.noCode().minDecimals(decimalPlaces).repeatOptionalDecimals(1, decimalPlaces).format(coin).toString();
+                }
+            } catch (Throwable t) {
+                log.warn("Exception at formatBtc: " + t.toString());
+            }
+        }
+
+        if (decimalAligned) {
+            formattedCoin = fillUpPlacesWithEmptyStrings(formattedCoin, maxNumberOfDigits);
+        }
+
+        return formattedCoin;
+    }
+
+    public class CoinFormatter {
+
+        // We don't support localized formatting. Format is always using "." as decimal mark and no grouping separator.
+        // Input of "," as decimal mark (like in german locale) will be replaced with ".".
+        // Input of a group separator (1,123,45) lead to an validation error.
+        // Note: BtcFormat was intended to be used, but it lead to many problems (automatic format to mBit,
+        // no way to remove grouping separator). It seems to be not optimal for user input formatting.
+        private final MonetaryFormat coinFormat;
+
+        public CoinFormatter(MonetaryFormat coinFormat) {
+            this.coinFormat = coinFormat;
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Volume
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    public static String formatFiat(Fiat fiat, MonetaryFormat format, boolean appendCurrencyCode) {
         if (fiat != null) {
             try {
                 final String res = format.noCode().format(fiat).toString();
@@ -71,21 +138,8 @@ public class FormattingUtils {
     // Price
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    public static String formatPrice(Price price, boolean appendCurrencyCode) {
-        return formatPrice(price, fiatPriceFormat, true);
-    }
-
     public static String formatPrice(Price price) {
         return formatPrice(price, fiatPriceFormat, false);
-    }
-
-    public static String formatPrice(Price price, Boolean decimalAligned, int maxPlaces) {
-        String formattedPrice = formatPrice(price);
-
-        if (decimalAligned) {
-            formattedPrice = FormattingUtils.fillUpPlacesWithEmptyStrings(formattedPrice, maxPlaces);
-        }
-        return formattedPrice;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////

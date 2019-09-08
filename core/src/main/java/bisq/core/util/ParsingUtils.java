@@ -4,12 +4,43 @@ import bisq.core.monetary.Price;
 
 import bisq.common.util.MathUtils;
 
+import org.bitcoinj.core.Coin;
+import org.bitcoinj.utils.Fiat;
+import org.bitcoinj.utils.MonetaryFormat;
+
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ParsingUtils {
+    protected static Fiat parseToFiat(String input, String currencyCode) {
+        if (input != null && input.length() > 0) {
+            try {
+                return Fiat.parseFiat(currencyCode, cleanDoubleInput(input));
+            } catch (Exception e) {
+                log.warn("Exception at parseToFiat: " + e.toString());
+                return Fiat.valueOf(currencyCode, 0);
+            }
+
+        } else {
+            return Fiat.valueOf(currencyCode, 0);
+        }
+    }
+
+    public static Coin parseToCoin(String input, MonetaryFormat coinFormat) {
+        if (input != null && input.length() > 0) {
+            try {
+                return coinFormat.parse(cleanDoubleInput(input));
+            } catch (Throwable t) {
+                log.warn("Exception at parseToCoin: " + t.toString());
+                return Coin.ZERO;
+            }
+        } else {
+            return Coin.ZERO;
+        }
+    }
+
     public static double parseNumberStringToDouble(String input) throws NumberFormatException {
         return Double.parseDouble(cleanDoubleInput(input));
     }

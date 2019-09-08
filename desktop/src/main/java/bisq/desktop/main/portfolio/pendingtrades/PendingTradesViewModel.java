@@ -280,7 +280,7 @@ public class PendingTradesViewModel extends ActivatableWithDataModel<PendingTrad
     }
 
     public String getFiatVolume() {
-        return dataModel.getTrade() != null ? btcFormatter.formatVolumeWithCode(dataModel.getTrade().getTradeVolume()) : "";
+        return dataModel.getTrade() != null ? DisplayUtils.formatVolumeWithCode(dataModel.getTrade().getTradeVolume()) : "";
     }
 
     public String getTxFee() {

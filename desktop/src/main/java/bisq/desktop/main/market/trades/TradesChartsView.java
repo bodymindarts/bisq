@@ -673,8 +673,8 @@ public class TradesChartsView extends ActivatableViewAndModel<VBox, TradesCharts
                                 super.updateItem(item, empty);
                                 if (item != null)
                                     setText(model.showAllTradeCurrenciesProperty.get() ?
-                                            formatter.formatVolumeWithCode(item.getTradeVolume()) :
-                                            formatter.formatVolume(item.getTradeVolume()));
+                                            DisplayUtils.formatVolumeWithCode(item.getTradeVolume()) :
+                                            DisplayUtils.formatVolume(item.getTradeVolume()));
                                 else
                                     setText("");
                             }

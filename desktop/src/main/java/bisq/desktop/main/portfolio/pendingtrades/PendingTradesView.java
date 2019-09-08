@@ -559,7 +559,7 @@ public class PendingTradesView extends ActivatableViewAndModel<VBox, PendingTrad
                             public void updateItem(final PendingTradesListItem item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null && !empty)
-                                    setGraphic(new AutoTooltipLabel(formatter.formatVolumeWithCode(item.getTrade().getTradeVolume())));
+                                    setGraphic(new AutoTooltipLabel(DisplayUtils.formatVolumeWithCode(item.getTrade().getTradeVolume())));
                                 else
                                     setGraphic(null);
                             }

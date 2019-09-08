@@ -114,9 +114,9 @@ public class BSFormatterTest {
 
     @Test
     public void testFormatVolume() {
-        assertEquals("1.00", formatter.formatVolume(make(btcUsdOffer), true, 4));
-        assertEquals("100.00", formatter.formatVolume(make(usdVolume)));
-        assertEquals("1774.62", formatter.formatVolume(make(usdVolume.but(with(volumeString, "1774.62")))));
+        assertEquals("1.00", DisplayUtils.formatVolume(make(btcUsdOffer), true, 4));
+        assertEquals("100.00", DisplayUtils.formatVolume(make(usdVolume)));
+        assertEquals("1774.62", DisplayUtils.formatVolume(make(usdVolume.but(with(volumeString, "1774.62")))));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class BSFormatterTest {
         when(offer.getMinVolume()).thenReturn(btc);
         when(offer.getVolume()).thenReturn(btc);
 
-        assertEquals("0.10000000", formatter.formatVolume(offer.getVolume()));
+        assertEquals("0.10000000", DisplayUtils.formatVolume(offer.getVolume()));
     }
 
     @Test
@@ -138,7 +138,7 @@ public class BSFormatterTest {
         when(offer.getMinVolume()).thenReturn(btcMin);
         when(offer.getVolume()).thenReturn(btcMax);
 
-        assertEquals("0.10000000 - 0.25000000", formatter.formatVolume(offer, false, 0));
+        assertEquals("0.10000000 - 0.25000000", DisplayUtils.formatVolume(offer, false, 0));
     }
 
     @Test
@@ -147,7 +147,7 @@ public class BSFormatterTest {
         when(offer.getMinVolume()).thenReturn(null);
         when(offer.getVolume()).thenReturn(null);
 
-        assertEquals("", formatter.formatVolume(offer.getVolume()));
+        assertEquals("", DisplayUtils.formatVolume(offer.getVolume()));
     }
 
     @Test

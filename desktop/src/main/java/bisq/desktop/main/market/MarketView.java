@@ -190,7 +190,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
                             .append("Market: ").append(CurrencyUtil.getCurrencyPair(trade.getCurrencyCode())).append("\n")
                             .append("Price: ").append(FormattingUtils.formatPrice(trade.getTradePrice())).append("\n")
                             .append("Amount: ").append(formatter.formatCoin(trade.getTradeAmount())).append("\n")
-                            .append("Volume: ").append(formatter.formatVolume(trade.getTradeVolume())).append("\n")
+                            .append("Volume: ").append(DisplayUtils.formatVolume(trade.getTradeVolume())).append("\n")
                             .append("Payment method: ").append(Res.get(trade.getOfferPaymentMethod())).append("\n")
                             .append("ReferralID: ").append(trade.getExtraDataMap().get(OfferPayload.REFERRAL_ID));
                     return sb.toString();
