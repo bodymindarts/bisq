@@ -34,6 +34,7 @@ import bisq.core.trade.statistics.TradeStatisticsManager;
 import bisq.core.user.Preferences;
 import bisq.core.util.BSFormatter;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.common.util.Tuple3;
 
@@ -308,7 +309,7 @@ public class BsqDashboardView extends ActivatableView<GridPane, Void> implements
         Optional<Price> optionalBsqPrice = priceFeedService.getBsqPrice();
         if (optionalBsqPrice.isPresent()) {
             Price bsqPrice = optionalBsqPrice.get();
-            marketPriceLabel.setText(bsqFormatter.formatPrice(bsqPrice) + " BSQ/BTC");
+            marketPriceLabel.setText(FormattingUtils.formatPrice(bsqPrice) + " BSQ/BTC");
 
             marketCapTextField.setText(bsqFormatter.formatMarketCap(priceFeedService.getMarketPrice("BSQ"),
                     priceFeedService.getMarketPrice(preferences.getPreferredTradeCurrency().getCode()),

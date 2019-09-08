@@ -160,7 +160,7 @@ public class BsqFormatter extends BSFormatter {
 
     private void validateCoinInput(String input, MonetaryFormat coinFormat) throws ProposalValidationException {
         try {
-            coinFormat.parse(cleanDoubleInput(input));
+            coinFormat.parse(ParsingUtils.cleanDoubleInput(input));
         } catch (Throwable t) {
             throw new ProposalValidationException("Invalid format for a " + coinFormat.code() + " value");
         }
@@ -176,7 +176,7 @@ public class BsqFormatter extends BSFormatter {
             case BTC:
                 return formatBTCWithCode(parseToBTC(value));
             case PERCENT:
-                return formatToPercentWithSymbol(parsePercentStringToDouble(value));
+                return FormattingUtils.formatToPercentWithSymbol(ParsingUtils.parsePercentStringToDouble(value));
             case BLOCK:
                 return Res.get("dao.param.blocks", Integer.parseInt(value));
             case ADDRESS:
@@ -216,7 +216,7 @@ public class BsqFormatter extends BSFormatter {
             case BTC:
                 return formatBTC(parseParamValueToCoin(param, inputValue));
             case PERCENT:
-                return formatToPercent(parsePercentStringToDouble(inputValue));
+                return FormattingUtils.formatToPercent(ParsingUtils.parsePercentStringToDouble(inputValue));
             case BLOCK:
                 return Integer.toString(parseParamValueToBlocks(param, inputValue));
             case ADDRESS:

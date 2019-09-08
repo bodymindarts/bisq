@@ -23,9 +23,11 @@ import bisq.desktop.components.BusyAnimation;
 import bisq.desktop.main.overlays.Overlay;
 import bisq.desktop.main.overlays.popups.Popup;
 import bisq.desktop.util.Layout;
+import bisq.desktop.util.DisplayUtils;
 
 import bisq.core.locale.BankUtil;
 import bisq.core.locale.CountryUtil;
+import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
 import bisq.core.monetary.Price;
 import bisq.core.offer.Offer;
@@ -34,6 +36,9 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.user.User;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+
+import bisq.network.p2p.NodeAddress;
 
 import bisq.common.crypto.KeyRing;
 import bisq.common.util.Tuple2;
@@ -58,6 +63,7 @@ import javafx.geometry.Insets;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -170,17 +176,17 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
         double firstRowDistance = Layout.TWICE_FIRST_ROW_DISTANCE;
         if (takeOfferHandlerOptional.isPresent()) {
             addConfirmationLabelLabel(gridPane, rowIndex, offerTypeLabel,
-                    formatter.getDirectionForTakeOffer(direction, currencyCode), firstRowDistance);
+                    getDirectionForTakeOffer(direction, currencyCode), firstRowDistance);
             fiatDirectionInfo = direction == OfferPayload.Direction.BUY ? toReceive : toSpend;
             btcDirectionInfo = direction == OfferPayload.Direction.SELL ? toReceive : toSpend;
         } else if (placeOfferHandlerOptional.isPresent()) {
             addConfirmationLabelLabel(gridPane, rowIndex, offerTypeLabel,
-                    formatter.getOfferDirectionForCreateOffer(direction, currencyCode), firstRowDistance);
+                    getOfferDirectionForCreateOffer(direction, currencyCode), firstRowDistance);
             fiatDirectionInfo = direction == OfferPayload.Direction.SELL ? toReceive : toSpend;
             btcDirectionInfo = direction == OfferPayload.Direction.BUY ? toReceive : toSpend;
         } else {
             addConfirmationLabelLabel(gridPane, rowIndex, offerTypeLabel,
-                    formatter.getDirectionBothSides(direction, currencyCode), firstRowDistance);
+                    DisplayUtils.getDirectionBothSides(direction, currencyCode), firstRowDistance);
         }
         String btcAmount = Res.get("shared.btcAmount");
         if (takeOfferHandlerOptional.isPresent()) {
@@ -204,15 +210,15 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
 
         String priceLabel = Res.get("shared.price");
         if (takeOfferHandlerOptional.isPresent()) {
-            addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, formatter.formatPrice(tradePrice));
+            addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, FormattingUtils.formatPrice(tradePrice));
         } else {
             Price price = offer.getPrice();
             if (offer.isUseMarketBasedPrice()) {
-                addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, formatter.formatPrice(price) +
+                addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, FormattingUtils.formatPrice(price) +
                         " " + Res.get("offerDetailsWindow.distance",
-                        formatter.formatPercentagePrice(offer.getMarketPriceMargin())));
+                        FormattingUtils.formatPercentagePrice(offer.getMarketPriceMargin())));
             } else {
-                addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, formatter.formatPrice(price));
+                addConfirmationLabelLabel(gridPane, ++rowIndex, priceLabel, FormattingUtils.formatPrice(price));
             }
         }
         final PaymentMethod paymentMethod = offer.getPaymentMethod();
@@ -307,7 +313,7 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
         addConfirmationLabelTextFieldWithCopyIcon(gridPane, ++rowIndex, Res.get("offerDetailsWindow.makersOnion"),
                 offer.getMakerNodeAddress().getFullAddress());
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("offerDetailsWindow.creationDate"),
-                formatter.formatDateTime(offer.getDate()));
+                DisplayUtils.formatDateTime(offer.getDate()));
         String value = Res.getWithColAndCap("shared.buyer") +
                 " " +
                 formatter.formatCoinWithCode(offer.getBuyerSecurityDeposit()) +
@@ -322,7 +328,7 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
                     CountryUtil.getNameAndCode(countryCode));
 
         addConfirmationLabelTextFieldWithCopyIcon(gridPane, ++rowIndex, Res.get("offerDetailsWindow.acceptedArbitrators"),
-                formatter.arbitratorAddressesToString(offer.getArbitratorNodeAddresses()));
+                arbitratorAddressesToString(offer.getArbitratorNodeAddresses()));
         if (offer.getOfferFeePaymentTxId() != null)
             addLabelTxIdTextField(gridPane, ++rowIndex, Res.get("shared.makerFeeTxId"), offer.getOfferFeePaymentTxId());
 
@@ -407,5 +413,36 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
                 new Popup<>().warning(Res.get("popup.warning.noArbitratorsAvailable")).show();
             }
         });
+    }
+
+    private String getDirectionForTakeOffer(OfferPayload.Direction direction, String currencyCode) {
+        String baseCurrencyCode = Res.getBaseCurrencyCode();
+        if (CurrencyUtil.isFiatCurrency(currencyCode)) {
+            return direction == OfferPayload.Direction.BUY ?
+                    Res.get("formatter.youAre", Res.get("shared.selling"), baseCurrencyCode, Res.get("shared.buying"), currencyCode) :
+                    Res.get("formatter.youAre", Res.get("shared.buying"), baseCurrencyCode, Res.get("shared.selling"), currencyCode);
+        } else {
+
+            return direction == OfferPayload.Direction.SELL ?
+                    Res.get("formatter.youAre", Res.get("shared.selling"), currencyCode, Res.get("shared.buying"), baseCurrencyCode) :
+                    Res.get("formatter.youAre", Res.get("shared.buying"), currencyCode, Res.get("shared.selling"), baseCurrencyCode);
+        }
+    }
+
+    private String getOfferDirectionForCreateOffer(OfferPayload.Direction direction, String currencyCode) {
+        String baseCurrencyCode = Res.getBaseCurrencyCode();
+        if (CurrencyUtil.isFiatCurrency(currencyCode)) {
+            return direction == OfferPayload.Direction.BUY ?
+                    Res.get("formatter.youAreCreatingAnOffer.fiat", Res.get("shared.buy"), baseCurrencyCode) :
+                    Res.get("formatter.youAreCreatingAnOffer.fiat", Res.get("shared.sell"), baseCurrencyCode);
+        } else {
+            return direction == OfferPayload.Direction.SELL ?
+                    Res.get("formatter.youAreCreatingAnOffer.altcoin", Res.get("shared.buy"), currencyCode, Res.get("shared.selling"), baseCurrencyCode) :
+                    Res.get("formatter.youAreCreatingAnOffer.altcoin", Res.get("shared.sell"), currencyCode, Res.get("shared.buying"), baseCurrencyCode);
+        }
+    }
+
+    private String arbitratorAddressesToString(List<NodeAddress> nodeAddresses) {
+        return nodeAddresses.stream().map(NodeAddress::getFullAddress).collect(Collectors.joining(", "));
     }
 }

@@ -22,6 +22,7 @@ import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.CoinMaker;
@@ -61,13 +62,13 @@ public class BSFormatterTest {
 
     @Test
     public void testIsValid() {
-        assertEquals("0 days", formatter.formatAccountAge(TimeUnit.HOURS.toMillis(23)));
-        assertEquals("0 days", formatter.formatAccountAge(0));
-        assertEquals("0 days", formatter.formatAccountAge(-1));
-        assertEquals("1 day", formatter.formatAccountAge(TimeUnit.DAYS.toMillis(1)));
-        assertEquals("2 days", formatter.formatAccountAge(TimeUnit.DAYS.toMillis(2)));
-        assertEquals("30 days", formatter.formatAccountAge(TimeUnit.DAYS.toMillis(30)));
-        assertEquals("60 days", formatter.formatAccountAge(TimeUnit.DAYS.toMillis(60)));
+        assertEquals("0 days", DisplayUtils.formatAccountAge(TimeUnit.HOURS.toMillis(23)));
+        assertEquals("0 days", DisplayUtils.formatAccountAge(0));
+        assertEquals("0 days", DisplayUtils.formatAccountAge(-1));
+        assertEquals("1 day", DisplayUtils.formatAccountAge(TimeUnit.DAYS.toMillis(1)));
+        assertEquals("2 days", DisplayUtils.formatAccountAge(TimeUnit.DAYS.toMillis(2)));
+        assertEquals("30 days", DisplayUtils.formatAccountAge(TimeUnit.DAYS.toMillis(30)));
+        assertEquals("60 days", DisplayUtils.formatAccountAge(TimeUnit.DAYS.toMillis(60)));
     }
 
     @Test
@@ -77,29 +78,29 @@ public class BSFormatterTest {
         long oneMinute = TimeUnit.MINUTES.toMillis(1);
         long oneSecond = TimeUnit.SECONDS.toMillis(1);
 
-        assertEquals("1 hour, 0 minutes", formatter.formatDurationAsWords(oneHour));
-        assertEquals("1 day, 0 hours, 0 minutes", formatter.formatDurationAsWords(oneDay));
-        assertEquals("2 days, 0 hours, 1 minute", formatter.formatDurationAsWords(oneDay * 2 + oneMinute));
-        assertEquals("2 days, 0 hours, 2 minutes", formatter.formatDurationAsWords(oneDay * 2 + oneMinute * 2));
-        assertEquals("1 hour, 0 minutes, 0 seconds", formatter.formatDurationAsWords(oneHour, true, true));
-        assertEquals("1 hour, 0 minutes, 1 second", formatter.formatDurationAsWords(oneHour + oneSecond, true, true));
-        assertEquals("1 hour, 0 minutes, 2 seconds", formatter.formatDurationAsWords(oneHour + oneSecond * 2, true, true));
-        assertEquals("2 days, 21 hours, 28 minutes", formatter.formatDurationAsWords(oneDay * 2 + oneHour * 21 + oneMinute * 28));
-        assertEquals("110 days", formatter.formatDurationAsWords(oneDay * 110, false, false));
-        assertEquals("10 days, 10 hours, 10 minutes, 10 seconds", formatter.formatDurationAsWords(oneDay * 10 + oneHour * 10 + oneMinute * 10 + oneSecond * 10, true, false));
-        assertEquals("1 hour, 2 seconds", formatter.formatDurationAsWords(oneHour + oneSecond * 2, true, false));
-        assertEquals("1 hour", formatter.formatDurationAsWords(oneHour + oneSecond * 2, false, false));
-        assertEquals("0 hours, 0 minutes, 1 second", formatter.formatDurationAsWords(oneSecond, true, true));
-        assertEquals("1 second", formatter.formatDurationAsWords(oneSecond, true, false));
-        assertEquals("0 hours", formatter.formatDurationAsWords(oneSecond, false, false));
-        assertEquals("", formatter.formatDurationAsWords(0));
-        assertTrue(formatter.formatDurationAsWords(0).isEmpty());
+        assertEquals("1 hour, 0 minutes", DisplayUtils.formatDurationAsWords(oneHour));
+        assertEquals("1 day, 0 hours, 0 minutes", DisplayUtils.formatDurationAsWords(oneDay));
+        assertEquals("2 days, 0 hours, 1 minute", DisplayUtils.formatDurationAsWords(oneDay * 2 + oneMinute));
+        assertEquals("2 days, 0 hours, 2 minutes", DisplayUtils.formatDurationAsWords(oneDay * 2 + oneMinute * 2));
+        assertEquals("1 hour, 0 minutes, 0 seconds", FormattingUtils.formatDurationAsWords(oneHour, true, true));
+        assertEquals("1 hour, 0 minutes, 1 second", FormattingUtils.formatDurationAsWords(oneHour + oneSecond, true, true));
+        assertEquals("1 hour, 0 minutes, 2 seconds", FormattingUtils.formatDurationAsWords(oneHour + oneSecond * 2, true, true));
+        assertEquals("2 days, 21 hours, 28 minutes", DisplayUtils.formatDurationAsWords(oneDay * 2 + oneHour * 21 + oneMinute * 28));
+        assertEquals("110 days", FormattingUtils.formatDurationAsWords(oneDay * 110, false, false));
+        assertEquals("10 days, 10 hours, 10 minutes, 10 seconds", FormattingUtils.formatDurationAsWords(oneDay * 10 + oneHour * 10 + oneMinute * 10 + oneSecond * 10, true, false));
+        assertEquals("1 hour, 2 seconds", FormattingUtils.formatDurationAsWords(oneHour + oneSecond * 2, true, false));
+        assertEquals("1 hour", FormattingUtils.formatDurationAsWords(oneHour + oneSecond * 2, false, false));
+        assertEquals("0 hours, 0 minutes, 1 second", FormattingUtils.formatDurationAsWords(oneSecond, true, true));
+        assertEquals("1 second", FormattingUtils.formatDurationAsWords(oneSecond, true, false));
+        assertEquals("0 hours", FormattingUtils.formatDurationAsWords(oneSecond, false, false));
+        assertEquals("", DisplayUtils.formatDurationAsWords(0));
+        assertTrue(DisplayUtils.formatDurationAsWords(0).isEmpty());
     }
 
     @Test
     public void testFormatPrice() {
-        assertEquals("100.0000", formatter.formatPrice(make(usdPrice)));
-        assertEquals("7098.4700", formatter.formatPrice(make(usdPrice.but(with(priceString, "7098.4700")))));
+        assertEquals("100.0000", FormattingUtils.formatPrice(make(usdPrice)));
+        assertEquals("7098.4700", FormattingUtils.formatPrice(make(usdPrice.but(with(priceString, "7098.4700")))));
     }
 
     @Test

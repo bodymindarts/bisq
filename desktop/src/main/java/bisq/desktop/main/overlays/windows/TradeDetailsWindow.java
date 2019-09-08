@@ -21,6 +21,7 @@ import bisq.desktop.components.BisqTextArea;
 import bisq.desktop.components.TextFieldWithCopyIcon;
 import bisq.desktop.main.MainView;
 import bisq.desktop.main.overlays.Overlay;
+import bisq.desktop.util.DisplayUtils;
 import bisq.desktop.util.Layout;
 
 import bisq.core.account.witness.AccountAgeWitnessService;
@@ -33,6 +34,7 @@ import bisq.core.trade.Contract;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeManager;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.common.UserThread;
 
@@ -134,12 +136,12 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
         String offerType = Res.get("shared.offerType");
         if (tradeManager.isBuyer(offer)) {
             addConfirmationLabelLabel(gridPane, rowIndex, offerType,
-                    formatter.getDirectionForBuyer(myOffer, offer.getCurrencyCode()), Layout.TWICE_FIRST_ROW_DISTANCE);
+                    getDirectionForBuyer(myOffer, offer.getCurrencyCode()), Layout.TWICE_FIRST_ROW_DISTANCE);
             fiatDirectionInfo = toSpend;
             btcDirectionInfo = toReceive;
         } else {
             addConfirmationLabelLabel(gridPane, rowIndex, offerType,
-                    formatter.getDirectionForSeller(myOffer, offer.getCurrencyCode()), Layout.TWICE_FIRST_ROW_DISTANCE);
+                    getDirectionForSeller(myOffer, offer.getCurrencyCode()), Layout.TWICE_FIRST_ROW_DISTANCE);
             fiatDirectionInfo = toReceive;
             btcDirectionInfo = toSpend;
         }
@@ -150,7 +152,7 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
                 formatter.formatVolumeLabel(offer.getCurrencyCode()) + fiatDirectionInfo,
                 formatter.formatVolumeWithCode(trade.getTradeVolume()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradePrice"),
-                formatter.formatPrice(trade.getTradePrice()));
+                FormattingUtils.formatPrice(trade.getTradePrice()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.paymentMethod"),
                 Res.get(offer.getPaymentMethod().getId()));
 
@@ -198,7 +200,7 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
         addConfirmationLabelTextFieldWithCopyIcon(gridPane, rowIndex, Res.get("shared.tradeId"),
                 trade.getId(), Layout.TWICE_FIRST_ROW_AND_GROUP_DISTANCE);
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("tradeDetailsWindow.tradeDate"),
-                formatter.formatDateTime(trade.getDate()));
+                DisplayUtils.formatDateTime(trade.getDate()));
         String securityDeposit = Res.getWithColAndCap("shared.buyer") +
                 " " +
                 formatter.formatCoinWithCode(offer.getBuyerSecurityDeposit()) +
@@ -226,7 +228,7 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
                 String paymentDetails = buyerPaymentAccountPayload.getPaymentDetails();
                 long age = accountAgeWitnessService.getAccountAge(buyerPaymentAccountPayload, contract.getBuyerPubKeyRing());
                 buyersAccountAge = CurrencyUtil.isFiatCurrency(offer.getCurrencyCode()) ?
-                        age > -1 ? Res.get("peerInfoIcon.tooltip.age", formatter.formatAccountAge(age)) :
+                        age > -1 ? Res.get("peerInfoIcon.tooltip.age", DisplayUtils.formatAccountAge(age)) :
                                 Res.get("peerInfoIcon.tooltip.unknownAge") :
                         "";
 
@@ -240,7 +242,7 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
                 String paymentDetails = sellerPaymentAccountPayload.getPaymentDetails();
                 long age = accountAgeWitnessService.getAccountAge(sellerPaymentAccountPayload, contract.getSellerPubKeyRing());
                 sellersAccountAge = CurrencyUtil.isFiatCurrency(offer.getCurrencyCode()) ?
-                        age > -1 ? Res.get("peerInfoIcon.tooltip.age", formatter.formatAccountAge(age)) :
+                        age > -1 ? Res.get("peerInfoIcon.tooltip.age", DisplayUtils.formatAccountAge(age)) :
                                 Res.get("peerInfoIcon.tooltip.unknownAge") :
                         "";
                 String postFix = sellersAccountAge.isEmpty() ? "" : " / " + sellersAccountAge;
@@ -345,5 +347,31 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
             closeHandlerOptional.ifPresent(Runnable::run);
             hide();
         });
+    }
+
+    private String getDirectionForBuyer(boolean isMyOffer, String currencyCode) {
+        if (CurrencyUtil.isFiatCurrency(currencyCode)) {
+            String code = Res.getBaseCurrencyCode();
+            return isMyOffer ?
+                    Res.get("formatter.youAreAsMaker", Res.get("shared.buying"), code, Res.get("shared.selling"), code) :
+                    Res.get("formatter.youAreAsTaker", Res.get("shared.buying"), code, Res.get("shared.selling"), code);
+        } else {
+            return isMyOffer ?
+                    Res.get("formatter.youAreAsMaker", Res.get("shared.selling"), currencyCode, Res.get("shared.buying"), currencyCode) :
+                    Res.get("formatter.youAreAsTaker", Res.get("shared.selling"), currencyCode, Res.get("shared.buying"), currencyCode);
+        }
+    }
+
+    private String getDirectionForSeller(boolean isMyOffer, String currencyCode) {
+        if (CurrencyUtil.isFiatCurrency(currencyCode)) {
+            String code = Res.getBaseCurrencyCode();
+            return isMyOffer ?
+                    Res.get("formatter.youAreAsMaker", Res.get("shared.selling"), code, Res.get("shared.buying"), code) :
+                    Res.get("formatter.youAreAsTaker", Res.get("shared.selling"), code, Res.get("shared.buying"), code);
+        } else {
+            return isMyOffer ?
+                    Res.get("formatter.youAreAsMaker", Res.get("shared.buying"), currencyCode, Res.get("shared.selling"), currencyCode) :
+                    Res.get("formatter.youAreAsTaker", Res.get("shared.buying"), currencyCode, Res.get("shared.selling"), currencyCode);
+        }
     }
 }
