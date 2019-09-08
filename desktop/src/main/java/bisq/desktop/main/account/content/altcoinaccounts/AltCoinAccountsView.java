@@ -38,7 +38,8 @@ import bisq.core.payment.PaymentAccountFactory;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.payment.validation.AltCoinAddressValidator;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.asset.AltCoinAccountDisclaimer;
@@ -75,7 +76,7 @@ public class AltCoinAccountsView extends PaymentAccountsView<GridPane, AltCoinAc
     private final AccountAgeWitnessService accountAgeWitnessService;
     private final AssetService assetService;
     private final FilterManager filterManager;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private final Preferences preferences;
 
     private PaymentMethodForm paymentMethodForm;
@@ -90,7 +91,7 @@ public class AltCoinAccountsView extends PaymentAccountsView<GridPane, AltCoinAc
                                AccountAgeWitnessService accountAgeWitnessService,
                                AssetService assetService,
                                FilterManager filterManager,
-                               BSFormatter formatter,
+                               FormattingUtils.CoinFormatter formatter,
                                Preferences preferences) {
         super(model);
 

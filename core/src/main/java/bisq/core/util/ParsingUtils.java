@@ -52,7 +52,7 @@ public class ParsingUtils {
         return MathUtils.roundDouble(value / 100d, 4);
     }
 
-    public static long parsePriceStringToLong(BSFormatter bsFormatter,
+    public static long parsePriceStringToLong(
                                               String currencyCode,
                                               String amount,
                                               int precision) {

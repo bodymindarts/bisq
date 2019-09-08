@@ -17,7 +17,8 @@
 
 package bisq.desktop.components;
 
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
 
@@ -37,7 +38,7 @@ public class BalanceTextField extends AnchorPane {
     private final JFXTextField textField;
     private final Effect fundedEffect = new DropShadow(BlurType.THREE_PASS_BOX, Color.GREEN, 4, 0.0, 0, 0);
     private final Effect notFundedEffect = new DropShadow(BlurType.THREE_PASS_BOX, Color.ORANGERED, 4, 0.0, 0, 0);
-    private BSFormatter formatter;
+    private FormattingUtils.CoinFormatter formatter;
     @Nullable
     private Coin balance;
 
@@ -60,7 +61,7 @@ public class BalanceTextField extends AnchorPane {
         getChildren().addAll(textField);
     }
 
-    public void setFormatter(BSFormatter formatter) {
+    public void setFormatter(FormattingUtils.CoinFormatter formatter) {
         this.formatter = formatter;
     }
 

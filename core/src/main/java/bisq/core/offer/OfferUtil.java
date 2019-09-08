@@ -32,10 +32,8 @@ import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.ReferralIdService;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.CoinUtil;
-import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
 

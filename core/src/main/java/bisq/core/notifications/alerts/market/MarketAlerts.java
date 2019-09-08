@@ -30,7 +30,6 @@ import bisq.core.offer.OfferPayload;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.common.crypto.KeyRing;
@@ -54,17 +53,15 @@ public class MarketAlerts {
     private final User user;
     private final PriceFeedService priceFeedService;
     private final KeyRing keyRing;
-    private final BSFormatter formatter;
 
     @Inject
     public MarketAlerts(OfferBookService offerBookService, MobileNotificationService mobileNotificationService,
-                        User user, PriceFeedService priceFeedService, KeyRing keyRing, BSFormatter formatter) {
+                        User user, PriceFeedService priceFeedService, KeyRing keyRing) {
         this.offerBookService = offerBookService;
         this.mobileNotificationService = mobileNotificationService;
         this.user = user;
         this.priceFeedService = priceFeedService;
         this.keyRing = keyRing;
-        this.formatter = formatter;
     }
 
 

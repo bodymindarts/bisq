@@ -20,11 +20,13 @@ import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.validation.InputValidator;
 
 import org.bitcoinj.core.Coin;
+import org.bitcoinj.utils.MonetaryFormat;
 
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -61,8 +63,6 @@ public class EditOfferDataModelTest {
         final CryptoCurrency btc = new CryptoCurrency("BTC", "bitcoin");
         GlobalSettings.setDefaultTradeCurrency(btc);
         Res.setup();
-
-        final BSFormatter bsFormatter = new BSFormatter();
 
         FeeService feeService = mock(FeeService.class);
         AddressEntry addressEntry = mock(AddressEntry.class);

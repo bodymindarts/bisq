@@ -29,7 +29,8 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.USPostalMoneyOrderAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.USPostalMoneyOrderAccountPayload;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.TextArea;
@@ -56,7 +57,7 @@ public class USPostalMoneyOrderForm extends PaymentMethodForm {
 
     public USPostalMoneyOrderForm(PaymentAccount paymentAccount,
                                   AccountAgeWitnessService accountAgeWitnessService, USPostalMoneyOrderValidator usPostalMoneyOrderValidator,
-                                  InputValidator inputValidator, GridPane gridPane, int gridRow, BSFormatter formatter) {
+                                  InputValidator inputValidator, GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.usPostalMoneyOrderAccount = (USPostalMoneyOrderAccount) paymentAccount;
         this.usPostalMoneyOrderValidator = usPostalMoneyOrderValidator;

@@ -47,7 +47,6 @@ import bisq.core.trade.Trade;
 import bisq.core.trade.closed.ClosedTradableManager;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
@@ -102,7 +101,7 @@ class OfferBookViewModel extends ActivatableViewModel {
     private final FilterManager filterManager;
     final AccountAgeWitnessService accountAgeWitnessService;
     private final Navigation navigation;
-    final BSFormatter formatter;
+    final FormattingUtils.CoinFormatter btcFormatter;
     final ObjectProperty<TableColumn.SortType> priceSortTypeProperty = new SimpleObjectProperty<>();
 
 
@@ -145,7 +144,7 @@ class OfferBookViewModel extends ActivatableViewModel {
                               FilterManager filterManager,
                               AccountAgeWitnessService accountAgeWitnessService,
                               Navigation navigation,
-                              BSFormatter formatter) {
+                              FormattingUtils.CoinFormatter btcFormatter) {
         super();
 
         this.openOfferManager = openOfferManager;
@@ -158,7 +157,7 @@ class OfferBookViewModel extends ActivatableViewModel {
         this.filterManager = filterManager;
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.navigation = navigation;
-        this.formatter = formatter;
+        this.btcFormatter = btcFormatter;
 
         this.filteredItems = new FilteredList<>(offerBook.getOfferBookListItems());
         this.sortedItems = new SortedList<>(filteredItems);
@@ -343,7 +342,7 @@ class OfferBookViewModel extends ActivatableViewModel {
     }
 
     private String formatAmount(Offer offer, boolean decimalAligned) {
-        return formatter.formatAmount(offer, GUIUtil.AMOUNT_DECIMALS, decimalAligned, maxPlacesForAmount.get());
+        return btcFormatter.formatAmount(offer, GUIUtil.AMOUNT_DECIMALS, decimalAligned, maxPlacesForAmount.get());
     }
 
 

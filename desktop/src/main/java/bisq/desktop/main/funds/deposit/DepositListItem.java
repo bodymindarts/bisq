@@ -25,7 +25,8 @@ import bisq.core.btc.listeners.TxConfidenceListener;
 import bisq.core.btc.model.AddressEntry;
 import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.locale.Res;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 
 import org.bitcoinj.core.Address;
 import org.bitcoinj.core.Coin;
@@ -53,7 +54,7 @@ class DepositListItem {
     private TxConfidenceListener txConfidenceListener;
     private int numTxOutputs = 0;
 
-    public DepositListItem(AddressEntry addressEntry, BtcWalletService walletService, BSFormatter formatter) {
+    public DepositListItem(AddressEntry addressEntry, BtcWalletService walletService, FormattingUtils.CoinFormatter formatter) {
         this.walletService = walletService;
 
         addressString = addressEntry.getAddressString();

@@ -35,7 +35,8 @@ import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.locale.Res;
 import bisq.core.provider.fee.FeeService;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 
 import bisq.common.UserThread;
 import bisq.common.app.DevEnv;
@@ -106,7 +107,7 @@ public class DepositView extends ActivatableView<VBox, Void> {
 
     private final BtcWalletService walletService;
     private final Preferences preferences;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private String paymentLabelString;
     private final ObservableList<DepositListItem> observableList = FXCollections.observableArrayList();
     private final SortedList<DepositListItem> sortedList = new SortedList<>(observableList);
@@ -121,9 +122,8 @@ public class DepositView extends ActivatableView<VBox, Void> {
 
     @Inject
     private DepositView(BtcWalletService walletService,
-                        FeeService feeService,
                         Preferences preferences,
-                        BSFormatter formatter) {
+                        FormattingUtils.CoinFormatter formatter) {
         this.walletService = walletService;
         this.preferences = preferences;
         this.formatter = formatter;

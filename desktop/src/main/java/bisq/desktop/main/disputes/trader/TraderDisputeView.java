@@ -44,7 +44,7 @@ import bisq.core.locale.Res;
 import bisq.core.trade.Contract;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeManager;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
 import bisq.network.p2p.P2PService;
@@ -110,12 +110,11 @@ public class TraderDisputeView extends ActivatableView<VBox, Void> {
     private final DisputeManager disputeManager;
     protected final KeyRing keyRing;
     private final TradeManager tradeManager;
-    protected final BSFormatter formatter;
+    protected final FormattingUtils.CoinFormatter formatter;
     private final DisputeSummaryWindow disputeSummaryWindow;
     private final PrivateNotificationManager privateNotificationManager;
     private final ContractWindow contractWindow;
     private final TradeDetailsWindow tradeDetailsWindow;
-    private final P2PService p2PService;
 
     private final AccountAgeWitnessService accountAgeWitnessService;
     private final boolean useDevPrivilegeKeys;
@@ -146,12 +145,11 @@ public class TraderDisputeView extends ActivatableView<VBox, Void> {
     public TraderDisputeView(DisputeManager disputeManager,
                              KeyRing keyRing,
                              TradeManager tradeManager,
-                             BSFormatter formatter,
+                             FormattingUtils.CoinFormatter formatter,
                              DisputeSummaryWindow disputeSummaryWindow,
                              PrivateNotificationManager privateNotificationManager,
                              ContractWindow contractWindow,
                              TradeDetailsWindow tradeDetailsWindow,
-                             P2PService p2PService,
                              AccountAgeWitnessService accountAgeWitnessService,
                              @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
         this.disputeManager = disputeManager;
@@ -162,7 +160,6 @@ public class TraderDisputeView extends ActivatableView<VBox, Void> {
         this.privateNotificationManager = privateNotificationManager;
         this.contractWindow = contractWindow;
         this.tradeDetailsWindow = tradeDetailsWindow;
-        this.p2PService = p2PService;
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.useDevPrivilegeKeys = useDevPrivilegeKeys;
     }

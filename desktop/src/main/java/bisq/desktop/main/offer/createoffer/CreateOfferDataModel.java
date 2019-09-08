@@ -35,7 +35,8 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.ReferralIdService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
 
@@ -64,7 +65,7 @@ class CreateOfferDataModel extends MutableOfferDataModel {
                                 FeeService feeService,
                                 TxFeeEstimationService txFeeEstimationService,
                                 ReferralIdService referralIdService,
-                                BSFormatter btcFormatter,
+                                FormattingUtils.CoinFormatter btcFormatter,
                                 MakerFeeProvider makerFeeProvider) {
         super(openOfferManager,
                 btcWalletService,

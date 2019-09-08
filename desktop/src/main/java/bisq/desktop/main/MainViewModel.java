@@ -55,7 +55,7 @@ import bisq.core.trade.TradeManager;
 import bisq.core.user.DontShowAgainLookup;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.BootstrapListener;
 import bisq.network.p2p.P2PService;
@@ -118,7 +118,6 @@ public class MainViewModel implements ViewModel, BisqSetup.BisqSetupCompleteList
     @Getter
     private final TorNetworkSettingsWindow torNetworkSettingsWindow;
     private final CorruptedDatabaseFilesHandler corruptedDatabaseFilesHandler;
-    private final BSFormatter formatter;
 
     @Getter
     private BooleanProperty showAppScreen = new SimpleBooleanProperty();
@@ -158,8 +157,7 @@ public class MainViewModel implements ViewModel, BisqSetup.BisqSetupCompleteList
                          BisqEnvironment bisqEnvironment,
                          AccountAgeWitnessService accountAgeWitnessService,
                          TorNetworkSettingsWindow torNetworkSettingsWindow,
-                         CorruptedDatabaseFilesHandler corruptedDatabaseFilesHandler,
-                         BSFormatter formatter) {
+                         CorruptedDatabaseFilesHandler corruptedDatabaseFilesHandler) {
         this.bisqSetup = bisqSetup;
         this.walletsSetup = walletsSetup;
         this.user = user;
@@ -180,7 +178,6 @@ public class MainViewModel implements ViewModel, BisqSetup.BisqSetupCompleteList
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.torNetworkSettingsWindow = torNetworkSettingsWindow;
         this.corruptedDatabaseFilesHandler = corruptedDatabaseFilesHandler;
-        this.formatter = formatter;
 
         TxIdTextField.setPreferences(preferences);
 

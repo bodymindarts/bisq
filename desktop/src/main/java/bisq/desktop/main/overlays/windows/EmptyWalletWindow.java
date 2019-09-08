@@ -31,8 +31,9 @@ import bisq.core.btc.wallet.Restrictions;
 import bisq.core.btc.wallet.WalletService;
 import bisq.core.locale.Res;
 import bisq.core.offer.OpenOfferManager;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
 
@@ -71,7 +72,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
     private final WalletsSetup walletsSetup;
     private final BtcWalletService btcWalletService;
     private final BsqWalletService bsqWalletService;
-    private final BSFormatter btcFormatter;
+    private final FormattingUtils.CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final OpenOfferManager openOfferManager;
 
@@ -92,7 +93,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
                              WalletsSetup walletsSetup,
                              BtcWalletService btcWalletService,
                              BsqWalletService bsqWalletService,
-                             BSFormatter btcFormatter,
+                             FormattingUtils.CoinFormatter btcFormatter,
                              BsqFormatter bsqFormatter) {
         this.walletPasswordWindow = walletPasswordWindow;
         this.openOfferManager = openOfferManager;
@@ -252,7 +253,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
         return isBtc ? btcWalletService : bsqWalletService;
     }
 
-    private BSFormatter getFormatter() {
+    private FormattingUtils.CoinFormatter getFormatter() {
         return isBtc ? btcFormatter : bsqFormatter;
     }
 }

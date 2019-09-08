@@ -39,7 +39,8 @@ import bisq.core.locale.Res;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeManager;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.CoinUtil;
 import bisq.core.util.validation.BtcAddressValidator;
 
@@ -126,7 +127,7 @@ public class WithdrawalView extends ActivatableView<VBox, Void> {
     private final TradeManager tradeManager;
     private final P2PService p2PService;
     private final WalletsSetup walletsSetup;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private final Preferences preferences;
     private final BtcAddressValidator btcAddressValidator;
     private final WalletPasswordWindow walletPasswordWindow;
@@ -156,7 +157,7 @@ public class WithdrawalView extends ActivatableView<VBox, Void> {
                            TradeManager tradeManager,
                            P2PService p2PService,
                            WalletsSetup walletsSetup,
-                           BSFormatter formatter,
+                           FormattingUtils.CoinFormatter formatter,
                            Preferences preferences,
                            BtcAddressValidator btcAddressValidator,
                            WalletPasswordWindow walletPasswordWindow) {

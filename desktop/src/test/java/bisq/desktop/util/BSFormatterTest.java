@@ -21,11 +21,12 @@ import bisq.core.locale.Res;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.CoinMaker;
+import org.bitcoinj.utils.MonetaryFormat;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -50,12 +51,12 @@ import static org.mockito.Mockito.when;
 
 public class BSFormatterTest {
 
-    private BSFormatter formatter;
+    private FormattingUtils.CoinFormatter formatter;
 
     @Before
     public void setUp() {
         Locale.setDefault(new Locale("en", "US"));
-        formatter = new BSFormatter();
+        formatter = new FormattingUtils.CoinFormatter(MonetaryFormat.BTC);
         Res.setBaseCurrencyCode("BTC");
         Res.setBaseCurrencyName("Bitcoin");
     }

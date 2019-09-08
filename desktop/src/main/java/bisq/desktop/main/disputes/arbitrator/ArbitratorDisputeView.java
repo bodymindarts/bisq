@@ -29,9 +29,7 @@ import bisq.core.alert.PrivateNotificationManager;
 import bisq.core.app.AppOptionKeys;
 import bisq.core.arbitration.DisputeManager;
 import bisq.core.trade.TradeManager;
-import bisq.core.util.BSFormatter;
-
-import bisq.network.p2p.P2PService;
+import bisq.core.util.FormattingUtils;
 
 import bisq.common.crypto.KeyRing;
 
@@ -46,12 +44,11 @@ public class ArbitratorDisputeView extends TraderDisputeView {
     public ArbitratorDisputeView(DisputeManager disputeManager,
                                  KeyRing keyRing,
                                  TradeManager tradeManager,
-                                 BSFormatter formatter,
+                                 FormattingUtils.CoinFormatter formatter,
                                  DisputeSummaryWindow disputeSummaryWindow,
                                  PrivateNotificationManager privateNotificationManager,
                                  ContractWindow contractWindow,
                                  TradeDetailsWindow tradeDetailsWindow,
-                                 P2PService p2PService,
                                  AccountAgeWitnessService accountAgeWitnessService,
                                  @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
         super(disputeManager,
@@ -62,7 +59,6 @@ public class ArbitratorDisputeView extends TraderDisputeView {
                 privateNotificationManager,
                 contractWindow,
                 tradeDetailsWindow,
-                p2PService,
                 accountAgeWitnessService,
                 useDevPrivilegeKeys);
     }

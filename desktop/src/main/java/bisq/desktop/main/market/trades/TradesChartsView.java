@@ -36,7 +36,7 @@ import bisq.core.monetary.Price;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.OfferPayload;
 import bisq.core.trade.statistics.TradeStatistics2;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.common.UserThread;
@@ -100,7 +100,7 @@ import static bisq.desktop.util.FormBuilder.getTopLabelWithVBox;
 @FxmlView
 public class TradesChartsView extends ActivatableViewAndModel<VBox, TradesChartsViewModel> {
 
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
 
     private TableView<TradeStatistics2> tableView;
     private AutocompleteComboBox<CurrencyListItem> currencyComboBox;
@@ -140,7 +140,7 @@ public class TradesChartsView extends ActivatableViewAndModel<VBox, TradesCharts
 
     @SuppressWarnings("WeakerAccess")
     @Inject
-    public TradesChartsView(TradesChartsViewModel model, BSFormatter formatter) {
+    public TradesChartsView(TradesChartsViewModel model, FormattingUtils.CoinFormatter formatter) {
         super(model);
         this.formatter = formatter;
 

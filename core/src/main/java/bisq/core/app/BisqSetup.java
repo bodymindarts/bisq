@@ -52,7 +52,7 @@ import bisq.core.trade.statistics.AssetTradeActivityCheck;
 import bisq.core.trade.statistics.TradeStatisticsManager;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.crypto.DecryptedDataTuple;
 import bisq.network.crypto.EncryptionService;
@@ -156,7 +156,7 @@ public class BisqSetup {
     private final AssetService assetService;
     private final TorSetup torSetup;
     private final TradeLimits tradeLimits;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     @Setter
     @Nullable
     private Consumer<Runnable> displayTacHandler;
@@ -235,7 +235,7 @@ public class BisqSetup {
                      AssetService assetService,
                      TorSetup torSetup,
                      TradeLimits tradeLimits,
-                     BSFormatter formatter) {
+                     FormattingUtils.CoinFormatter formatter) {
 
 
         this.p2PNetworkSetup = p2PNetworkSetup;

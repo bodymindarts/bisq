@@ -20,7 +20,6 @@ package bisq.core.dao.presentation;
 import bisq.core.dao.DaoFacade;
 import bisq.core.dao.state.model.governance.DaoPhase;
 import bisq.core.locale.Res;
-import bisq.core.util.BSFormatter;
 import bisq.core.util.FormattingUtils;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +32,7 @@ import java.util.Locale;
  */
 public class DaoUtil {
 
-    public static String getNextPhaseDuration(int height, DaoPhase.Phase phase, DaoFacade daoFacade, BSFormatter formatter) {
+    public static String getNextPhaseDuration(int height, DaoPhase.Phase phase, DaoFacade daoFacade) {
         final int currentCycleDuration = daoFacade.getCurrentCycleDuration();
         long start = daoFacade.getFirstBlockOfPhaseForDisplay(height, phase) + currentCycleDuration;
         long end = daoFacade.getLastBlockOfPhaseForDisplay(height, phase) + currentCycleDuration;
@@ -47,7 +46,7 @@ public class DaoUtil {
         return Res.get("dao.cycle.phaseDurationWithoutBlocks", start, end, startDateTime, endDateTime);
     }
 
-    public static String getPhaseDuration(int height, DaoPhase.Phase phase, DaoFacade daoFacade, BSFormatter formatter) {
+    public static String getPhaseDuration(int height, DaoPhase.Phase phase, DaoFacade daoFacade) {
         long start = daoFacade.getFirstBlockOfPhaseForDisplay(height, phase);
         long end = daoFacade.getLastBlockOfPhaseForDisplay(height, phase);
         long duration = daoFacade.getDurationForPhaseForDisplay(phase);

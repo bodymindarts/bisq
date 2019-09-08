@@ -47,7 +47,6 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 import bisq.core.util.validation.InputValidator;
@@ -90,7 +89,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
     private final PriceFeedService priceFeedService;
     private final MarketAlerts marketAlerts;
     private final MobileNotificationService mobileNotificationService;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
 
     private WebCamWindow webCamWindow;
     private QrCodeReader qrCodeReader;
@@ -127,7 +126,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
                                     PriceFeedService priceFeedService,
                                     MarketAlerts marketAlerts,
                                     MobileNotificationService mobileNotificationService,
-                                    BSFormatter formatter) {
+                                    FormattingUtils.CoinFormatter formatter) {
         super();
         this.preferences = preferences;
         this.user = user;
@@ -757,7 +756,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
                 // E.g. if input is 5555.5555 it will be rounded to  5555.55 and we use that as the value for comparing
                 // low and high price...
                 String stringValue = FormattingUtils.formatRoundedDoubleWithPrecision(priceAsDouble, precision);
-                return ParsingUtils.parsePriceStringToLong(formatter, currencyCode, stringValue, precision);
+                return ParsingUtils.parsePriceStringToLong(currencyCode, stringValue, precision);
             } else {
                 return 0;
             }

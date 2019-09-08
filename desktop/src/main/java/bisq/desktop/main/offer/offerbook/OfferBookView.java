@@ -55,7 +55,8 @@ import bisq.core.offer.OfferPayload;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.user.DontShowAgainLookup;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
 
@@ -116,7 +117,7 @@ public class OfferBookView extends ActivatableViewAndModel<GridPane, OfferBookVi
 
     private final Navigation navigation;
     private final OfferDetailsWindow offerDetailsWindow;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private final PrivateNotificationManager privateNotificationManager;
     private final boolean useDevPrivilegeKeys;
 
@@ -143,7 +144,7 @@ public class OfferBookView extends ActivatableViewAndModel<GridPane, OfferBookVi
     OfferBookView(OfferBookViewModel model,
                   Navigation navigation,
                   OfferDetailsWindow offerDetailsWindow,
-                  BSFormatter formatter,
+                  FormattingUtils.CoinFormatter formatter,
                   PrivateNotificationManager privateNotificationManager,
                   @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
         super(model);
@@ -604,7 +605,7 @@ public class OfferBookView extends ActivatableViewAndModel<GridPane, OfferBookVi
         if (model.isBootstrapped()) {
             String key = "RemoveOfferWarning";
             if (DontShowAgainLookup.showAgain(key))
-                new Popup<>().warning(Res.get("popup.warning.removeOffer", model.formatter.formatCoinWithCode(offer.getMakerFee())))
+                new Popup<>().warning(Res.get("popup.warning.removeOffer", model.btcFormatter.formatCoinWithCode(offer.getMakerFee())))
                         .actionButtonText(Res.get("shared.removeOffer"))
                         .onAction(() -> doRemoveOffer(offer))
                         .closeButtonText(Res.get("shared.dontRemoveOffer"))

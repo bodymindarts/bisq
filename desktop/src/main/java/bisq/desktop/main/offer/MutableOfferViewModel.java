@@ -51,7 +51,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
@@ -94,7 +94,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
     private final PriceFeedService priceFeedService;
     private final Navigation navigation;
     private final Preferences preferences;
-    protected final BSFormatter btcFormatter;
+    protected final FormattingUtils.CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final FiatVolumeValidator fiatVolumeValidator;
     private final FiatPriceValidator fiatPriceValidator;
@@ -195,7 +195,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                                  PriceFeedService priceFeedService,
                                  Navigation navigation,
                                  Preferences preferences,
-                                 BSFormatter btcFormatter,
+                                 FormattingUtils.CoinFormatter btcFormatter,
                                  BsqFormatter bsqFormatter) {
         super(dataModel);
 
@@ -930,7 +930,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                 .show();
     }
 
-    BSFormatter getBtcFormatter() {
+    FormattingUtils.CoinFormatter getBtcFormatter() {
         return btcFormatter;
     }
 
@@ -957,7 +957,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
 
     public String getSecurityDepositInfo() {
         return btcFormatter.formatCoinWithCode(dataModel.getSecurityDeposit()) +
-                GUIUtil.getPercentageOfTradeAmount(dataModel.getSecurityDeposit(), dataModel.getAmount().get(), btcFormatter);
+                GUIUtil.getPercentageOfTradeAmount(dataModel.getSecurityDeposit(), dataModel.getAmount().get());
     }
 
     public String getSecurityDepositWithCode() {
@@ -969,7 +969,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
         final Coin makerFeeAsCoin = dataModel.getMakerFee();
         final String makerFee = getFormatterForMakerFee().formatCoinWithCode(makerFeeAsCoin);
         if (dataModel.isCurrencyForMakerFeeBtc())
-            return makerFee + GUIUtil.getPercentageOfTradeAmount(makerFeeAsCoin, dataModel.getAmount().get(), btcFormatter);
+            return makerFee + GUIUtil.getPercentageOfTradeAmount(makerFeeAsCoin, dataModel.getAmount().get());
         else
             return makerFee + " (" + Res.get("shared.tradingFeeInBsqInfo", btcFormatter.formatCoinWithCode(makerFeeAsCoin)) + ")";
     }
@@ -977,7 +977,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
     public String getMakerFeePercentage() {
         final Coin makerFeeAsCoin = dataModel.getMakerFee();
         if (dataModel.isCurrencyForMakerFeeBtc())
-            return GUIUtil.getPercentage(makerFeeAsCoin, dataModel.getAmount().get(), btcFormatter);
+            return GUIUtil.getPercentage(makerFeeAsCoin, dataModel.getAmount().get());
         else
             return Res.get("dao.paidWithBsq");
     }
@@ -1005,13 +1005,13 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
     public String getTxFee() {
         Coin txFeeAsCoin = dataModel.getTxFee();
         return btcFormatter.formatCoinWithCode(txFeeAsCoin) +
-                GUIUtil.getPercentageOfTradeAmount(txFeeAsCoin, dataModel.getAmount().get(), btcFormatter);
+                GUIUtil.getPercentageOfTradeAmount(txFeeAsCoin, dataModel.getAmount().get());
 
     }
 
     public String getTxFeePercentage() {
         Coin txFeeAsCoin = dataModel.getTxFee();
-        return GUIUtil.getPercentage(txFeeAsCoin, dataModel.getAmount().get(), btcFormatter);
+        return GUIUtil.getPercentage(txFeeAsCoin, dataModel.getAmount().get());
     }
 
     public PaymentAccount getPaymentAccount() {
@@ -1207,7 +1207,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
         }
     }
 
-    private BSFormatter getFormatterForMakerFee() {
+    private FormattingUtils.CoinFormatter getFormatterForMakerFee() {
         return dataModel.isCurrencyForMakerFeeBtc() ? btcFormatter : bsqFormatter;
     }
 }

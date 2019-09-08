@@ -35,7 +35,7 @@ import bisq.core.offer.OfferPayload;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.user.User;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
@@ -73,7 +73,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
     protected static final Logger log = LoggerFactory.getLogger(OfferDetailsWindow.class);
 
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private final User user;
     private final KeyRing keyRing;
     private Offer offer;
@@ -89,7 +89,7 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public OfferDetailsWindow(BSFormatter formatter, User user, KeyRing keyRing,
+    public OfferDetailsWindow(FormattingUtils.CoinFormatter formatter, User user, KeyRing keyRing,
                               Navigation navigation) {
         this.formatter = formatter;
         this.user = user;

@@ -37,7 +37,7 @@ import bisq.core.locale.Res;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeChatSession;
 import bisq.core.user.Preferences;
-import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
@@ -98,7 +98,7 @@ import java.util.Map;
 public class PendingTradesView extends ActivatableViewAndModel<VBox, PendingTradesViewModel> {
 
     private final TradeDetailsWindow tradeDetailsWindow;
-    private final BSFormatter formatter;
+    private final FormattingUtils.CoinFormatter formatter;
     private final PrivateNotificationManager privateNotificationManager;
     private final boolean useDevPrivilegeKeys;
     private final Preferences preferences;
@@ -135,7 +135,7 @@ public class PendingTradesView extends ActivatableViewAndModel<VBox, PendingTrad
     @Inject
     public PendingTradesView(PendingTradesViewModel model,
                              TradeDetailsWindow tradeDetailsWindow,
-                             BSFormatter formatter,
+                             FormattingUtils.CoinFormatter formatter,
                              PrivateNotificationManager privateNotificationManager,
                              Preferences preferences,
                              @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
