@@ -45,6 +45,7 @@ public class BSFormatter {
     // Note: BtcFormat was intended to be used, but it lead to many problems (automatic format to mBit,
     // no way to remove grouping separator). It seems to be not optimal for user input formatting.
     protected MonetaryFormat coinFormat;
+    private final FormattingUtils.CoinFormatter coinFormatter;
 
     //  protected String currencyCode = CurrencyUtil.getDefaultFiatCurrencyAsCode();
 
@@ -52,6 +53,7 @@ public class BSFormatter {
     @Inject
     public BSFormatter() {
         coinFormat = BisqEnvironment.getParameters().getMonetaryFormat();
+        coinFormatter = new FormattingUtils.CoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
     }
 
 
@@ -60,28 +62,28 @@ public class BSFormatter {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     public String formatCoin(Coin coin) {
-        return formatCoin(coin, -1);
+        return coinFormatter.formatCoin(coin, -1);
     }
 
     @NotNull
     public String formatCoin(Coin coin, int decimalPlaces) {
-        return formatCoin(coin, decimalPlaces, false, 0);
+        return coinFormatter.formatCoin(coin, decimalPlaces, false, 0);
     }
 
     public String formatCoin(Coin coin, int decimalPlaces, boolean decimalAligned, int maxNumberOfDigits) {
-        return FormattingUtils.formatCoin(coin, decimalPlaces, decimalAligned, maxNumberOfDigits, coinFormat);
+        return coinFormatter.formatCoin(coin, decimalPlaces, decimalAligned, maxNumberOfDigits);
     }
 
     public String formatCoinWithCode(Coin coin) {
-        return FormattingUtils.formatCoinWithCode(coin, coinFormat);
+        return coinFormatter.formatCoin(coin);
     }
 
     public String formatCoinWithCode(long value) {
-        return FormattingUtils.formatCoinWithCode(Coin.valueOf(value), coinFormat);
+        return coinFormatter.formatCoinWithCode(value);
     }
 
     public Coin parseToCoin(String input) {
-        return ParsingUtils.parseToCoin(input, coinFormat);
+        return coinFormatter.parseToCoin(input);
     }
 
     /**
@@ -93,18 +95,11 @@ public class BSFormatter {
      * @return
      */
     public Coin parseToCoinWith4Decimals(String input) {
-        try {
-            return Coin.valueOf(new BigDecimal(parseToCoin(ParsingUtils.cleanDoubleInput(input)).value).setScale(-scale - 1,
-                    BigDecimal.ROUND_HALF_UP).setScale(scale + 1, BigDecimal.ROUND_HALF_UP).toBigInteger().longValue());
-        } catch (Throwable t) {
-            if (input != null && input.length() > 0)
-                log.warn("Exception at parseToCoinWith4Decimals: " + t.toString());
-            return Coin.ZERO;
-        }
+        return coinFormatter.parseToCoinWith4Decimals(input);
     }
 
     public boolean hasBtcValidDecimals(String input) {
-        return parseToCoin(input).equals(parseToCoinWith4Decimals(input));
+        return coinFormatter.hasBtcValidDecimals(input);
     }
 
     /**
@@ -114,7 +109,7 @@ public class BSFormatter {
      * @return The transformed coin
      */
     public Coin reduceTo4Decimals(Coin coin) {
-        return parseToCoin(formatCoin(coin));
+        return coinFormatter.reduceTo4Decimals(coin);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -122,15 +117,10 @@ public class BSFormatter {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     public String formatAmount(Offer offer) {
-        return offer.isRange() ? formatCoin(offer.getMinAmount()) + FormattingUtils.RANGE_SEPARATOR + formatCoin(offer.getAmount()) : formatCoin(offer.getAmount());
+        return coinFormatter.formatAmount(offer);
     }
 
     public String formatAmount(Offer offer, int decimalPlaces, boolean decimalAligned, int maxPlaces) {
-        String formattedAmount = offer.isRange() ? formatCoin(offer.getMinAmount(), decimalPlaces) + FormattingUtils.RANGE_SEPARATOR + formatCoin(offer.getAmount(), decimalPlaces) : formatCoin(offer.getAmount(), decimalPlaces);
-
-        if (decimalAligned) {
-            formattedAmount = FormattingUtils.fillUpPlacesWithEmptyStrings(formattedAmount, maxPlaces);
-        }
-        return formattedAmount;
+        return coinFormatter.formatAmount(offer, decimalPlaces, decimalAligned, maxPlaces);
     }
 }
