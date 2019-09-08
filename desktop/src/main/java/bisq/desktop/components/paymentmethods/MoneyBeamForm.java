@@ -29,8 +29,7 @@ import bisq.core.payment.MoneyBeamAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.MoneyBeamAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.TextField;
@@ -50,7 +49,7 @@ public class MoneyBeamForm extends PaymentMethodForm {
         return gridRow;
     }
 
-    public MoneyBeamForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, MoneyBeamValidator moneyBeamValidator, InputValidator inputValidator, GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+    public MoneyBeamForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, MoneyBeamValidator moneyBeamValidator, InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.account = (MoneyBeamAccount) paymentAccount;
         this.validator = moneyBeamValidator;

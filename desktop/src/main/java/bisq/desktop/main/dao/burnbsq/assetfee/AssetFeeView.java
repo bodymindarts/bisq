@@ -34,8 +34,7 @@ import bisq.core.dao.governance.asset.StatefulAsset;
 import bisq.core.dao.governance.proposal.TxException;
 import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 
 import bisq.common.app.DevEnv;
@@ -86,7 +85,7 @@ public class AssetFeeView extends ActivatableView<GridPane, Void> implements Bsq
     private final BsqWalletService bsqWalletService;
     private final BsqValidator bsqValidator;
     private final AssetService assetService;
-    private final FormattingUtils.CoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
 
     private final ObservableList<AssetListItem> observableList = FXCollections.observableArrayList();
     private final SortedList<AssetListItem> sortedList = new SortedList<>(observableList);
@@ -109,7 +108,7 @@ public class AssetFeeView extends ActivatableView<GridPane, Void> implements Bsq
                          BsqWalletService bsqWalletService,
                          BsqValidator bsqValidator,
                          AssetService assetService,
-                         FormattingUtils.CoinFormatter btcFormatter) {
+                         CoinFormatter btcFormatter) {
         this.bsqFormatter = bsqFormatter;
         this.bsqWalletService = bsqWalletService;
         this.bsqValidator = bsqValidator;

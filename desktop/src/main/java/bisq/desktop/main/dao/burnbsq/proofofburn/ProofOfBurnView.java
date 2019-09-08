@@ -36,8 +36,7 @@ import bisq.core.dao.governance.proofofburn.ProofOfBurnService;
 import bisq.core.dao.governance.proposal.TxException;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.validation.InputValidator;
 
@@ -82,7 +81,7 @@ public class ProofOfBurnView extends ActivatableView<GridPane, Void> implements 
     private final ProofOfBurnService proofOfBurnService;
     private final MyProofOfBurnListService myProofOfBurnListService;
     private final Preferences preferences;
-    private final FormattingUtils.CoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final BsqWalletService bsqWalletService;
     private final BsqValidator bsqValidator;
@@ -117,7 +116,7 @@ public class ProofOfBurnView extends ActivatableView<GridPane, Void> implements 
                             ProofOfBurnService proofOfBurnService,
                             MyProofOfBurnListService myProofOfBurnListService,
                             Preferences preferences,
-                            FormattingUtils.CoinFormatter btcFormatter) {
+                            CoinFormatter btcFormatter) {
         this.bsqFormatter = bsqFormatter;
         this.bsqWalletService = bsqWalletService;
         this.bsqValidator = bsqValidator;

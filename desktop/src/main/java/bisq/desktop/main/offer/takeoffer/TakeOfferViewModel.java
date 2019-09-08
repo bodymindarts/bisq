@@ -43,6 +43,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.validation.InputValidator;
 
@@ -82,7 +83,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
     private final Preferences preferences;
     private final PriceFeedService priceFeedService;
     private final Navigation navigation;
-    private final FormattingUtils.CoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
 
     private String amountRange;
@@ -142,7 +143,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
                               Preferences preferences,
                               PriceFeedService priceFeedService,
                               Navigation navigation,
-                              FormattingUtils.CoinFormatter btcFormatter,
+                              CoinFormatter btcFormatter,
                               BsqFormatter bsqFormatter) {
         super(dataModel);
         this.dataModel = dataModel;
@@ -652,7 +653,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
     // Getters
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    FormattingUtils.CoinFormatter getBtcFormatter() {
+    CoinFormatter getBtcFormatter() {
         return btcFormatter;
     }
 
@@ -787,7 +788,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
         return btcFormatter.formatCoin(dataModel.getSellerSecurityDeposit());
     }
 
-    private FormattingUtils.CoinFormatter getFormatterForTakerFee() {
+    private CoinFormatter getFormatterForTakerFee() {
         return dataModel.isCurrencyForTakerFeeBtc() ? btcFormatter : bsqFormatter;
     }
 }

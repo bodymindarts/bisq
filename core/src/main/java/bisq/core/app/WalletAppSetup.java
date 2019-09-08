@@ -21,6 +21,7 @@ import bisq.core.btc.setup.WalletsSetup;
 import bisq.core.btc.wallet.WalletsManager;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.VersionMessage;
@@ -57,7 +58,7 @@ public class WalletAppSetup {
     private final WalletsSetup walletsSetup;
     private final BisqEnvironment bisqEnvironment;
     private final Preferences preferences;
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
 
     @SuppressWarnings("FieldCanBeLocal")
     private MonadicBinding<String> btcInfoBinding;
@@ -80,7 +81,7 @@ public class WalletAppSetup {
                           WalletsSetup walletsSetup,
                           BisqEnvironment bisqEnvironment,
                           Preferences preferences,
-                          FormattingUtils.CoinFormatter formatter) {
+                          CoinFormatter formatter) {
         this.walletsManager = walletsManager;
         this.walletsSetup = walletsSetup;
         this.bisqEnvironment = bisqEnvironment;

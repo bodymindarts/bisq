@@ -40,7 +40,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
 import bisq.core.util.BsqFormatter;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import org.bitcoinj.core.Coin;
@@ -68,7 +68,7 @@ public class CreateOfferViewModelTest {
 
     private CreateOfferViewModel model;
 
-    private FormattingUtils.CoinFormatter btcFormatter;
+    private CoinFormatter btcFormatter;
 
     @Before
     public void setUp() {
@@ -79,7 +79,7 @@ public class CreateOfferViewModelTest {
         final BtcValidator btcValidator = new BtcValidator(btcFormatter);
         final AltcoinValidator altcoinValidator = new AltcoinValidator();
         final FiatPriceValidator fiatPriceValidator = new FiatPriceValidator();
-        btcFormatter = new FormattingUtils.CoinFormatter(MonetaryFormat.BTC);
+        btcFormatter = new CoinFormatter(MonetaryFormat.BTC);
 
         FeeService feeService = mock(FeeService.class);
         AddressEntry addressEntry = mock(AddressEntry.class);

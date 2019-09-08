@@ -21,7 +21,7 @@ import bisq.core.locale.Res;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
@@ -51,12 +51,12 @@ import static org.mockito.Mockito.when;
 
 public class BSFormatterTest {
 
-    private FormattingUtils.CoinFormatter formatter;
+    private CoinFormatter formatter;
 
     @Before
     public void setUp() {
         Locale.setDefault(new Locale("en", "US"));
-        formatter = new FormattingUtils.CoinFormatter(MonetaryFormat.BTC);
+        formatter = new CoinFormatter(MonetaryFormat.BTC);
         Res.setBaseCurrencyCode("BTC");
         Res.setBaseCurrencyName("Bitcoin");
     }
@@ -157,7 +157,7 @@ public class BSFormatterTest {
         when(offer.getMinAmount()).thenReturn(Coin.valueOf(10000000));
         when(offer.getAmount()).thenReturn(Coin.valueOf(10000000));
 
-        assertEquals("0.10", formatter.formatAmount(offer));
+        assertEquals("0.10", DisplayUtils.formatAmount(offer, formatter));
     }
 
     @Test
@@ -167,7 +167,7 @@ public class BSFormatterTest {
         when(offerPayload.getMinAmount()).thenReturn(10000000L);
         when(offerPayload.getAmount()).thenReturn(20000000L);
 
-        assertEquals("0.10 - 0.20", formatter.formatAmount(offer));
+        assertEquals("0.10 - 0.20", DisplayUtils.formatAmount(offer, formatter));
     }
 
     @Test
@@ -177,7 +177,7 @@ public class BSFormatterTest {
         when(offerPayload.getMinAmount()).thenReturn(10000000L);
         when(offerPayload.getAmount()).thenReturn(20000000L);
 
-        assertEquals("0.1000 - 0.2000", formatter.formatAmount(offer, 4, true, 15));
+        assertEquals("0.1000 - 0.2000", DisplayUtils.formatAmount(offer, 4, true, 15, formatter));
     }
 
     @Test
@@ -187,7 +187,7 @@ public class BSFormatterTest {
         when(offerPayload.getMinAmount()).thenReturn(10000000L);
         when(offerPayload.getAmount()).thenReturn(10000000L);
 
-        assertEquals("0.1000", formatter.formatAmount(offer, 4, true, 15));
+        assertEquals("0.1000", DisplayUtils.formatAmount(offer, 4, true, 15, formatter));
     }
 
     @Test
@@ -196,6 +196,6 @@ public class BSFormatterTest {
         when(offer.getMinAmount()).thenReturn(null);
         when(offer.getAmount()).thenReturn(null);
 
-        assertEquals("", formatter.formatAmount(offer));
+        assertEquals("", DisplayUtils.formatAmount(offer, formatter));
     }
 }

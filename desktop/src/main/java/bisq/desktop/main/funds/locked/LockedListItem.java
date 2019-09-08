@@ -25,8 +25,7 @@ import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.btc.wallet.WalletService;
 import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.core.Address;
 import org.bitcoinj.core.Coin;
@@ -42,13 +41,13 @@ class LockedListItem {
     private final Trade trade;
     private final AddressEntry addressEntry;
     private final BtcWalletService btcWalletService;
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
     private final String addressString;
     @Nullable
     private final Address address;
     private Coin balance;
 
-    public LockedListItem(Trade trade, AddressEntry addressEntry, BtcWalletService btcWalletService, FormattingUtils.CoinFormatter formatter) {
+    public LockedListItem(Trade trade, AddressEntry addressEntry, BtcWalletService btcWalletService, CoinFormatter formatter) {
         this.trade = trade;
         this.addressEntry = addressEntry;
         this.btcWalletService = btcWalletService;

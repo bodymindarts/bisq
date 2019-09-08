@@ -27,7 +27,7 @@ import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
 
@@ -76,7 +76,7 @@ public class PeerInfoIcon extends Group {
                         Offer offer,
                         Preferences preferences,
                         AccountAgeWitnessService accountAgeWitnessService,
-                        FormattingUtils.CoinFormatter formatter,
+                        CoinFormatter formatter,
                         boolean useDevPrivilegeKeys) {
         this(nodeAddress,
                 role,
@@ -98,7 +98,7 @@ public class PeerInfoIcon extends Group {
                         Trade trade,
                         Preferences preferences,
                         AccountAgeWitnessService accountAgeWitnessService,
-                        FormattingUtils.CoinFormatter formatter,
+                        CoinFormatter formatter,
                         boolean useDevPrivilegeKeys) {
         this(nodeAddress,
                 role,
@@ -120,7 +120,7 @@ public class PeerInfoIcon extends Group {
                          @Nullable Trade trade,
                          Preferences preferences,
                          AccountAgeWitnessService accountAgeWitnessService,
-                         FormattingUtils.CoinFormatter formatter,
+                         CoinFormatter formatter,
                          boolean useDevPrivilegeKeys) {
         this.numTrades = numTrades;
         this.accountAgeWitnessService = accountAgeWitnessService;
@@ -263,7 +263,7 @@ public class PeerInfoIcon extends Group {
                                     PrivateNotificationManager privateNotificationManager,
                                     Offer offer,
                                     Preferences preferences,
-                                    FormattingUtils.CoinFormatter formatter,
+                                    CoinFormatter formatter,
                                     boolean useDevPrivilegeKeys,
                                     boolean isFiatCurrency,
                                     long makersAccountAge) {

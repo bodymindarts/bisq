@@ -32,7 +32,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.TradeStatistics2;
 import bisq.core.trade.statistics.TradeStatisticsManager;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.FormattingUtils;
 
@@ -94,7 +94,7 @@ public class BsqDashboardView extends ActivatableView<GridPane, Void> implements
     private final DaoStateService daoStateService;
     private final Preferences preferences;
     private final BsqFormatter bsqFormatter;
-    private final FormattingUtils.CoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
 
     private ChangeListener<Number> priceChangeListener;
 
@@ -120,7 +120,7 @@ public class BsqDashboardView extends ActivatableView<GridPane, Void> implements
                              DaoStateService daoStateService,
                              Preferences preferences,
                              BsqFormatter bsqFormatter,
-                             FormattingUtils.CoinFormatter btcFormatter) {
+                             CoinFormatter btcFormatter) {
         this.daoFacade = daoFacade;
         this.tradeStatisticsManager = tradeStatisticsManager;
         this.priceFeedService = priceFeedService;

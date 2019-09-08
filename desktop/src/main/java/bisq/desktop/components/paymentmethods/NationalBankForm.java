@@ -20,8 +20,7 @@ package bisq.desktop.components.paymentmethods;
 import bisq.core.account.witness.AccountAgeWitnessService;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.layout.GridPane;
@@ -32,7 +31,7 @@ public class NationalBankForm extends BankForm {
     }
 
     public NationalBankForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator,
-                            GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+                            GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
     }
 }

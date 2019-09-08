@@ -33,8 +33,7 @@ import bisq.core.chat.ChatManager;
 import bisq.core.chat.ChatSession;
 import bisq.core.locale.Res;
 import bisq.core.trade.TradeChatSession;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
 import bisq.network.p2p.P2PService;
@@ -139,11 +138,11 @@ public class Chat extends AnchorPane {
     private ChangeListener<Boolean> storedInMailboxPropertyListener, arrivedPropertyListener;
     private ChangeListener<String> sendMessageErrorPropertyListener;
 
-    protected final FormattingUtils.CoinFormatter formatter;
+    protected final CoinFormatter formatter;
     private EventHandler<KeyEvent> keyEventEventHandler;
     private ChatManager chatManager;
 
-    public Chat(ChatManager chatManager, FormattingUtils.CoinFormatter formatter) {
+    public Chat(ChatManager chatManager, CoinFormatter formatter) {
         this.chatManager = chatManager;
         this.formatter = formatter;
         this.p2PService = chatManager.getP2PService();

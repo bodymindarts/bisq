@@ -36,8 +36,9 @@ import bisq.core.btc.wallet.TradeWalletService;
 import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.trade.Contract;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
+import bisq.core.util.ParsingUtils;
 
 import bisq.common.UserThread;
 import bisq.common.util.Tuple2;
@@ -81,7 +82,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
     private static final Logger log = LoggerFactory.getLogger(DisputeSummaryWindow.class);
 
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
     private final DisputeManager disputeManager;
     private final BtcWalletService walletService;
     private final TradeWalletService tradeWalletService;
@@ -111,7 +112,7 @@ public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public DisputeSummaryWindow(FormattingUtils.CoinFormatter formatter, DisputeManager disputeManager, BtcWalletService walletService,
+    public DisputeSummaryWindow(CoinFormatter formatter, DisputeManager disputeManager, BtcWalletService walletService,
                                 TradeWalletService tradeWalletService) {
 
         this.formatter = formatter;
@@ -358,8 +359,8 @@ public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
     }
 
     private boolean isPayoutAmountValid() {
-        Coin buyerAmount = formatter.parseToCoin(buyerPayoutAmountInputTextField.getText());
-        Coin sellerAmount = formatter.parseToCoin(sellerPayoutAmountInputTextField.getText());
+        Coin buyerAmount = ParsingUtils.parseToCoin(buyerPayoutAmountInputTextField.getText(), formatter);
+        Coin sellerAmount = ParsingUtils.parseToCoin(sellerPayoutAmountInputTextField.getText(), formatter);
         Contract contract = dispute.getContract();
         Coin tradeAmount = contract.getTradeAmount();
         Offer offer = new Offer(contract.getOfferPayload());
@@ -372,8 +373,8 @@ public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
 
     private void applyCustomAmounts(InputTextField inputTextField) {
         Contract contract = dispute.getContract();
-        Coin buyerAmount = formatter.parseToCoin(buyerPayoutAmountInputTextField.getText());
-        Coin sellerAmount = formatter.parseToCoin(sellerPayoutAmountInputTextField.getText());
+        Coin buyerAmount = ParsingUtils.parseToCoin(buyerPayoutAmountInputTextField.getText(), formatter);
+        Coin sellerAmount = ParsingUtils.parseToCoin(sellerPayoutAmountInputTextField.getText(), formatter);
         Offer offer = new Offer(contract.getOfferPayload());
         Coin available = contract.getTradeAmount().
                 add(offer.getBuyerSecurityDeposit())

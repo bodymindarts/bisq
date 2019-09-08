@@ -37,7 +37,7 @@ import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
 import bisq.core.offer.OfferPayload;
 import bisq.core.trade.statistics.TradeStatistics2;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -73,7 +73,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
     private final ViewLoader viewLoader;
     private final P2PService p2PService;
     private final OfferBook offerBook;
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
     private final Navigation navigation;
     private Navigation.Listener navigationListener;
     private ChangeListener<Tab> tabChangeListener;
@@ -82,7 +82,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
 
 
     @Inject
-    public MarketView(CachingViewLoader viewLoader, P2PService p2PService, OfferBook offerBook, FormattingUtils.CoinFormatter formatter,
+    public MarketView(CachingViewLoader viewLoader, P2PService p2PService, OfferBook offerBook, CoinFormatter formatter,
                       Navigation navigation) {
         this.viewLoader = viewLoader;
         this.p2PService = p2PService;
@@ -210,7 +210,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
                             .append("Type: ").append(offer.getDirection().name()).append("\n")
                             .append("Market: ").append(CurrencyUtil.getCurrencyPair(offer.getCurrencyCode())).append("\n")
                             .append("Price: ").append(FormattingUtils.formatPrice(offer.getPrice())).append("\n")
-                            .append("Amount: ").append(formatter.formatAmount(offer)).append(" BTC\n")
+                            .append("Amount: ").append(DisplayUtils.formatAmount(offer, formatter)).append(" BTC\n")
                             .append("Payment method: ").append(Res.get(offer.getPaymentMethod().getId())).append("\n")
                             .append("ReferralID: ").append(offer.getOfferPayload().getExtraDataMap().get(OfferPayload.REFERRAL_ID));
                     return sb.toString();

@@ -28,6 +28,9 @@ public class ParsingUtils {
         }
     }
 
+    public static Coin parseToCoin(String input, CoinFormatter coinFormat) {
+      return parseToCoin(input, coinFormat.getMonetaryFormat());
+    }
     public static Coin parseToCoin(String input, MonetaryFormat coinFormat) {
         if (input != null && input.length() > 0) {
             try {

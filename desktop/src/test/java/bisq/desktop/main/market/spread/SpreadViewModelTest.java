@@ -22,10 +22,8 @@ import bisq.desktop.main.offer.offerbook.OfferBook;
 import bisq.desktop.main.offer.offerbook.OfferBookListItem;
 import bisq.desktop.main.offer.offerbook.OfferBookListItemMaker;
 
-import bisq.core.app.BisqEnvironment;
 import bisq.core.provider.price.PriceFeedService;
-import bisq.core.util.FormattingUtils.CoinFormatter;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.utils.MonetaryFormat;
 
@@ -46,11 +44,11 @@ import static org.mockito.Mockito.when;
 
 public class SpreadViewModelTest {
 
-    private FormattingUtils.CoinFormatter coinFormatter;
+    private CoinFormatter coinFormatter;
 
     @Before
     public void setup() {
-      coinFormatter = new FormattingUtils.CoinFormatter(MonetaryFormat.BTC);
+      coinFormatter = new CoinFormatter(MonetaryFormat.BTC);
     }
 
     @Test

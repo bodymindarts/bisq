@@ -24,8 +24,7 @@ import bisq.desktop.main.overlays.windows.OfferDetailsWindow;
 import bisq.desktop.util.Transitions;
 
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 
 import com.google.inject.Inject;
@@ -34,7 +33,7 @@ import com.google.inject.Inject;
 public class CreateOfferView extends MutableOfferView<CreateOfferViewModel> {
 
     @Inject
-    public CreateOfferView(CreateOfferViewModel model, Navigation navigation, Preferences preferences, Transitions transitions, OfferDetailsWindow offerDetailsWindow, FormattingUtils.CoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
+    public CreateOfferView(CreateOfferViewModel model, Navigation navigation, Preferences preferences, Transitions transitions, OfferDetailsWindow offerDetailsWindow, CoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
         super(model, navigation, preferences, transitions, offerDetailsWindow, btcFormatter, bsqFormatter);
     }
 }

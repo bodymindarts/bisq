@@ -30,8 +30,7 @@ import bisq.core.payment.FasterPaymentsAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.FasterPaymentsAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.TextField;
@@ -59,7 +58,7 @@ public class FasterPaymentsForm extends PaymentMethodForm {
     private InputTextField sortCodeInputTextField;
 
     public FasterPaymentsForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator, GridPane gridPane,
-                              int gridRow, FormattingUtils.CoinFormatter formatter) {
+                              int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.fasterPaymentsAccount = (FasterPaymentsAccount) paymentAccount;
     }

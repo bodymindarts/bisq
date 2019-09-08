@@ -34,8 +34,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.SepaAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.SepaAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.CheckBox;
@@ -78,7 +77,7 @@ public class SepaForm extends GeneralSepaForm {
 
     public SepaForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, IBANValidator ibanValidator,
                     BICValidator bicValidator, InputValidator inputValidator,
-                    GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+                    GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.sepaAccount = (SepaAccount) paymentAccount;
         this.ibanValidator = ibanValidator;

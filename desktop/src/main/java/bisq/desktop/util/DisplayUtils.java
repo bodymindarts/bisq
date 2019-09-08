@@ -8,13 +8,15 @@ import bisq.core.monetary.Price;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.Monetary;
 import org.bitcoinj.utils.Fiat;
 import org.bitcoinj.utils.MonetaryFormat;
+
+import com.google.inject.internal.asm.$ClassWriter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -95,7 +97,7 @@ public class DisplayUtils {
         }
     }
 
-    public static String getFeeWithFiatAmount(Coin makerFeeAsCoin, Optional<Volume> optionalFeeInFiat, FormattingUtils.CoinFormatter formatter) {
+    public static String getFeeWithFiatAmount(Coin makerFeeAsCoin, Optional<Volume> optionalFeeInFiat, CoinFormatter formatter) {
         String fee = makerFeeAsCoin != null ? formatter.formatCoinWithCode(makerFeeAsCoin) : Res.get("shared.na");
         String feeInFiatAsString;
         if (optionalFeeInFiat != null && optionalFeeInFiat.isPresent()) {
@@ -159,5 +161,23 @@ public class DisplayUtils {
             formattedPrice = FormattingUtils.fillUpPlacesWithEmptyStrings(formattedPrice, maxPlaces);
         }
         return formattedPrice;
+    }
+
+
+    public static String formatAmount(Offer offer, CoinFormatter coinFormatter) {
+        return offer.isRange() ? coinFormatter.formatCoin(offer.getMinAmount()) + FormattingUtils.RANGE_SEPARATOR + coinFormatter.formatCoin(offer.getAmount()) : coinFormatter.formatCoin(offer.getAmount());
+    }
+
+    public static String formatAmount(Offer offer,
+                                      int decimalPlaces,
+                                      boolean decimalAligned,
+                                      int maxPlaces,
+                                      CoinFormatter coinFormatter) {
+        String formattedAmount = offer.isRange() ? coinFormatter.formatCoin(offer.getMinAmount(), decimalPlaces) + FormattingUtils.RANGE_SEPARATOR + coinFormatter.formatCoin(offer.getAmount(), decimalPlaces) : coinFormatter.formatCoin(offer.getAmount(), decimalPlaces);
+
+        if (decimalAligned) {
+            formattedAmount = FormattingUtils.fillUpPlacesWithEmptyStrings(formattedAmount, maxPlaces);
+        }
+        return formattedAmount;
     }
 }

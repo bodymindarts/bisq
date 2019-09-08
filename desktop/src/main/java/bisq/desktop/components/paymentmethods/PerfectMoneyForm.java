@@ -26,8 +26,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.PerfectMoneyAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.PerfectMoneyAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.layout.GridPane;
@@ -46,7 +45,7 @@ public class PerfectMoneyForm extends GeneralAccountNumberForm {
     }
 
     public PerfectMoneyForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, PerfectMoneyValidator perfectMoneyValidator, InputValidator inputValidator, GridPane gridPane, int
-            gridRow, FormattingUtils.CoinFormatter formatter) {
+            gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.perfectMoneyAccount = (PerfectMoneyAccount) paymentAccount;
     }

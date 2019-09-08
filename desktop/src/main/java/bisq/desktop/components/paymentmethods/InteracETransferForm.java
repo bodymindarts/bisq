@@ -29,8 +29,7 @@ import bisq.core.payment.InteracETransferAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.InteracETransferAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.layout.GridPane;
@@ -58,7 +57,7 @@ public class InteracETransferForm extends PaymentMethodForm {
     }
 
     public InteracETransferForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InteracETransferValidator interacETransferValidator,
-                                InputValidator inputValidator, GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+                                InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.interacETransferAccount = (InteracETransferAccount) paymentAccount;
         this.interacETransferValidator = interacETransferValidator;

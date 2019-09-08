@@ -20,13 +20,10 @@ import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.FormattingUtils.CoinFormatter;
 import bisq.core.util.BsqFormatter;
-import bisq.core.util.FormattingUtils;
 import bisq.core.util.validation.InputValidator;
 
 import org.bitcoinj.core.Coin;
-import org.bitcoinj.utils.MonetaryFormat;
 
 import javafx.beans.property.SimpleIntegerProperty;
 

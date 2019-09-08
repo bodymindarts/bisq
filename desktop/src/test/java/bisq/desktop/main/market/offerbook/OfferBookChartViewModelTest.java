@@ -21,11 +21,9 @@ import bisq.desktop.main.offer.offerbook.OfferBook;
 import bisq.desktop.main.offer.offerbook.OfferBookListItem;
 import bisq.desktop.main.offer.offerbook.OfferBookListItemMaker;
 
-import bisq.core.app.BisqEnvironment;
 import bisq.core.locale.GlobalSettings;
 import bisq.core.provider.price.PriceFeedService;
-import bisq.core.util.FormattingUtils.CoinFormatter;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.utils.MonetaryFormat;
 
@@ -50,7 +48,7 @@ import static org.mockito.Mockito.when;
 
 public class OfferBookChartViewModelTest {
 
-    private final FormattingUtils.CoinFormatter btcFormatter = new FormattingUtils.CoinFormatter(MonetaryFormat.BTC);
+    private final CoinFormatter btcFormatter = new CoinFormatter(MonetaryFormat.BTC);
 
 
     @Before

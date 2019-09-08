@@ -25,8 +25,7 @@ import bisq.core.payment.AliPayAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.AliPayAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.layout.GridPane;
@@ -42,7 +41,7 @@ public class AliPayForm extends GeneralAccountNumberForm {
         return gridRow;
     }
 
-    public AliPayForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, AliPayValidator aliPayValidator, InputValidator inputValidator, GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+    public AliPayForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, AliPayValidator aliPayValidator, InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.aliPayAccount = (AliPayAccount) paymentAccount;
     }

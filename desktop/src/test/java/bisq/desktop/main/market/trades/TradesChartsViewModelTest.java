@@ -27,8 +27,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.TradeStatistics2;
 import bisq.core.trade.statistics.TradeStatisticsManager;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 
 import bisq.common.crypto.KeyRing;
 import bisq.common.crypto.KeyStorage;
@@ -112,7 +111,7 @@ public class TradesChartsViewModelTest {
     public void setup() throws IOException {
         tradeStatisticsManager = mock(TradeStatisticsManager.class);
         model = new TradesChartsViewModel(tradeStatisticsManager, mock(Preferences.class), mock(PriceFeedService.class),
-                mock(Navigation.class), mock(FormattingUtils.CoinFormatter.class));
+                mock(Navigation.class), mock(CoinFormatter.class));
         dir = File.createTempFile("temp_tests1", "");
         //noinspection ResultOfMethodCallIgnored
         dir.delete();

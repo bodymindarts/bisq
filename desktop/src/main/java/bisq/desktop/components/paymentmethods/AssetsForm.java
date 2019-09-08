@@ -37,8 +37,7 @@ import bisq.core.payment.payload.AssetsAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.validation.AltCoinAddressValidator;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.common.util.Tuple3;
@@ -91,7 +90,7 @@ public class AssetsForm extends PaymentMethodForm {
                       InputValidator inputValidator,
                       GridPane gridPane,
                       int gridRow,
-                      FormattingUtils.CoinFormatter formatter,
+                      CoinFormatter formatter,
                       AssetService assetService,
                       FilterManager filterManager,
                       Preferences preferences) {

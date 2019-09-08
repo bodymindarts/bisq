@@ -31,8 +31,7 @@ import bisq.core.trade.Contract;
 import bisq.core.trade.Trade;
 import bisq.core.trade.closed.ClosedTradableManager;
 import bisq.core.user.User;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.validation.BtcAddressValidator;
 
@@ -86,7 +85,7 @@ public class PendingTradesViewModel extends ActivatableWithDataModel<PendingTrad
         STEP4
     }
 
-    public final FormattingUtils.CoinFormatter btcFormatter;
+    public final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     public final BtcAddressValidator btcAddressValidator;
     final AccountAgeWitnessService accountAgeWitnessService;
@@ -110,7 +109,7 @@ public class PendingTradesViewModel extends ActivatableWithDataModel<PendingTrad
 
     @Inject
     public PendingTradesViewModel(PendingTradesDataModel dataModel,
-                                  FormattingUtils.CoinFormatter btcFormatter,
+                                  CoinFormatter btcFormatter,
                                   BsqFormatter bsqFormatter,
                                   BtcAddressValidator btcAddressValidator,
                                   P2PService p2PService,

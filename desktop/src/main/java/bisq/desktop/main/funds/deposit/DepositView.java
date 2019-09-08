@@ -33,10 +33,9 @@ import bisq.core.btc.listeners.BalanceListener;
 import bisq.core.btc.model.AddressEntry;
 import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.locale.Res;
-import bisq.core.provider.fee.FeeService;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
+import bisq.core.util.ParsingUtils;
 
 import bisq.common.UserThread;
 import bisq.common.app.DevEnv;
@@ -107,7 +106,7 @@ public class DepositView extends ActivatableView<VBox, Void> {
 
     private final BtcWalletService walletService;
     private final Preferences preferences;
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
     private String paymentLabelString;
     private final ObservableList<DepositListItem> observableList = FXCollections.observableArrayList();
     private final SortedList<DepositListItem> sortedList = new SortedList<>(observableList);
@@ -123,7 +122,7 @@ public class DepositView extends ActivatableView<VBox, Void> {
     @Inject
     private DepositView(BtcWalletService walletService,
                         Preferences preferences,
-                        FormattingUtils.CoinFormatter formatter) {
+                        CoinFormatter formatter) {
         this.walletService = walletService;
         this.preferences = preferences;
         this.formatter = formatter;
@@ -232,7 +231,7 @@ public class DepositView extends ActivatableView<VBox, Void> {
 
         walletService.addBalanceListener(balanceListener);
         amountTextFieldSubscription = EasyBind.subscribe(amountTextField.textProperty(), t -> {
-            addressTextField.setAmountAsCoin(formatter.parseToCoin(t));
+            addressTextField.setAmountAsCoin(ParsingUtils.parseToCoin(t, formatter));
             updateQRCode();
         });
 
@@ -301,7 +300,7 @@ public class DepositView extends ActivatableView<VBox, Void> {
     }
 
     private Coin getAmountAsCoin() {
-        return formatter.parseToCoin(amountTextField.getText());
+        return ParsingUtils.parseToCoin(amountTextField.getText(), formatter);
     }
 
     @NotNull

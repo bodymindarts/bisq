@@ -34,8 +34,7 @@ import bisq.core.payment.CountryBasedPaymentAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.WesternUnionAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.common.util.Tuple2;
@@ -77,7 +76,7 @@ public class WesternUnionForm extends PaymentMethodForm {
     private Country selectedCountry;
 
     public WesternUnionForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator,
-                            GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+                            GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.westernUnionAccountPayload = (WesternUnionAccountPayload) paymentAccount.paymentAccountPayload;
 

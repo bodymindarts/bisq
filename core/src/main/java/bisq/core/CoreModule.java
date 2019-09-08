@@ -31,7 +31,7 @@ import bisq.core.proto.network.CoreNetworkProtoResolver;
 import bisq.core.proto.persistable.CorePersistenceProtoResolver;
 import bisq.core.trade.TradeModule;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import bisq.network.crypto.EncryptionServiceModule;
 import bisq.network.p2p.P2PModule;
@@ -69,8 +69,8 @@ public class CoreModule extends AppModule {
 
         bind(SeedNodeRepository.class).to(DefaultSeedNodeRepository.class);
 
-        FormattingUtils.CoinFormatter btcFormatter = new FormattingUtils.CoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
-        bind(FormattingUtils.CoinFormatter.class).toInstance(btcFormatter);
+        CoinFormatter btcFormatter = new CoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
+        bind(CoinFormatter.class).toInstance(btcFormatter);
 
         File storageDir = new File(environment.getRequiredProperty(Storage.STORAGE_DIR));
         bind(File.class).annotatedWith(named(Storage.STORAGE_DIR)).toInstance(storageDir);

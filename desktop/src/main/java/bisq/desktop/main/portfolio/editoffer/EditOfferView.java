@@ -30,8 +30,7 @@ import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
 import bisq.core.offer.OpenOffer;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 
 import bisq.common.util.Tuple4;
@@ -62,7 +61,7 @@ public class EditOfferView extends MutableOfferView<EditOfferViewModel> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    private EditOfferView(EditOfferViewModel model, Navigation navigation, Preferences preferences, Transitions transitions, OfferDetailsWindow offerDetailsWindow, FormattingUtils.CoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
+    private EditOfferView(EditOfferViewModel model, Navigation navigation, Preferences preferences, Transitions transitions, OfferDetailsWindow offerDetailsWindow, CoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
         super(model, navigation, preferences, transitions, offerDetailsWindow, btcFormatter, bsqFormatter);
     }
 

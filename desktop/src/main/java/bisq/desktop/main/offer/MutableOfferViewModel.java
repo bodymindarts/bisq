@@ -51,7 +51,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
@@ -94,7 +94,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
     private final PriceFeedService priceFeedService;
     private final Navigation navigation;
     private final Preferences preferences;
-    protected final FormattingUtils.CoinFormatter btcFormatter;
+    protected final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final FiatVolumeValidator fiatVolumeValidator;
     private final FiatPriceValidator fiatPriceValidator;
@@ -195,7 +195,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                                  PriceFeedService priceFeedService,
                                  Navigation navigation,
                                  Preferences preferences,
-                                 FormattingUtils.CoinFormatter btcFormatter,
+                                 CoinFormatter btcFormatter,
                                  BsqFormatter bsqFormatter) {
         super(dataModel);
 
@@ -930,7 +930,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                 .show();
     }
 
-    FormattingUtils.CoinFormatter getBtcFormatter() {
+    CoinFormatter getBtcFormatter() {
         return btcFormatter;
     }
 
@@ -1207,7 +1207,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
         }
     }
 
-    private FormattingUtils.CoinFormatter getFormatterForMakerFee() {
+    private CoinFormatter getFormatterForMakerFee() {
         return dataModel.isCurrencyForMakerFeeBtc() ? btcFormatter : bsqFormatter;
     }
 }

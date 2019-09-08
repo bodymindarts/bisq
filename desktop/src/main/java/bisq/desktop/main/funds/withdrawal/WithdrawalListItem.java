@@ -23,8 +23,7 @@ import bisq.core.btc.listeners.BalanceListener;
 import bisq.core.btc.model.AddressEntry;
 import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.locale.Res;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.core.Address;
 import org.bitcoinj.core.Coin;
@@ -40,7 +39,7 @@ class WithdrawalListItem {
     private final Label balanceLabel;
     private final AddressEntry addressEntry;
     private final BtcWalletService walletService;
-    private final FormattingUtils.CoinFormatter formatter;
+    private final CoinFormatter formatter;
     private Coin balance;
     private final String addressString;
     @Setter
@@ -48,7 +47,7 @@ class WithdrawalListItem {
     private boolean isSelected;
 
     public WithdrawalListItem(AddressEntry addressEntry, BtcWalletService walletService,
-                              FormattingUtils.CoinFormatter formatter) {
+                              CoinFormatter formatter) {
         this.addressEntry = addressEntry;
         this.walletService = walletService;
         this.formatter = formatter;

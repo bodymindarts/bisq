@@ -50,8 +50,7 @@ import bisq.core.dao.state.model.governance.DaoPhase;
 import bisq.core.dao.state.model.governance.Proposal;
 import bisq.core.dao.state.model.governance.Role;
 import bisq.core.locale.Res;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.BsqFormatter;
 
 import bisq.asset.Asset;
@@ -108,7 +107,7 @@ public class MakeProposalView extends ActivatableView<GridPane, Void> implements
     private final P2PService p2PService;
     private final PhasesView phasesView;
     private final ChangeParamValidator changeParamValidator;
-    private final FormattingUtils.CoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final Navigation navigation;
     private final BsqWalletService bsqWalletService;
@@ -144,7 +143,7 @@ public class MakeProposalView extends ActivatableView<GridPane, Void> implements
                              BsqWalletService bsqWalletService,
                              PhasesView phasesView,
                              ChangeParamValidator changeParamValidator,
-                             FormattingUtils.CoinFormatter btcFormatter,
+                             CoinFormatter btcFormatter,
                              BsqFormatter bsqFormatter,
                              Navigation navigation) {
         this.daoFacade = daoFacade;

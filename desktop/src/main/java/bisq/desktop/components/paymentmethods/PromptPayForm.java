@@ -28,8 +28,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.PromptPayAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.PromptPayAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.TextField;
@@ -52,7 +51,7 @@ public class PromptPayForm extends PaymentMethodForm {
     }
 
     public PromptPayForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, PromptPayValidator promptPayValidator,
-                       InputValidator inputValidator, GridPane gridPane, int gridRow, FormattingUtils.CoinFormatter formatter) {
+                       InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.promptPayAccount = (PromptPayAccount) paymentAccount;
         this.promptPayValidator = promptPayValidator;

@@ -19,8 +19,7 @@ package bisq.desktop.util.validation;
 
 import bisq.core.btc.wallet.Restrictions;
 import bisq.core.locale.Res;
-import bisq.core.util.FormattingUtils.CoinFormatter;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.core.Coin;
 
@@ -35,7 +34,7 @@ import javax.annotation.Nullable;
 
 public class BtcValidator extends NumberValidator {
 
-    protected final FormattingUtils.CoinFormatter formatter;
+    protected final CoinFormatter formatter;
 
     @Nullable
     @Setter
@@ -51,7 +50,7 @@ public class BtcValidator extends NumberValidator {
     protected Coin maxTradeLimit;
 
     @Inject
-    public BtcValidator(FormattingUtils.CoinFormatter formatter) {
+    public BtcValidator(CoinFormatter formatter) {
         this.formatter = formatter;
     }
 

@@ -4,8 +4,7 @@ import bisq.core.account.witness.AccountAgeWitnessService;
 import bisq.core.alert.PrivateNotificationManager;
 import bisq.core.offer.Offer;
 import bisq.core.user.Preferences;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
 
@@ -14,7 +13,7 @@ public class PeerInfoIconSmall extends PeerInfoIcon {
                              String role, Offer offer,
                              Preferences preferences,
                              AccountAgeWitnessService accountAgeWitnessService,
-                             FormattingUtils.CoinFormatter formatter,
+                             CoinFormatter formatter,
                              boolean useDevPrivilegeKeys) {
         // We don't want to show number of trades in that case as it would be unreadable.
         // Also we don't need the privateNotificationManager as no interaction will take place with this icon.
@@ -37,7 +36,7 @@ public class PeerInfoIconSmall extends PeerInfoIcon {
     protected void addMouseListener(int numTrades,
                                     PrivateNotificationManager privateNotificationManager,
                                     Offer offer, Preferences preferences,
-                                    FormattingUtils.CoinFormatter formatter,
+                                    CoinFormatter formatter,
                                     boolean useDevPrivilegeKeys,
                                     boolean isFiatCurrency,
                                     long makersAccountAge) {

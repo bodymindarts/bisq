@@ -22,7 +22,6 @@ import bisq.core.dao.governance.param.Param;
 import bisq.core.dao.governance.proposal.ProposalValidationException;
 import bisq.core.locale.GlobalSettings;
 import bisq.core.locale.Res;
-import bisq.core.offer.Offer;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.util.validation.BtcAddressValidator;
 import bisq.core.util.validation.InputValidator;
@@ -49,11 +48,11 @@ import org.jetbrains.annotations.NotNull;
 
 @Slf4j
 @Singleton
-public class BsqFormatter extends FormattingUtils.CoinFormatter {
+public class BsqFormatter extends CoinFormatter {
     @SuppressWarnings("PointlessBooleanExpression")
     private static final boolean useBsqAddressFormat = true || !DevEnv.isDevMode();
     private final String prefix = "B";
-    private final FormattingUtils.CoinFormatter coinFormatter;
+    private final CoinFormatter coinFormatter;
 
     protected int scale = 3;
     // We don't support localized formatting. Format is always using "." as decimal mark and no grouping separator.
@@ -71,7 +70,7 @@ public class BsqFormatter extends FormattingUtils.CoinFormatter {
         super(BisqEnvironment.getParameters().getMonetaryFormat());
 
         this.coinFormat = BisqEnvironment.getParameters().getMonetaryFormat();
-        this.coinFormatter = new FormattingUtils.CoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
+        this.coinFormatter = new CoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
 
         GlobalSettings.localeProperty().addListener((observable, oldValue, newValue) -> setFormatter(newValue));
         setFormatter(GlobalSettings.getLocale());
@@ -252,6 +251,6 @@ public class BsqFormatter extends FormattingUtils.CoinFormatter {
     }
 
     public Coin parseToCoin(String input) {
-        return coinFormatter.parseToCoin(input);
+        return ParsingUtils.parseToCoin(input, this);
     }
 }

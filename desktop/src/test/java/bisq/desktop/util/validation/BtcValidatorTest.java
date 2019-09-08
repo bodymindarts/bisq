@@ -21,8 +21,7 @@ import bisq.core.app.BisqEnvironment;
 import bisq.core.btc.BaseCurrencyNetwork;
 import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
-import bisq.core.util.FormattingUtils.CoinFormatter;
-import bisq.core.util.FormattingUtils;
+import bisq.core.util.CoinFormatter;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.MonetaryFormat;
@@ -46,7 +45,7 @@ public class BtcValidatorTest {
 
     @Test
     public void testIsValid() {
-        BtcValidator validator = new BtcValidator(new FormattingUtils.CoinFormatter(MonetaryFormat.BTC));
+        BtcValidator validator = new BtcValidator(new CoinFormatter(MonetaryFormat.BTC));
 
         assertTrue(validator.validate("1").isValid);
         assertTrue(validator.validate("0,1").isValid);

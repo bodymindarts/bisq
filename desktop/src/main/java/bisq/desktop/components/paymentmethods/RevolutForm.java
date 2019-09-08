@@ -29,8 +29,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.RevolutAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.RevolutAccountPayload;
-import bisq.core.util.FormattingUtils;
-import bisq.core.util.FormattingUtils.CoinFormatter;
+import bisq.core.util.CoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import javafx.scene.control.TextField;
@@ -65,7 +64,7 @@ public class RevolutForm extends PaymentMethodForm {
 
     public RevolutForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService,
                        RevolutValidator revolutValidator, InputValidator inputValidator, GridPane gridPane,
-                       int gridRow, FormattingUtils.CoinFormatter formatter) {
+                       int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.account = (RevolutAccount) paymentAccount;
         this.validator = revolutValidator;
