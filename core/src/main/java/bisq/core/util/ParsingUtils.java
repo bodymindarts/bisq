@@ -82,7 +82,7 @@ public class ParsingUtils {
         return input.replace(",", ".");
     }
 
-    static String cleanDoubleInput(String input) {
+    public static String cleanDoubleInput(String input) {
         input = convertCharsForNumber(input);
         if (input.equals("."))
             input = input.replace(".", "0.");

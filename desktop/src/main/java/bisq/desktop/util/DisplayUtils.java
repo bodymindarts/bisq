@@ -10,23 +10,30 @@ import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
 import bisq.core.util.CoinFormatter;
 import bisq.core.util.FormattingUtils;
+import bisq.core.util.ParsingUtils;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.Monetary;
 import org.bitcoinj.utils.Fiat;
 import org.bitcoinj.utils.MonetaryFormat;
 
-import com.google.inject.internal.asm.$ClassWriter;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.text.DateFormat;
 
+import java.math.BigDecimal;
+
 import java.util.Date;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
+
+import static bisq.core.util.ParsingUtils.parseToCoin;
+
+@Slf4j
 public class DisplayUtils {
+    private static final int scale = 3;
     private static final MonetaryFormat fiatVolumeFormat = new MonetaryFormat().shift(0).minDecimals(2).repeatOptionalDecimals(0, 0);
 
     public static String getDirectionWithCode(OfferPayload.Direction direction, String currencyCode) {
@@ -179,5 +186,40 @@ public class DisplayUtils {
             formattedAmount = FormattingUtils.fillUpPlacesWithEmptyStrings(formattedAmount, maxPlaces);
         }
         return formattedAmount;
+    }
+
+    /**
+     * Converts to a coin with max. 4 decimal places. Last place gets rounded.
+     * 0.01234 -> 0.0123
+     * 0.01235 -> 0.0124
+     *
+     * @param input
+     * @param coinFormatter
+     * @return
+     */
+    public static Coin parseToCoinWith4Decimals(String input, CoinFormatter coinFormatter) {
+        try {
+            return Coin.valueOf(new BigDecimal(parseToCoin(ParsingUtils.cleanDoubleInput(input), coinFormatter).value).setScale(-scale - 1,
+                    BigDecimal.ROUND_HALF_UP).setScale(scale + 1, BigDecimal.ROUND_HALF_UP).toBigInteger().longValue());
+        } catch (Throwable t) {
+            if (input != null && input.length() > 0)
+                log.warn("Exception at parseToCoinWith4Decimals: " + t.toString());
+            return Coin.ZERO;
+        }
+    }
+
+    public static boolean hasBtcValidDecimals(String input, CoinFormatter coinFormatter) {
+        return parseToCoin(input, coinFormatter).equals(parseToCoinWith4Decimals(input, coinFormatter));
+    }
+
+    /**
+     * Transform a coin with the properties defined in the format (used to reduce decimal places)
+     *
+     * @param coin The coin which should be transformed
+     * @param coinFormatter
+     * @return The transformed coin
+     */
+    public static Coin reduceTo4Decimals(Coin coin, CoinFormatter coinFormatter) {
+        return parseToCoin(coinFormatter.formatCoin(coin), coinFormatter);
     }
 }
