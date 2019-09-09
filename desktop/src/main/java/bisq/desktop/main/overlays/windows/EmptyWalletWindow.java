@@ -31,6 +31,7 @@ import bisq.core.btc.wallet.Restrictions;
 import bisq.core.btc.wallet.WalletService;
 import bisq.core.locale.Res;
 import bisq.core.offer.OpenOfferManager;
+import bisq.core.util.coin.ICoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 
@@ -252,7 +253,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
         return isBtc ? btcWalletService : bsqWalletService;
     }
 
-    private ImmutableCoinFormatter getFormatter() {
+    private ICoinFormatter getFormatter() {
         return isBtc ? btcFormatter : bsqFormatter;
     }
 }

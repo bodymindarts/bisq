@@ -44,13 +44,14 @@ import java.text.NumberFormat;
 
 import java.util.Locale;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.jetbrains.annotations.NotNull;
 
 @Slf4j
 @Singleton
-public class BsqFormatter extends ImmutableCoinFormatter {
+public class BsqFormatter implements ICoinFormatter {
     @SuppressWarnings("PointlessBooleanExpression")
     private static final boolean useBsqAddressFormat = true || !DevEnv.isDevMode();
     private final String prefix = "B";
@@ -62,15 +63,13 @@ public class BsqFormatter extends ImmutableCoinFormatter {
     // Input of a group separator (1,123,45) lead to an validation error.
     // Note: BtcFormat was intended to be used, but it lead to many problems (automatic format to mBit,
     // no way to remove grouping separator). It seems to be not optimal for user input formatting.
-    protected MonetaryFormat coinFormat;
+    private MonetaryFormat coinFormat;
     private DecimalFormat amountFormat;
     private DecimalFormat marketCapFormat;
     private final MonetaryFormat btcCoinFormat;
 
     @Inject
     public BsqFormatter() {
-        super(BisqEnvironment.getParameters().getMonetaryFormat());
-
         this.coinFormat = BisqEnvironment.getParameters().getMonetaryFormat();
         this.coinFormatter = new ImmutableCoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
 
@@ -89,6 +88,11 @@ public class BsqFormatter extends ImmutableCoinFormatter {
         }
 
         amountFormat.setMinimumFractionDigits(2);
+    }
+
+    @Override
+    public MonetaryFormat getMonetaryFormat() {
+        return coinFormat;
     }
 
     private void setFormatter(Locale locale) {
