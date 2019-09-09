@@ -44,9 +44,9 @@ import bisq.core.btc.wallet.TxBroadcaster;
 import bisq.core.btc.wallet.WalletsManager;
 import bisq.core.dao.state.model.blockchain.TxType;
 import bisq.core.locale.Res;
-import bisq.core.util.BsqFormatter;
-import bisq.core.util.CoinFormatter;
-import bisq.core.util.CoinUtil;
+import bisq.core.util.coin.BsqFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.CoinUtil;
 import bisq.core.util.validation.BtcAddressValidator;
 
 import bisq.network.p2p.P2PService;
@@ -76,7 +76,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
     private final WalletsSetup walletsSetup;
     private final P2PService p2PService;
     private final BsqFormatter bsqFormatter;
-    private final CoinFormatter btcFormatter;
+    private final ImmutableCoinFormatter btcFormatter;
     private final Navigation navigation;
     private final BsqBalanceUtil bsqBalanceUtil;
     private final BsqValidator bsqValidator;
@@ -104,7 +104,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
                         WalletsSetup walletsSetup,
                         P2PService p2PService,
                         BsqFormatter bsqFormatter,
-                        CoinFormatter btcFormatter,
+                        ImmutableCoinFormatter btcFormatter,
                         Navigation navigation,
                         BsqBalanceUtil bsqBalanceUtil,
                         BsqValidator bsqValidator,
@@ -350,8 +350,8 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
                                     TxType txType,
                                     Coin miningFee,
                                     int txSize, String address,
-                                    CoinFormatter amountFormatter, // can be BSQ or BTC formatter
-                                    CoinFormatter feeFormatter,
+                                    ImmutableCoinFormatter amountFormatter, // can be BSQ or BTC formatter
+                                    ImmutableCoinFormatter feeFormatter,
                                     ResultHandler resultHandler) {
         new Popup<>().headLine(Res.get("dao.wallet.send.sendFunds.headline"))
                 .confirmation(Res.get("dao.wallet.send.sendFunds.details",

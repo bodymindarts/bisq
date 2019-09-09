@@ -53,8 +53,8 @@ import bisq.core.dao.state.model.governance.Proposal;
 import bisq.core.dao.state.model.governance.Vote;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
-import bisq.core.util.BsqFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.BsqFormatter;
 
 import bisq.common.UserThread;
 import bisq.common.app.DevEnv;
@@ -118,7 +118,7 @@ public class ProposalsView extends ActivatableView<GridPane, Void> implements Bs
     private final MyBlindVoteListService myBlindVoteListService;
     private final Preferences preferences;
     private final BsqFormatter bsqFormatter;
-    private final CoinFormatter btcFormatter;
+    private final ImmutableCoinFormatter btcFormatter;
     private final SelectProposalWindow selectProposalWindow;
 
     private final ObservableList<ProposalsListItem> listItems = FXCollections.observableArrayList();
@@ -169,7 +169,7 @@ public class ProposalsView extends ActivatableView<GridPane, Void> implements Bs
                           MyBlindVoteListService myBlindVoteListService,
                           Preferences preferences,
                           BsqFormatter bsqFormatter,
-                          CoinFormatter btcFormatter,
+                          ImmutableCoinFormatter btcFormatter,
                           SelectProposalWindow selectProposalWindow) {
         this.daoFacade = daoFacade;
         this.bsqWalletService = bsqWalletService;

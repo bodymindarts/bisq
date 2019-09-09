@@ -20,7 +20,7 @@ package bisq.desktop.main.settings.network;
 import bisq.desktop.util.DisplayUtils;
 
 import bisq.core.locale.Res;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.network.Connection;
@@ -47,7 +47,7 @@ public class P2pNetworkListItem {
     private final Connection connection;
     private final Subscription sentBytesSubscription, receivedBytesSubscription, onionAddressSubscription, roundTripTimeSubscription;
     private final ClockWatcher clockWatcher;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
 
     private final StringProperty lastActivity = new SimpleStringProperty();
     private final StringProperty sentBytes = new SimpleStringProperty();
@@ -58,7 +58,7 @@ public class P2pNetworkListItem {
     private final StringProperty onionAddress = new SimpleStringProperty();
     private final ClockWatcher.Listener listener;
 
-    public P2pNetworkListItem(Connection connection, ClockWatcher clockWatcher, CoinFormatter formatter) {
+    public P2pNetworkListItem(Connection connection, ClockWatcher clockWatcher, ImmutableCoinFormatter formatter) {
         this.connection = connection;
         this.clockWatcher = clockWatcher;
         this.formatter = formatter;

@@ -20,7 +20,7 @@ import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.BsqFormatter;
+import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import org.bitcoinj.core.Coin;

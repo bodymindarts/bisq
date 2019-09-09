@@ -36,7 +36,7 @@ import bisq.core.filter.Filter;
 import bisq.core.filter.FilterManager;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -113,7 +113,7 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
     private final BisqEnvironment bisqEnvironment;
     private final TorNetworkSettingsWindow torNetworkSettingsWindow;
     private final ClockWatcher clockWatcher;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final WalletsSetup walletsSetup;
     private final P2PService p2PService;
 
@@ -139,7 +139,7 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
                                BisqEnvironment bisqEnvironment,
                                TorNetworkSettingsWindow torNetworkSettingsWindow,
                                ClockWatcher clockWatcher,
-                               CoinFormatter formatter) {
+                               ImmutableCoinFormatter formatter) {
         super();
         this.walletsSetup = walletsSetup;
         this.p2PService = p2PService;

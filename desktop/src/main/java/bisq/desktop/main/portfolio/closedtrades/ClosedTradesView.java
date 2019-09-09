@@ -40,7 +40,7 @@ import bisq.core.trade.Contract;
 import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
 
@@ -101,7 +101,7 @@ public class ClosedTradesView extends ActivatableViewAndModel<VBox, ClosedTrades
 
     private final OfferDetailsWindow offerDetailsWindow;
     private Preferences preferences;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final TradeDetailsWindow tradeDetailsWindow;
     private final PrivateNotificationManager privateNotificationManager;
     private SortedList<ClosedTradableListItem> sortedList;
@@ -114,7 +114,7 @@ public class ClosedTradesView extends ActivatableViewAndModel<VBox, ClosedTrades
                             Preferences preferences,
                             TradeDetailsWindow tradeDetailsWindow,
                             PrivateNotificationManager privateNotificationManager,
-                            CoinFormatter formatter,
+                            ImmutableCoinFormatter formatter,
                             @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
         super(model);
         this.offerDetailsWindow = offerDetailsWindow;

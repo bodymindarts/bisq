@@ -30,8 +30,8 @@ import bisq.core.btc.setup.WalletsSetup;
 import bisq.core.offer.OpenOffer;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
-import bisq.core.util.BsqFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -44,7 +44,7 @@ import com.google.inject.Inject;
 class EditOfferViewModel extends MutableOfferViewModel<EditOfferDataModel> {
 
     @Inject
-    public EditOfferViewModel(EditOfferDataModel dataModel, FiatVolumeValidator fiatVolumeValidator, FiatPriceValidator fiatPriceValidator, AltcoinValidator altcoinValidator, BtcValidator btcValidator, BsqValidator bsqValidator, SecurityDepositValidator securityDepositValidator, P2PService p2PService, WalletsSetup walletsSetup, PriceFeedService priceFeedService, Navigation navigation, Preferences preferences, CoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
+    public EditOfferViewModel(EditOfferDataModel dataModel, FiatVolumeValidator fiatVolumeValidator, FiatPriceValidator fiatPriceValidator, AltcoinValidator altcoinValidator, BtcValidator btcValidator, BsqValidator bsqValidator, SecurityDepositValidator securityDepositValidator, P2PService p2PService, WalletsSetup walletsSetup, PriceFeedService priceFeedService, Navigation navigation, Preferences preferences, ImmutableCoinFormatter btcFormatter, BsqFormatter bsqFormatter) {
         super(dataModel, fiatVolumeValidator, fiatPriceValidator, altcoinValidator, btcValidator, bsqValidator, securityDepositValidator, p2PService, walletsSetup, priceFeedService, navigation, preferences, btcFormatter, bsqFormatter);
         syncMinAmountWithAmount = false;
     }

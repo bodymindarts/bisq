@@ -27,7 +27,7 @@ import bisq.core.locale.Res;
 import bisq.core.offer.OpenOffer;
 import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import com.google.inject.Inject;
@@ -37,13 +37,13 @@ import javafx.collections.ObservableList;
 import java.util.stream.Collectors;
 
 class ClosedTradesViewModel extends ActivatableWithDataModel<ClosedTradesDataModel> implements ViewModel {
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     final AccountAgeWitnessService accountAgeWitnessService;
 
     @Inject
     public ClosedTradesViewModel(ClosedTradesDataModel dataModel,
                                  AccountAgeWitnessService accountAgeWitnessService,
-                                 CoinFormatter formatter) {
+                                 ImmutableCoinFormatter formatter) {
         super(dataModel);
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.formatter = formatter;

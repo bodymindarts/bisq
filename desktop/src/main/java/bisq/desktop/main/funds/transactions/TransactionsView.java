@@ -35,7 +35,7 @@ import bisq.core.offer.OpenOffer;
 import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.network.p2p.P2PService;
 
@@ -110,7 +110,7 @@ public class TransactionsView extends ActivatableView<VBox, Void> {
     private final BtcWalletService btcWalletService;
     private final P2PService p2PService;
     private final WalletsSetup walletsSetup;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final Preferences preferences;
     private final TradeDetailsWindow tradeDetailsWindow;
     private final OfferDetailsWindow offerDetailsWindow;
@@ -127,7 +127,7 @@ public class TransactionsView extends ActivatableView<VBox, Void> {
     private TransactionsView(BtcWalletService btcWalletService,
                              P2PService p2PService,
                              WalletsSetup walletsSetup,
-                             CoinFormatter formatter,
+                             ImmutableCoinFormatter formatter,
                              Preferences preferences,
                              TradeDetailsWindow tradeDetailsWindow,
                              OfferDetailsWindow offerDetailsWindow,

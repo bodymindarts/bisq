@@ -47,7 +47,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 import bisq.core.util.validation.InputValidator;
@@ -90,7 +90,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
     private final PriceFeedService priceFeedService;
     private final MarketAlerts marketAlerts;
     private final MobileNotificationService mobileNotificationService;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
 
     private WebCamWindow webCamWindow;
     private QrCodeReader qrCodeReader;
@@ -127,7 +127,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
                                     PriceFeedService priceFeedService,
                                     MarketAlerts marketAlerts,
                                     MobileNotificationService mobileNotificationService,
-                                    CoinFormatter formatter) {
+                                    ImmutableCoinFormatter formatter) {
         super();
         this.preferences = preferences;
         this.user = user;

@@ -34,7 +34,7 @@ import bisq.core.locale.TradeCurrency;
 import bisq.core.offer.Offer;
 import bisq.core.payment.AssetAccount;
 import bisq.core.payment.PaymentAccount;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.common.util.Tuple3;
@@ -73,7 +73,7 @@ public abstract class PaymentMethodForm {
     protected final InputValidator inputValidator;
     protected final GridPane gridPane;
     protected int gridRow;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     protected final BooleanProperty allInputsValid = new SimpleBooleanProperty();
 
     protected int gridRowFrom;
@@ -82,7 +82,7 @@ public abstract class PaymentMethodForm {
     protected ComboBox<TradeCurrency> currencyComboBox;
 
     public PaymentMethodForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService,
-                             InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
+                             InputValidator inputValidator, GridPane gridPane, int gridRow, ImmutableCoinFormatter formatter) {
         this.paymentAccount = paymentAccount;
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.inputValidator = inputValidator;

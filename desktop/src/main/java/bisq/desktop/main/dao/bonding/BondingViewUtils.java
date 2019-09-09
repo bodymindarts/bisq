@@ -34,9 +34,9 @@ import bisq.core.dao.state.model.blockchain.TxOutput;
 import bisq.core.dao.state.model.governance.Role;
 import bisq.core.dao.state.model.governance.RoleProposal;
 import bisq.core.locale.Res;
-import bisq.core.util.CoinFormatter;
-import bisq.core.util.BsqFormatter;
-import bisq.core.util.CoinUtil;
+import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.BsqFormatter;
+import bisq.core.util.coin.CoinUtil;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -67,7 +67,7 @@ public class BondingViewUtils {
     private final DaoFacade daoFacade;
     private final Navigation navigation;
     private final BsqFormatter bsqFormatter;
-    private final CoinFormatter btcFormatter;
+    private final ImmutableCoinFormatter btcFormatter;
 
     @Inject
     public BondingViewUtils(P2PService p2PService,
@@ -76,7 +76,7 @@ public class BondingViewUtils {
                             WalletsSetup walletsSetup,
                             DaoFacade daoFacade,
                             Navigation navigation,
-                            CoinFormatter btcFormatter,
+                            ImmutableCoinFormatter btcFormatter,
                             BsqFormatter bsqFormatter) {
         this.p2PService = p2PService;
         this.myReputationListService = myReputationListService;

@@ -32,7 +32,7 @@ import bisq.core.payment.MoneyGramAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.MoneyGramAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.common.util.Tuple2;
@@ -74,7 +74,7 @@ public class MoneyGramForm extends PaymentMethodForm {
     private final EmailValidator emailValidator;
 
     public MoneyGramForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator,
-                         GridPane gridPane, int gridRow, CoinFormatter formatter) {
+                         GridPane gridPane, int gridRow, ImmutableCoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.moneyGramAccountPayload = (MoneyGramAccountPayload) paymentAccount.paymentAccountPayload;
 

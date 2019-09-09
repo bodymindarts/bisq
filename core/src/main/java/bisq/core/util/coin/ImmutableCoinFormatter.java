@@ -1,4 +1,6 @@
-package bisq.core.util;
+package bisq.core.util.coin;
+
+import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.MonetaryFormat;
@@ -13,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import static bisq.core.util.ParsingUtils.parseToCoin;
 
 @Slf4j
-public class CoinFormatter {
+public class ImmutableCoinFormatter implements ICoinFormatter {
 
     // We don't support localized formatting. Format is always using "." as decimal mark and no grouping separator.
     // Input of "," as decimal mark (like in german locale) will be replaced with ".".
@@ -23,7 +25,7 @@ public class CoinFormatter {
     @Getter
     private final MonetaryFormat monetaryFormat;
 
-    public CoinFormatter(MonetaryFormat coinFormat) {
+    public ImmutableCoinFormatter(MonetaryFormat coinFormat) {
         this.monetaryFormat = coinFormat;
     }
 

@@ -20,7 +20,7 @@ package bisq.desktop.util.validation;
 import bisq.core.btc.wallet.Restrictions;
 import bisq.core.locale.Res;
 import bisq.core.payment.PaymentAccount;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 
@@ -28,11 +28,11 @@ import javax.inject.Inject;
 
 public class SecurityDepositValidator extends NumberValidator {
 
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private PaymentAccount paymentAccount;
 
     @Inject
-    public SecurityDepositValidator(CoinFormatter formatter) {
+    public SecurityDepositValidator(ImmutableCoinFormatter formatter) {
         this.formatter = formatter;
     }
 

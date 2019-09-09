@@ -1,6 +1,7 @@
 package bisq.core.util;
 
 import bisq.core.monetary.Price;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.common.util.MathUtils;
 
@@ -14,23 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ParsingUtils {
-    protected static Fiat parseToFiat(String input, String currencyCode) {
-        if (input != null && input.length() > 0) {
-            try {
-                return Fiat.parseFiat(currencyCode, cleanDoubleInput(input));
-            } catch (Exception e) {
-                log.warn("Exception at parseToFiat: " + e.toString());
-                return Fiat.valueOf(currencyCode, 0);
-            }
-
-        } else {
-            return Fiat.valueOf(currencyCode, 0);
-        }
-    }
-
-    public static Coin parseToCoin(String input, CoinFormatter coinFormat) {
+    public static Coin parseToCoin(String input, ImmutableCoinFormatter coinFormat) {
       return parseToCoin(input, coinFormat.getMonetaryFormat());
     }
+
     public static Coin parseToCoin(String input, MonetaryFormat coinFormat) {
         if (input != null && input.length() > 0) {
             try {

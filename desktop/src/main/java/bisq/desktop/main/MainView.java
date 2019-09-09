@@ -44,7 +44,7 @@ import bisq.core.dao.monitoring.DaoStateMonitoringService;
 import bisq.core.exceptions.BisqException;
 import bisq.core.locale.GlobalSettings;
 import bisq.core.locale.Res;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.common.Timer;
 import bisq.common.UserThread;
@@ -140,7 +140,7 @@ public class MainView extends InitializableView<StackPane, MainViewModel>
 
     private final ViewLoader viewLoader;
     private final Navigation navigation;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
 
     private final ToggleGroup navButtons = new ToggleGroup();
     private ChangeListener<String> walletServiceErrorMsgListener;
@@ -160,7 +160,7 @@ public class MainView extends InitializableView<StackPane, MainViewModel>
                     CachingViewLoader viewLoader,
                     Navigation navigation,
                     Transitions transitions,
-                    CoinFormatter formatter,
+                    ImmutableCoinFormatter formatter,
                     DaoStateMonitoringService daoStateMonitoringService) {
         super(model);
         this.viewLoader = viewLoader;

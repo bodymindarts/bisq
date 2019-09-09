@@ -22,7 +22,7 @@ import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.dao.DaoFacade;
 import bisq.core.trade.Tradable;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.core.Transaction;
 
@@ -38,12 +38,12 @@ public class TransactionListItemFactory {
     private final BtcWalletService btcWalletService;
     private final BsqWalletService bsqWalletService;
     private final DaoFacade daoFacade;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final Preferences preferences;
 
     @Inject
     TransactionListItemFactory(BtcWalletService btcWalletService, BsqWalletService bsqWalletService,
-                               DaoFacade daoFacade, CoinFormatter formatter, Preferences preferences) {
+                               DaoFacade daoFacade, ImmutableCoinFormatter formatter, Preferences preferences) {
         this.btcWalletService = btcWalletService;
         this.bsqWalletService = bsqWalletService;
         this.daoFacade = daoFacade;

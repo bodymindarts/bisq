@@ -47,7 +47,7 @@ import bisq.core.trade.Trade;
 import bisq.core.trade.closed.ClosedTradableManager;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
@@ -102,7 +102,7 @@ class OfferBookViewModel extends ActivatableViewModel {
     private final FilterManager filterManager;
     final AccountAgeWitnessService accountAgeWitnessService;
     private final Navigation navigation;
-    final CoinFormatter btcFormatter;
+    final ImmutableCoinFormatter btcFormatter;
     final ObjectProperty<TableColumn.SortType> priceSortTypeProperty = new SimpleObjectProperty<>();
 
 
@@ -145,7 +145,7 @@ class OfferBookViewModel extends ActivatableViewModel {
                               FilterManager filterManager,
                               AccountAgeWitnessService accountAgeWitnessService,
                               Navigation navigation,
-                              CoinFormatter btcFormatter) {
+                              ImmutableCoinFormatter btcFormatter) {
         super();
 
         this.openOfferManager = openOfferManager;

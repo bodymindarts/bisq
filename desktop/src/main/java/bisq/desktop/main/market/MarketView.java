@@ -37,7 +37,7 @@ import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
 import bisq.core.offer.OfferPayload;
 import bisq.core.trade.statistics.TradeStatistics2;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -73,7 +73,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
     private final ViewLoader viewLoader;
     private final P2PService p2PService;
     private final OfferBook offerBook;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final Navigation navigation;
     private Navigation.Listener navigationListener;
     private ChangeListener<Tab> tabChangeListener;
@@ -82,7 +82,7 @@ public class MarketView extends ActivatableViewAndModel<TabPane, Activatable> {
 
 
     @Inject
-    public MarketView(CachingViewLoader viewLoader, P2PService p2PService, OfferBook offerBook, CoinFormatter formatter,
+    public MarketView(CachingViewLoader viewLoader, P2PService p2PService, OfferBook offerBook, ImmutableCoinFormatter formatter,
                       Navigation navigation) {
         this.viewLoader = viewLoader;
         this.p2PService = p2PService;

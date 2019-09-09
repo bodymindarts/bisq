@@ -33,7 +33,7 @@ import bisq.core.offer.Offer;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.trade.Contract;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.common.UserThread;
@@ -70,7 +70,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class ContractWindow extends Overlay<ContractWindow> {
     private final DisputeManager disputeManager;
     private final AccountAgeWitnessService accountAgeWitnessService;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private Dispute dispute;
 
 
@@ -80,7 +80,7 @@ public class ContractWindow extends Overlay<ContractWindow> {
 
     @Inject
     public ContractWindow(DisputeManager disputeManager, AccountAgeWitnessService accountAgeWitnessService,
-                          CoinFormatter formatter) {
+                          ImmutableCoinFormatter formatter) {
         this.disputeManager = disputeManager;
         this.accountAgeWitnessService = accountAgeWitnessService;
         this.formatter = formatter;

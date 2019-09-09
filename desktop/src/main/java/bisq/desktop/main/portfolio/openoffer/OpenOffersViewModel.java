@@ -26,7 +26,7 @@ import bisq.core.locale.Res;
 import bisq.core.monetary.Price;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OpenOffer;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
@@ -40,13 +40,13 @@ import javafx.collections.ObservableList;
 
 class OpenOffersViewModel extends ActivatableWithDataModel<OpenOffersDataModel> implements ViewModel {
     private final P2PService p2PService;
-    final CoinFormatter formatter;
+    final ImmutableCoinFormatter formatter;
 
 
     @Inject
     public OpenOffersViewModel(OpenOffersDataModel dataModel,
                                P2PService p2PService,
-                               CoinFormatter formatter) {
+                               ImmutableCoinFormatter formatter) {
         super(dataModel);
 
         this.p2PService = p2PService;

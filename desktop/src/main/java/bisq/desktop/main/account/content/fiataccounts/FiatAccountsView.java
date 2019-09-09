@@ -83,7 +83,7 @@ import bisq.core.payment.RevolutAccount;
 import bisq.core.payment.USPostalMoneyOrderAccount;
 import bisq.core.payment.WesternUnionAccount;
 import bisq.core.payment.payload.PaymentMethod;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.common.util.Tuple2;
@@ -138,7 +138,7 @@ public class FiatAccountsView extends PaymentAccountsView<GridPane, FiatAccounts
     private final PromptPayValidator promptPayValidator;
     private final AdvancedCashValidator advancedCashValidator;
     private final AccountAgeWitnessService accountAgeWitnessService;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private ComboBox<PaymentMethod> paymentMethodComboBox;
     private PaymentMethodForm paymentMethodForm;
     private TitledGroupBg accountTitledGroupBg;
@@ -167,7 +167,7 @@ public class FiatAccountsView extends PaymentAccountsView<GridPane, FiatAccounts
                             PromptPayValidator promptPayValidator,
                             AdvancedCashValidator advancedCashValidator,
                             AccountAgeWitnessService accountAgeWitnessService,
-                            CoinFormatter formatter) {
+                            ImmutableCoinFormatter formatter) {
         super(model);
 
         this.ibanValidator = ibanValidator;

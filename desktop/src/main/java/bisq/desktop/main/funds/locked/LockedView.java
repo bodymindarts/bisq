@@ -36,7 +36,7 @@ import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeManager;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.Transaction;
@@ -79,7 +79,7 @@ public class LockedView extends ActivatableView<VBox, Void> {
     private final TradeManager tradeManager;
     private final OpenOfferManager openOfferManager;
     private final Preferences preferences;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final OfferDetailsWindow offerDetailsWindow;
     private final TradeDetailsWindow tradeDetailsWindow;
     private final ObservableList<LockedListItem> observableList = FXCollections.observableArrayList();
@@ -95,7 +95,7 @@ public class LockedView extends ActivatableView<VBox, Void> {
 
     @Inject
     private LockedView(BtcWalletService btcWalletService, TradeManager tradeManager, OpenOfferManager openOfferManager, Preferences preferences,
-                       CoinFormatter formatter, OfferDetailsWindow offerDetailsWindow, TradeDetailsWindow tradeDetailsWindow) {
+                       ImmutableCoinFormatter formatter, OfferDetailsWindow offerDetailsWindow, TradeDetailsWindow tradeDetailsWindow) {
         this.btcWalletService = btcWalletService;
         this.tradeManager = tradeManager;
         this.openOfferManager = openOfferManager;

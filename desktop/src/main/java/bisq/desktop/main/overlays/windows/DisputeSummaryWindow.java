@@ -36,7 +36,7 @@ import bisq.core.btc.wallet.TradeWalletService;
 import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.trade.Contract;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 
@@ -82,7 +82,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
     private static final Logger log = LoggerFactory.getLogger(DisputeSummaryWindow.class);
 
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private final DisputeManager disputeManager;
     private final BtcWalletService walletService;
     private final TradeWalletService tradeWalletService;
@@ -112,7 +112,7 @@ public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public DisputeSummaryWindow(CoinFormatter formatter, DisputeManager disputeManager, BtcWalletService walletService,
+    public DisputeSummaryWindow(ImmutableCoinFormatter formatter, DisputeManager disputeManager, BtcWalletService walletService,
                                 TradeWalletService tradeWalletService) {
 
         this.formatter = formatter;

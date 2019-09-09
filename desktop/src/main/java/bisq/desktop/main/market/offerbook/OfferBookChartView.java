@@ -38,7 +38,7 @@ import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
@@ -105,7 +105,7 @@ public class OfferBookChartView extends ActivatableViewAndModel<VBox, OfferBookC
     private NumberAxis xAxis;
     private XYChart.Series seriesBuy, seriesSell;
     private final Navigation navigation;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
     private TableView<OfferListItem> buyOfferTableView;
     private TableView<OfferListItem> sellOfferTableView;
     private AreaChart<Number, Number> areaChart;
@@ -136,7 +136,7 @@ public class OfferBookChartView extends ActivatableViewAndModel<VBox, OfferBookC
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public OfferBookChartView(OfferBookChartViewModel model, Navigation navigation, CoinFormatter formatter,
+    public OfferBookChartView(OfferBookChartViewModel model, Navigation navigation, ImmutableCoinFormatter formatter,
                               @Named(AppOptionKeys.USE_DEV_PRIVILEGE_KEYS) boolean useDevPrivilegeKeys) {
         super(model);
         this.navigation = navigation;

@@ -26,7 +26,7 @@ import bisq.desktop.util.ImageUtil;
 import bisq.core.locale.Res;
 import bisq.core.notifications.alerts.market.MarketAlertFilter;
 import bisq.core.notifications.alerts.market.MarketAlerts;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import bisq.common.UserThread;
@@ -54,9 +54,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ManageMarketAlertsWindow extends Overlay<ManageMarketAlertsWindow> {
 
     private final MarketAlerts marketAlerts;
-    private final CoinFormatter formatter;
+    private final ImmutableCoinFormatter formatter;
 
-    ManageMarketAlertsWindow(MarketAlerts marketAlerts, CoinFormatter formatter) {
+    ManageMarketAlertsWindow(MarketAlerts marketAlerts, ImmutableCoinFormatter formatter) {
         this.marketAlerts = marketAlerts;
         this.formatter = formatter;
         type = Type.Attention;

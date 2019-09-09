@@ -37,7 +37,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.TradeStatistics2;
 import bisq.core.trade.statistics.TradeStatisticsManager;
 import bisq.core.user.Preferences;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.common.util.MathUtils;
 
@@ -99,7 +99,7 @@ class TradesChartsViewModel extends ActivatableViewModel {
     final Preferences preferences;
     private PriceFeedService priceFeedService;
     private Navigation navigation;
-    private CoinFormatter formatter;
+    private ImmutableCoinFormatter formatter;
 
     private final SetChangeListener<TradeStatistics2> setChangeListener;
     final ObjectProperty<TradeCurrency> selectedTradeCurrencyProperty = new SimpleObjectProperty<>();
@@ -121,7 +121,7 @@ class TradesChartsViewModel extends ActivatableViewModel {
 
     @SuppressWarnings("WeakerAccess")
     @Inject
-    public TradesChartsViewModel(TradeStatisticsManager tradeStatisticsManager, Preferences preferences, PriceFeedService priceFeedService, Navigation navigation, CoinFormatter formatter) {
+    public TradesChartsViewModel(TradeStatisticsManager tradeStatisticsManager, Preferences preferences, PriceFeedService priceFeedService, Navigation navigation, ImmutableCoinFormatter formatter) {
         this.tradeStatisticsManager = tradeStatisticsManager;
         this.preferences = preferences;
         this.priceFeedService = priceFeedService;

@@ -23,7 +23,7 @@ import bisq.desktop.main.offer.offerbook.OfferBookListItemMaker;
 
 import bisq.core.locale.GlobalSettings;
 import bisq.core.provider.price.PriceFeedService;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.utils.MonetaryFormat;
 
@@ -48,7 +48,7 @@ import static org.mockito.Mockito.when;
 
 public class OfferBookChartViewModelTest {
 
-    private final CoinFormatter btcFormatter = new CoinFormatter(MonetaryFormat.BTC);
+    private final ImmutableCoinFormatter btcFormatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
 
 
     @Before

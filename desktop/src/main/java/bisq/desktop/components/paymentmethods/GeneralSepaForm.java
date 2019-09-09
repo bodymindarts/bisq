@@ -10,7 +10,7 @@ import bisq.core.locale.Res;
 import bisq.core.locale.TradeCurrency;
 import bisq.core.payment.CountryBasedPaymentAccount;
 import bisq.core.payment.PaymentAccount;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +45,7 @@ public abstract class GeneralSepaForm extends PaymentMethodForm {
     private ComboBox<TradeCurrency> currencyComboBox;
     InputTextField ibanInputTextField;
 
-    GeneralSepaForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
+    GeneralSepaForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, InputValidator inputValidator, GridPane gridPane, int gridRow, ImmutableCoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
     }
 

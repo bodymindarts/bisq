@@ -21,7 +21,7 @@ import bisq.core.locale.Res;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
 import org.bitcoinj.core.Coin;
@@ -51,12 +51,12 @@ import static org.mockito.Mockito.when;
 
 public class BSFormatterTest {
 
-    private CoinFormatter formatter;
+    private ImmutableCoinFormatter formatter;
 
     @Before
     public void setUp() {
         Locale.setDefault(new Locale("en", "US"));
-        formatter = new CoinFormatter(MonetaryFormat.BTC);
+        formatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
         Res.setBaseCurrencyCode("BTC");
         Res.setBaseCurrencyName("Bitcoin");
     }

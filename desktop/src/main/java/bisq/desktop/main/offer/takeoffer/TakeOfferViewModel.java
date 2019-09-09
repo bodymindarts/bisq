@@ -42,8 +42,8 @@ import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
-import bisq.core.util.BsqFormatter;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.BsqFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.validation.InputValidator;
 
@@ -83,7 +83,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
     private final Preferences preferences;
     private final PriceFeedService priceFeedService;
     private final Navigation navigation;
-    private final CoinFormatter btcFormatter;
+    private final ImmutableCoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
 
     private String amountRange;
@@ -143,7 +143,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
                               Preferences preferences,
                               PriceFeedService priceFeedService,
                               Navigation navigation,
-                              CoinFormatter btcFormatter,
+                              ImmutableCoinFormatter btcFormatter,
                               BsqFormatter bsqFormatter) {
         super(dataModel);
         this.dataModel = dataModel;
@@ -653,7 +653,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
     // Getters
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    CoinFormatter getBtcFormatter() {
+    ImmutableCoinFormatter getBtcFormatter() {
         return btcFormatter;
     }
 
@@ -788,7 +788,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
         return btcFormatter.formatCoin(dataModel.getSellerSecurityDeposit());
     }
 
-    private CoinFormatter getFormatterForTakerFee() {
+    private ImmutableCoinFormatter getFormatterForTakerFee() {
         return dataModel.isCurrencyForTakerFeeBtc() ? btcFormatter : bsqFormatter;
     }
 }

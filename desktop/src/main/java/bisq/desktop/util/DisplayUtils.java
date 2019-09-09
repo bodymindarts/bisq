@@ -8,7 +8,7 @@ import bisq.core.monetary.Price;
 import bisq.core.monetary.Volume;
 import bisq.core.offer.Offer;
 import bisq.core.offer.OfferPayload;
-import bisq.core.util.CoinFormatter;
+import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 
@@ -104,7 +104,7 @@ public class DisplayUtils {
         }
     }
 
-    public static String getFeeWithFiatAmount(Coin makerFeeAsCoin, Optional<Volume> optionalFeeInFiat, CoinFormatter formatter) {
+    public static String getFeeWithFiatAmount(Coin makerFeeAsCoin, Optional<Volume> optionalFeeInFiat, ImmutableCoinFormatter formatter) {
         String fee = makerFeeAsCoin != null ? formatter.formatCoinWithCode(makerFeeAsCoin) : Res.get("shared.na");
         String feeInFiatAsString;
         if (optionalFeeInFiat != null && optionalFeeInFiat.isPresent()) {
@@ -171,7 +171,7 @@ public class DisplayUtils {
     }
 
 
-    public static String formatAmount(Offer offer, CoinFormatter coinFormatter) {
+    public static String formatAmount(Offer offer, ImmutableCoinFormatter coinFormatter) {
         return offer.isRange() ? coinFormatter.formatCoin(offer.getMinAmount()) + FormattingUtils.RANGE_SEPARATOR + coinFormatter.formatCoin(offer.getAmount()) : coinFormatter.formatCoin(offer.getAmount());
     }
 
@@ -179,7 +179,7 @@ public class DisplayUtils {
                                       int decimalPlaces,
                                       boolean decimalAligned,
                                       int maxPlaces,
-                                      CoinFormatter coinFormatter) {
+                                      ImmutableCoinFormatter coinFormatter) {
         String formattedAmount = offer.isRange() ? coinFormatter.formatCoin(offer.getMinAmount(), decimalPlaces) + FormattingUtils.RANGE_SEPARATOR + coinFormatter.formatCoin(offer.getAmount(), decimalPlaces) : coinFormatter.formatCoin(offer.getAmount(), decimalPlaces);
 
         if (decimalAligned) {
@@ -197,7 +197,7 @@ public class DisplayUtils {
      * @param coinFormatter
      * @return
      */
-    public static Coin parseToCoinWith4Decimals(String input, CoinFormatter coinFormatter) {
+    public static Coin parseToCoinWith4Decimals(String input, ImmutableCoinFormatter coinFormatter) {
         try {
             return Coin.valueOf(new BigDecimal(parseToCoin(ParsingUtils.cleanDoubleInput(input), coinFormatter).value).setScale(-scale - 1,
                     BigDecimal.ROUND_HALF_UP).setScale(scale + 1, BigDecimal.ROUND_HALF_UP).toBigInteger().longValue());
@@ -208,7 +208,7 @@ public class DisplayUtils {
         }
     }
 
-    public static boolean hasBtcValidDecimals(String input, CoinFormatter coinFormatter) {
+    public static boolean hasBtcValidDecimals(String input, ImmutableCoinFormatter coinFormatter) {
         return parseToCoin(input, coinFormatter).equals(parseToCoinWith4Decimals(input, coinFormatter));
     }
 
@@ -219,7 +219,7 @@ public class DisplayUtils {
      * @param coinFormatter
      * @return The transformed coin
      */
-    public static Coin reduceTo4Decimals(Coin coin, CoinFormatter coinFormatter) {
+    public static Coin reduceTo4Decimals(Coin coin, ImmutableCoinFormatter coinFormatter) {
         return parseToCoin(coinFormatter.formatCoin(coin), coinFormatter);
     }
 }

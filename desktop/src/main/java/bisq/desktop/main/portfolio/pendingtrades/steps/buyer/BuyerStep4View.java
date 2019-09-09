@@ -38,8 +38,8 @@ import bisq.core.btc.wallet.BtcWalletService;
 import bisq.core.btc.wallet.Restrictions;
 import bisq.core.locale.Res;
 import bisq.core.user.DontShowAgainLookup;
-import bisq.core.util.CoinFormatter;
-import bisq.core.util.CoinUtil;
+import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.CoinUtil;
 import bisq.core.util.validation.BtcAddressValidator;
 
 import bisq.common.UserThread;
@@ -214,7 +214,7 @@ public class BuyerStep4View extends TradeStepView {
                     if (toAddresses.isEmpty()) {
                         validateWithdrawAddress();
                     } else if (Restrictions.isAboveDust(receiverAmount)) {
-                        CoinFormatter formatter = model.btcFormatter;
+                        ImmutableCoinFormatter formatter = model.btcFormatter;
                         int txSize = feeEstimationTransaction.bitcoinSerialize().length;
                         double feePerByte = CoinUtil.getFeePerByte(fee, txSize);
                         double kb = txSize / 1000d;
