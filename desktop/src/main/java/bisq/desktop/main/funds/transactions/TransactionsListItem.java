@@ -32,6 +32,7 @@ import bisq.core.offer.Offer;
 import bisq.core.offer.OpenOffer;
 import bisq.core.trade.Tradable;
 import bisq.core.trade.Trade;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.core.Coin;
@@ -52,7 +53,7 @@ import javax.annotation.Nullable;
 @Slf4j
 class TransactionsListItem {
     private final BtcWalletService btcWalletService;
-    private final ImmutableCoinFormatter formatter;
+    private final CoinFormatter formatter;
     private String dateString;
     private final Date date;
     private final String txId;
@@ -87,7 +88,7 @@ class TransactionsListItem {
                          BsqWalletService bsqWalletService,
                          Optional<Tradable> tradableOptional,
                          DaoFacade daoFacade,
-                         ImmutableCoinFormatter formatter,
+                         CoinFormatter formatter,
                          long ignoreDustThreshold) {
         this.btcWalletService = btcWalletService;
         this.formatter = formatter;

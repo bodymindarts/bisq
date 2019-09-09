@@ -48,7 +48,8 @@ import bisq.core.trade.handlers.TransactionResultHandler;
 import bisq.core.trade.statistics.ReferralIdService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.CoinUtil;
 
 import bisq.network.p2p.P2PService;
@@ -62,6 +63,8 @@ import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.Transaction;
 
 import com.google.inject.Inject;
+
+import javax.inject.Named;
 
 import com.google.common.collect.Lists;
 
@@ -107,7 +110,7 @@ public abstract class MutableOfferDataModel extends OfferDataModel implements Bs
     private final FeeService feeService;
     private final TxFeeEstimationService txFeeEstimationService;
     private final ReferralIdService referralIdService;
-    private final ImmutableCoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private MakerFeeProvider makerFeeProvider;
     private final String offerId;
     private final BalanceListener btcBalanceListener;
@@ -160,7 +163,7 @@ public abstract class MutableOfferDataModel extends OfferDataModel implements Bs
                                  FeeService feeService,
                                  TxFeeEstimationService txFeeEstimationService,
                                  ReferralIdService referralIdService,
-                                 ImmutableCoinFormatter btcFormatter,
+                                 @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                                  MakerFeeProvider makerFeeProvider) {
         super(btcWalletService);
 

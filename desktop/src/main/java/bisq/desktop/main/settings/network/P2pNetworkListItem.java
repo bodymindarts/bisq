@@ -47,7 +47,6 @@ public class P2pNetworkListItem {
     private final Connection connection;
     private final Subscription sentBytesSubscription, receivedBytesSubscription, onionAddressSubscription, roundTripTimeSubscription;
     private final ClockWatcher clockWatcher;
-    private final ImmutableCoinFormatter formatter;
 
     private final StringProperty lastActivity = new SimpleStringProperty();
     private final StringProperty sentBytes = new SimpleStringProperty();
@@ -58,10 +57,9 @@ public class P2pNetworkListItem {
     private final StringProperty onionAddress = new SimpleStringProperty();
     private final ClockWatcher.Listener listener;
 
-    public P2pNetworkListItem(Connection connection, ClockWatcher clockWatcher, ImmutableCoinFormatter formatter) {
+    public P2pNetworkListItem(Connection connection, ClockWatcher clockWatcher) {
         this.connection = connection;
         this.clockWatcher = clockWatcher;
-        this.formatter = formatter;
         this.statistic = connection.getStatistic();
 
         sentBytesSubscription = EasyBind.subscribe(statistic.sentBytesProperty(),

@@ -36,6 +36,7 @@ import bisq.core.filter.Filter;
 import bisq.core.filter.FilterManager;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
@@ -48,6 +49,7 @@ import bisq.common.UserThread;
 import org.bitcoinj.core.Peer;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.fxml.FXML;
 
@@ -113,7 +115,6 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
     private final BisqEnvironment bisqEnvironment;
     private final TorNetworkSettingsWindow torNetworkSettingsWindow;
     private final ClockWatcher clockWatcher;
-    private final ImmutableCoinFormatter formatter;
     private final WalletsSetup walletsSetup;
     private final P2PService p2PService;
 
@@ -138,8 +139,7 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
                                FilterManager filterManager,
                                BisqEnvironment bisqEnvironment,
                                TorNetworkSettingsWindow torNetworkSettingsWindow,
-                               ClockWatcher clockWatcher,
-                               ImmutableCoinFormatter formatter) {
+                               ClockWatcher clockWatcher) {
         super();
         this.walletsSetup = walletsSetup;
         this.p2PService = p2PService;
@@ -149,7 +149,6 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
         this.bisqEnvironment = bisqEnvironment;
         this.torNetworkSettingsWindow = torNetworkSettingsWindow;
         this.clockWatcher = clockWatcher;
-        this.formatter = formatter;
     }
 
     public void initialize() {
@@ -426,7 +425,7 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
         tableView.getItems().forEach(P2pNetworkListItem::cleanup);
         networkListItems.clear();
         networkListItems.setAll(p2PService.getNetworkNode().getAllConnections().stream()
-                .map(connection -> new P2pNetworkListItem(connection, clockWatcher, formatter))
+                .map(connection -> new P2pNetworkListItem(connection, clockWatcher))
                 .collect(Collectors.toList()));
     }
 

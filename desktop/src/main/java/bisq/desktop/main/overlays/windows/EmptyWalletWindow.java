@@ -31,7 +31,8 @@ import bisq.core.btc.wallet.Restrictions;
 import bisq.core.btc.wallet.WalletService;
 import bisq.core.locale.Res;
 import bisq.core.offer.OpenOfferManager;
-import bisq.core.util.coin.ICoinFormatter;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 
@@ -44,6 +45,7 @@ import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.InsufficientMoneyException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -72,7 +74,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
     private final WalletsSetup walletsSetup;
     private final BtcWalletService btcWalletService;
     private final BsqWalletService bsqWalletService;
-    private final ImmutableCoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final OpenOfferManager openOfferManager;
 
@@ -93,7 +95,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
                              WalletsSetup walletsSetup,
                              BtcWalletService btcWalletService,
                              BsqWalletService bsqWalletService,
-                             ImmutableCoinFormatter btcFormatter,
+                             @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                              BsqFormatter bsqFormatter) {
         this.walletPasswordWindow = walletPasswordWindow;
         this.openOfferManager = openOfferManager;
@@ -253,7 +255,7 @@ public class EmptyWalletWindow extends Overlay<EmptyWalletWindow> {
         return isBtc ? btcWalletService : bsqWalletService;
     }
 
-    private ICoinFormatter getFormatter() {
+    private CoinFormatter getFormatter() {
         return isBtc ? btcFormatter : bsqFormatter;
     }
 }

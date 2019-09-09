@@ -35,6 +35,7 @@ import bisq.core.offer.OfferPayload;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.user.User;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
@@ -47,6 +48,7 @@ import bisq.common.util.Tuple4;
 import org.bitcoinj.core.Coin;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.google.common.base.Joiner;
 
@@ -73,7 +75,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
     protected static final Logger log = LoggerFactory.getLogger(OfferDetailsWindow.class);
 
-    private final ImmutableCoinFormatter formatter;
+    private final CoinFormatter formatter;
     private final User user;
     private final KeyRing keyRing;
     private Offer offer;
@@ -89,7 +91,7 @@ public class OfferDetailsWindow extends Overlay<OfferDetailsWindow> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public OfferDetailsWindow(ImmutableCoinFormatter formatter, User user, KeyRing keyRing,
+    public OfferDetailsWindow(@Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter formatter, User user, KeyRing keyRing,
                               Navigation navigation) {
         this.formatter = formatter;
         this.user = user;

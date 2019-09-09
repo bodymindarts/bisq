@@ -50,7 +50,9 @@ import bisq.core.dao.state.model.governance.DaoPhase;
 import bisq.core.dao.state.model.governance.Proposal;
 import bisq.core.dao.state.model.governance.Role;
 import bisq.core.locale.Res;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 
@@ -67,6 +69,7 @@ import org.bitcoinj.core.InsufficientMoneyException;
 import org.bitcoinj.core.Transaction;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -108,7 +111,7 @@ public class MakeProposalView extends ActivatableView<GridPane, Void> implements
     private final P2PService p2PService;
     private final PhasesView phasesView;
     private final ChangeParamValidator changeParamValidator;
-    private final ImmutableCoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final Navigation navigation;
     private final BsqWalletService bsqWalletService;
@@ -144,7 +147,7 @@ public class MakeProposalView extends ActivatableView<GridPane, Void> implements
                              BsqWalletService bsqWalletService,
                              PhasesView phasesView,
                              ChangeParamValidator changeParamValidator,
-                             ImmutableCoinFormatter btcFormatter,
+                             @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                              BsqFormatter bsqFormatter,
                              Navigation navigation) {
         this.daoFacade = daoFacade;

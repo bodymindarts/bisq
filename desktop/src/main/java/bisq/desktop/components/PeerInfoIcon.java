@@ -27,6 +27,7 @@ import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.network.p2p.NodeAddress;
@@ -76,7 +77,6 @@ public class PeerInfoIcon extends Group {
                         Offer offer,
                         Preferences preferences,
                         AccountAgeWitnessService accountAgeWitnessService,
-                        ImmutableCoinFormatter formatter,
                         boolean useDevPrivilegeKeys) {
         this(nodeAddress,
                 role,
@@ -86,7 +86,6 @@ public class PeerInfoIcon extends Group {
                 null,
                 preferences,
                 accountAgeWitnessService,
-                formatter,
                 useDevPrivilegeKeys);
 
     }
@@ -98,7 +97,6 @@ public class PeerInfoIcon extends Group {
                         Trade trade,
                         Preferences preferences,
                         AccountAgeWitnessService accountAgeWitnessService,
-                        ImmutableCoinFormatter formatter,
                         boolean useDevPrivilegeKeys) {
         this(nodeAddress,
                 role,
@@ -108,7 +106,6 @@ public class PeerInfoIcon extends Group {
                 trade,
                 preferences,
                 accountAgeWitnessService,
-                formatter,
                 useDevPrivilegeKeys);
     }
 
@@ -120,7 +117,6 @@ public class PeerInfoIcon extends Group {
                          @Nullable Trade trade,
                          Preferences preferences,
                          AccountAgeWitnessService accountAgeWitnessService,
-                         ImmutableCoinFormatter formatter,
                          boolean useDevPrivilegeKeys) {
         this.numTrades = numTrades;
         this.accountAgeWitnessService = accountAgeWitnessService;
@@ -240,7 +236,7 @@ public class PeerInfoIcon extends Group {
 
         getChildren().addAll(outerBackground, innerBackground, avatarImageView, tagPane, numTradesPane);
 
-        addMouseListener(numTrades, privateNotificationManager, offer, preferences, formatter, useDevPrivilegeKeys, isFiatCurrency, peersAccountAge);
+        addMouseListener(numTrades, privateNotificationManager, offer, preferences, useDevPrivilegeKeys, isFiatCurrency, peersAccountAge);
     }
 
     private long getPeersAccountAge(@Nullable Trade trade, @Nullable Offer offer) {
@@ -263,7 +259,6 @@ public class PeerInfoIcon extends Group {
                                     PrivateNotificationManager privateNotificationManager,
                                     Offer offer,
                                     Preferences preferences,
-                                    ImmutableCoinFormatter formatter,
                                     boolean useDevPrivilegeKeys,
                                     boolean isFiatCurrency,
                                     long makersAccountAge) {

@@ -29,6 +29,8 @@ import bisq.core.alert.PrivateNotificationManager;
 import bisq.core.app.AppOptionKeys;
 import bisq.core.arbitration.DisputeManager;
 import bisq.core.trade.TradeManager;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.common.crypto.KeyRing;
@@ -44,7 +46,7 @@ public class ArbitratorDisputeView extends TraderDisputeView {
     public ArbitratorDisputeView(DisputeManager disputeManager,
                                  KeyRing keyRing,
                                  TradeManager tradeManager,
-                                 ImmutableCoinFormatter formatter,
+                                 @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter formatter,
                                  DisputeSummaryWindow disputeSummaryWindow,
                                  PrivateNotificationManager privateNotificationManager,
                                  ContractWindow contractWindow,

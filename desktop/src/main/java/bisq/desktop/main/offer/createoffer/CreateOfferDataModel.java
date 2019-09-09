@@ -35,6 +35,8 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.trade.statistics.ReferralIdService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
+import bisq.core.util.FormattingUtils;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import bisq.network.p2p.P2PService;
@@ -42,6 +44,8 @@ import bisq.network.p2p.P2PService;
 import bisq.common.crypto.KeyRing;
 
 import com.google.inject.Inject;
+
+import javax.inject.Named;
 
 /**
  * Domain for that UI element.
@@ -64,7 +68,7 @@ class CreateOfferDataModel extends MutableOfferDataModel {
                                 FeeService feeService,
                                 TxFeeEstimationService txFeeEstimationService,
                                 ReferralIdService referralIdService,
-                                ImmutableCoinFormatter btcFormatter,
+                                @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                                 MakerFeeProvider makerFeeProvider) {
         super(openOfferManager,
                 btcWalletService,

@@ -47,7 +47,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 import bisq.core.util.validation.InputValidator;
@@ -57,6 +57,7 @@ import bisq.common.util.Tuple2;
 import bisq.common.util.Tuple3;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -90,7 +91,6 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
     private final PriceFeedService priceFeedService;
     private final MarketAlerts marketAlerts;
     private final MobileNotificationService mobileNotificationService;
-    private final ImmutableCoinFormatter formatter;
 
     private WebCamWindow webCamWindow;
     private QrCodeReader qrCodeReader;
@@ -126,15 +126,13 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
                                     User user,
                                     PriceFeedService priceFeedService,
                                     MarketAlerts marketAlerts,
-                                    MobileNotificationService mobileNotificationService,
-                                    ImmutableCoinFormatter formatter) {
+                                    MobileNotificationService mobileNotificationService) {
         super();
         this.preferences = preferences;
         this.user = user;
         this.priceFeedService = priceFeedService;
         this.marketAlerts = marketAlerts;
         this.mobileNotificationService = mobileNotificationService;
-        this.formatter = formatter;
     }
 
     @Override
@@ -358,7 +356,7 @@ public class MobileNotificationsView extends ActivatableView<GridPane, Void> {
     }
 
     private void onManageMarketAlerts() {
-        new ManageMarketAlertsWindow(marketAlerts, formatter)
+        new ManageMarketAlertsWindow(marketAlerts)
                 .onClose(this::updateMarketAlertFields)
                 .show();
     }

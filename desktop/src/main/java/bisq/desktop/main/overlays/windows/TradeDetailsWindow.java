@@ -33,6 +33,7 @@ import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.trade.Contract;
 import bisq.core.trade.Trade;
 import bisq.core.trade.TradeManager;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.FormattingUtils;
 
@@ -41,6 +42,7 @@ import bisq.common.UserThread;
 import org.bitcoinj.core.Utils;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -68,7 +70,7 @@ import static bisq.desktop.util.FormBuilder.*;
 public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
     protected static final Logger log = LoggerFactory.getLogger(TradeDetailsWindow.class);
 
-    private final ImmutableCoinFormatter formatter;
+    private final CoinFormatter formatter;
     private final DisputeManager disputeManager;
     private final TradeManager tradeManager;
     private final AccountAgeWitnessService accountAgeWitnessService;
@@ -84,7 +86,7 @@ public class TradeDetailsWindow extends Overlay<TradeDetailsWindow> {
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     @Inject
-    public TradeDetailsWindow(ImmutableCoinFormatter formatter, DisputeManager disputeManager, TradeManager tradeManager,
+    public TradeDetailsWindow(@Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter formatter, DisputeManager disputeManager, TradeManager tradeManager,
                               AccountAgeWitnessService accountAgeWitnessService) {
         this.formatter = formatter;
         this.disputeManager = disputeManager;

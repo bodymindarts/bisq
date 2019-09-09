@@ -23,6 +23,7 @@ import bisq.desktop.main.offer.offerbook.OfferBookListItem;
 import bisq.desktop.main.offer.offerbook.OfferBookListItemMaker;
 
 import bisq.core.provider.price.PriceFeedService;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.utils.MonetaryFormat;
@@ -44,7 +45,7 @@ import static org.mockito.Mockito.when;
 
 public class SpreadViewModelTest {
 
-    private ImmutableCoinFormatter coinFormatter;
+    private CoinFormatter coinFormatter;
 
     @Before
     public void setup() {

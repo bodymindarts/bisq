@@ -5,8 +5,6 @@ import bisq.core.util.FormattingUtils;
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.MonetaryFormat;
 
-import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import static bisq.core.util.ParsingUtils.parseToCoin;
 
 @Slf4j
-public class ImmutableCoinFormatter implements ICoinFormatter {
+public class ImmutableCoinFormatter implements CoinFormatter {
 
     // We don't support localized formatting. Format is always using "." as decimal mark and no grouping separator.
     // Input of "," as decimal mark (like in german locale) will be replaced with ".".

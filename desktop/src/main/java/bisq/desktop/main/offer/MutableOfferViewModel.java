@@ -51,8 +51,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
-import bisq.core.util.coin.ICoinFormatter;
-import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
@@ -70,6 +69,7 @@ import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.Fiat;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -95,7 +95,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
     private final PriceFeedService priceFeedService;
     private final Navigation navigation;
     private final Preferences preferences;
-    protected final ImmutableCoinFormatter btcFormatter;
+    protected final CoinFormatter btcFormatter;
     private final BsqFormatter bsqFormatter;
     private final FiatVolumeValidator fiatVolumeValidator;
     private final FiatPriceValidator fiatPriceValidator;
@@ -196,7 +196,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                                  PriceFeedService priceFeedService,
                                  Navigation navigation,
                                  Preferences preferences,
-                                 ImmutableCoinFormatter btcFormatter,
+                                 @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                                  BsqFormatter bsqFormatter) {
         super(dataModel);
 
@@ -931,7 +931,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
                 .show();
     }
 
-    ImmutableCoinFormatter getBtcFormatter() {
+    CoinFormatter getBtcFormatter() {
         return btcFormatter;
     }
 
@@ -1208,7 +1208,7 @@ public abstract class MutableOfferViewModel<M extends MutableOfferDataModel> ext
         }
     }
 
-    private ICoinFormatter getFormatterForMakerFee() {
+    private CoinFormatter getFormatterForMakerFee() {
         return dataModel.isCurrencyForMakerFeeBtc() ? btcFormatter : bsqFormatter;
     }
 }

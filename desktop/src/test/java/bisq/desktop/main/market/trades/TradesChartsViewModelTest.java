@@ -111,7 +111,7 @@ public class TradesChartsViewModelTest {
     public void setup() throws IOException {
         tradeStatisticsManager = mock(TradeStatisticsManager.class);
         model = new TradesChartsViewModel(tradeStatisticsManager, mock(Preferences.class), mock(PriceFeedService.class),
-                mock(Navigation.class), mock(ImmutableCoinFormatter.class));
+                mock(Navigation.class));
         dir = File.createTempFile("temp_tests1", "");
         //noinspection ResultOfMethodCallIgnored
         dir.delete();

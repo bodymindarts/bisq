@@ -99,7 +99,6 @@ class TradesChartsViewModel extends ActivatableViewModel {
     final Preferences preferences;
     private PriceFeedService priceFeedService;
     private Navigation navigation;
-    private ImmutableCoinFormatter formatter;
 
     private final SetChangeListener<TradeStatistics2> setChangeListener;
     final ObjectProperty<TradeCurrency> selectedTradeCurrencyProperty = new SimpleObjectProperty<>();
@@ -121,12 +120,11 @@ class TradesChartsViewModel extends ActivatableViewModel {
 
     @SuppressWarnings("WeakerAccess")
     @Inject
-    public TradesChartsViewModel(TradeStatisticsManager tradeStatisticsManager, Preferences preferences, PriceFeedService priceFeedService, Navigation navigation, ImmutableCoinFormatter formatter) {
+    public TradesChartsViewModel(TradeStatisticsManager tradeStatisticsManager, Preferences preferences, PriceFeedService priceFeedService, Navigation navigation) {
         this.tradeStatisticsManager = tradeStatisticsManager;
         this.preferences = preferences;
         this.priceFeedService = priceFeedService;
         this.navigation = navigation;
-        this.formatter = formatter;
 
         setChangeListener = change -> {
             updateChartData();

@@ -29,6 +29,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.UpholdAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.UpholdAccountPayload;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
@@ -54,7 +55,7 @@ public class UpholdForm extends PaymentMethodForm {
 
     public UpholdForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService,
                       UpholdValidator upholdValidator, InputValidator inputValidator, GridPane gridPane,
-                      int gridRow, ImmutableCoinFormatter formatter) {
+                      int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.upholdAccount = (UpholdAccount) paymentAccount;
         this.upholdValidator = upholdValidator;

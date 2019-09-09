@@ -19,12 +19,8 @@ package bisq.core.dao.governance.param;
 
 import bisq.core.app.BisqEnvironment;
 import bisq.core.locale.Res;
-import bisq.core.util.ParsingUtils;
-import bisq.core.util.coin.ICoinFormatter;
 
 import bisq.common.proto.ProtoUtil;
-
-import org.bitcoinj.core.Coin;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

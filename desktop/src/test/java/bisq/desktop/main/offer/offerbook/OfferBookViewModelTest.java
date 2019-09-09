@@ -41,6 +41,7 @@ import bisq.core.payment.payload.SepaAccountPayload;
 import bisq.core.payment.payload.SpecificBanksAccountPayload;
 import bisq.core.provider.price.MarketPrice;
 import bisq.core.provider.price.PriceFeedService;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 
 import org.bitcoinj.utils.MonetaryFormat;
@@ -81,7 +82,7 @@ import static org.mockito.Mockito.when;
 public class OfferBookViewModelTest {
     private static final Logger log = LoggerFactory.getLogger(OfferBookViewModelTest.class);
 
-    private final ImmutableCoinFormatter btcFormatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
+    private final CoinFormatter btcFormatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
 
     @Before
     public void setUp() {

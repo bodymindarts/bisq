@@ -65,7 +65,6 @@ import lombok.Getter;
 @Singleton
 public class MarketPricePresentation {
     private final Preferences preferences;
-    private final ImmutableCoinFormatter formatter;
     private final PriceFeedService priceFeedService;
     @Getter
     private final ObservableList<PriceFeedComboBoxItem> priceFeedComboBoxItems = FXCollections.observableArrayList();
@@ -93,11 +92,9 @@ public class MarketPricePresentation {
     public MarketPricePresentation(BtcWalletService btcWalletService,
                                    PriceFeedService priceFeedService,
                                    Preferences preferences,
-                                   FeeService feeService,
-                                   ImmutableCoinFormatter formatter) {
+                                   FeeService feeService) {
         this.priceFeedService = priceFeedService;
         this.preferences = preferences;
-        this.formatter = formatter;
 
         TxIdTextField.setPreferences(preferences);
 

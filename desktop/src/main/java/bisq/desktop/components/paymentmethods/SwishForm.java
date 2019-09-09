@@ -29,6 +29,7 @@ import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.SwishAccount;
 import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.SwishAccountPayload;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
@@ -53,7 +54,7 @@ public class SwishForm extends PaymentMethodForm {
                      InputValidator inputValidator,
                      GridPane gridPane,
                      int gridRow,
-                     ImmutableCoinFormatter formatter) {
+                     CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.swishAccount = (SwishAccount) paymentAccount;
         this.swishValidator = swishValidator;

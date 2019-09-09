@@ -20,7 +20,7 @@ public class ImmutableCoinFormatterTest {
             valueOf(lookup.valueOf(satoshis, 100000000L));
     private static final Coin oneBitcoin = make(a(Coin));
 
-    private final ImmutableCoinFormatter formatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
+    private final CoinFormatter formatter = new ImmutableCoinFormatter(MonetaryFormat.BTC);
 
     @Test
     public void testFormatCoin() {

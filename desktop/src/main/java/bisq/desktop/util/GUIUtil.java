@@ -38,7 +38,7 @@ import bisq.core.provider.fee.FeeService;
 import bisq.core.user.DontShowAgainLookup;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
-import bisq.core.util.coin.ImmutableCoinFormatter;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.coin.CoinUtil;
 import bisq.core.util.FormattingUtils;
@@ -753,7 +753,7 @@ public class GUIUtil {
             log.warn("showNotReadyForTxBroadcastPopups called but no case matched. This should never happen if isReadyForTxBroadcast was called before.");
     }
 
-    public static void showWantToBurnBTCPopup(Coin miningFee, Coin amount, ImmutableCoinFormatter btcFormatter) {
+    public static void showWantToBurnBTCPopup(Coin miningFee, Coin amount, CoinFormatter btcFormatter) {
         new Popup<>().warning(Res.get("popup.warning.burnBTC", btcFormatter.formatCoinWithCode(miningFee),
                 btcFormatter.formatCoinWithCode(amount))).show();
     }
@@ -857,7 +857,7 @@ public class GUIUtil {
     }
 
     public static void showBsqFeeInfoPopup(Coin fee, Coin miningFee, Coin btcForIssuance, int txSize, BsqFormatter bsqFormatter,
-                                           ImmutableCoinFormatter btcFormatter, String type,
+                                           CoinFormatter btcFormatter, String type,
                                            Runnable actionHandler) {
         String confirmationMessage;
 
@@ -889,7 +889,7 @@ public class GUIUtil {
     }
 
     public static void showBsqFeeInfoPopup(Coin fee, Coin miningFee, int txSize, BsqFormatter bsqFormatter,
-                                           ImmutableCoinFormatter btcFormatter, String type,
+                                           CoinFormatter btcFormatter, String type,
                                            Runnable actionHandler) {
         showBsqFeeInfoPopup(fee, miningFee, null, txSize, bsqFormatter, btcFormatter, type, actionHandler);
     }

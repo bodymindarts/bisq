@@ -45,9 +45,10 @@ import bisq.core.btc.wallet.TxBroadcaster;
 import bisq.core.btc.wallet.WalletsManager;
 import bisq.core.dao.state.model.blockchain.TxType;
 import bisq.core.locale.Res;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 import bisq.core.util.coin.BsqFormatter;
-import bisq.core.util.coin.ICoinFormatter;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.CoinUtil;
 import bisq.core.util.validation.BtcAddressValidator;
@@ -61,6 +62,7 @@ import org.bitcoinj.core.InsufficientMoneyException;
 import org.bitcoinj.core.Transaction;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -80,7 +82,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
     private final P2PService p2PService;
     private final BsqFormatter bsqFormatter;
     private final BsqAddressHelper bsqAddressHelper;
-    private final ImmutableCoinFormatter btcFormatter;
+    private final CoinFormatter btcFormatter;
     private final Navigation navigation;
     private final BsqBalanceUtil bsqBalanceUtil;
     private final BsqValidator bsqValidator;
@@ -108,7 +110,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
                         WalletsSetup walletsSetup,
                         P2PService p2PService,
                         BsqFormatter bsqFormatter,
-                        ImmutableCoinFormatter btcFormatter,
+                        @Named(FormattingUtils.BTC_FORMATTER_KEY) CoinFormatter btcFormatter,
                         Navigation navigation,
                         BsqBalanceUtil bsqBalanceUtil,
                         BsqValidator bsqValidator,
@@ -356,8 +358,8 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
                                     TxType txType,
                                     Coin miningFee,
                                     int txSize, String address,
-                                    ICoinFormatter amountFormatter, // can be BSQ or BTC formatter
-                                    ImmutableCoinFormatter feeFormatter,
+                                    CoinFormatter amountFormatter, // can be BSQ or BTC formatter
+                                    CoinFormatter feeFormatter,
                                     ResultHandler resultHandler) {
         new Popup<>().headLine(Res.get("dao.wallet.send.sendFunds.headline"))
                 .confirmation(Res.get("dao.wallet.send.sendFunds.details",

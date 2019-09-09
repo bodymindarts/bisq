@@ -94,7 +94,6 @@ public class BsqDashboardView extends ActivatableView<GridPane, Void> implements
     private final DaoStateService daoStateService;
     private final Preferences preferences;
     private final BsqFormatter bsqFormatter;
-    private final ImmutableCoinFormatter btcFormatter;
 
     private ChangeListener<Number> priceChangeListener;
 
@@ -119,15 +118,13 @@ public class BsqDashboardView extends ActivatableView<GridPane, Void> implements
                              PriceFeedService priceFeedService,
                              DaoStateService daoStateService,
                              Preferences preferences,
-                             BsqFormatter bsqFormatter,
-                             ImmutableCoinFormatter btcFormatter) {
+                             BsqFormatter bsqFormatter) {
         this.daoFacade = daoFacade;
         this.tradeStatisticsManager = tradeStatisticsManager;
         this.priceFeedService = priceFeedService;
         this.daoStateService = daoStateService;
         this.preferences = preferences;
         this.bsqFormatter = bsqFormatter;
-        this.btcFormatter = btcFormatter;
     }
 
     @Override

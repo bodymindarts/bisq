@@ -29,6 +29,7 @@ import bisq.core.payment.AdvancedCashAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.AdvancedCashAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
@@ -63,7 +64,7 @@ public class AdvancedCashForm extends PaymentMethodForm {
     }
 
     public AdvancedCashForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, AdvancedCashValidator advancedCashValidator,
-                     InputValidator inputValidator, GridPane gridPane, int gridRow, ImmutableCoinFormatter formatter) {
+                     InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.advancedCashAccount = (AdvancedCashAccount) paymentAccount;
         this.advancedCashValidator = advancedCashValidator;

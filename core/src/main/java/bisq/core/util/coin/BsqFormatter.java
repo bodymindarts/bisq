@@ -48,7 +48,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Slf4j
 @Singleton
-public class BsqFormatter implements ICoinFormatter {
+public class BsqFormatter implements CoinFormatter {
     private final ImmutableCoinFormatter coinFormatter;
 
     protected int scale = 3;

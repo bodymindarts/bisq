@@ -44,14 +44,12 @@ public class PriceAlert {
     private final PriceFeedService priceFeedService;
     private final MobileNotificationService mobileNotificationService;
     private final User user;
-    private final ImmutableCoinFormatter formatter;
 
     @Inject
-    public PriceAlert(PriceFeedService priceFeedService, MobileNotificationService mobileNotificationService, User user, ImmutableCoinFormatter formatter) {
+    public PriceAlert(PriceFeedService priceFeedService, MobileNotificationService mobileNotificationService, User user) {
         this.priceFeedService = priceFeedService;
         this.user = user;
         this.mobileNotificationService = mobileNotificationService;
-        this.formatter = formatter;
     }
 
     public void onAllServicesInitialized() {

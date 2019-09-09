@@ -29,6 +29,7 @@ import bisq.core.payment.ChaseQuickPayAccount;
 import bisq.core.payment.PaymentAccount;
 import bisq.core.payment.payload.ChaseQuickPayAccountPayload;
 import bisq.core.payment.payload.PaymentAccountPayload;
+import bisq.core.util.coin.CoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.validation.InputValidator;
 
@@ -53,7 +54,7 @@ public class ChaseQuickPayForm extends PaymentMethodForm {
     }
 
     public ChaseQuickPayForm(PaymentAccount paymentAccount, AccountAgeWitnessService accountAgeWitnessService, ChaseQuickPayValidator chaseQuickPayValidator,
-                             InputValidator inputValidator, GridPane gridPane, int gridRow, ImmutableCoinFormatter formatter) {
+                             InputValidator inputValidator, GridPane gridPane, int gridRow, CoinFormatter formatter) {
         super(paymentAccount, accountAgeWitnessService, inputValidator, gridPane, gridRow, formatter);
         this.chaseQuickPayAccount = (ChaseQuickPayAccount) paymentAccount;
         this.chaseQuickPayValidator = chaseQuickPayValidator;

@@ -82,7 +82,6 @@ class OfferBookChartViewModel extends ActivatableViewModel {
     private final ObservableList<OfferListItem> topBuyOfferList = FXCollections.observableArrayList();
     private final ObservableList<OfferListItem> topSellOfferList = FXCollections.observableArrayList();
     private final ChangeListener<Number> currenciesUpdatedListener;
-    private final ImmutableCoinFormatter formatter;
     private int selectedTabIndex;
     public final IntegerProperty maxPlacesForBuyPrice = new SimpleIntegerProperty();
     public final IntegerProperty maxPlacesForBuyVolume = new SimpleIntegerProperty();
@@ -96,12 +95,11 @@ class OfferBookChartViewModel extends ActivatableViewModel {
     @SuppressWarnings("WeakerAccess")
     @Inject
     public OfferBookChartViewModel(OfferBook offerBook, Preferences preferences, PriceFeedService priceFeedService,
-                                   AccountAgeWitnessService accountAgeWitnessService, Navigation navigation, ImmutableCoinFormatter formatter) {
+                                   AccountAgeWitnessService accountAgeWitnessService, Navigation navigation) {
         this.offerBook = offerBook;
         this.preferences = preferences;
         this.priceFeedService = priceFeedService;
         this.navigation = navigation;
-        this.formatter = formatter;
         this.accountAgeWitnessService = accountAgeWitnessService;
 
         String code = preferences.getOfferBookChartScreenCurrencyCode();
