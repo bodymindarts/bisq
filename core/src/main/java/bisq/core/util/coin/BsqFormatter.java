@@ -41,6 +41,7 @@ import java.text.NumberFormat;
 
 import java.util.Locale;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,36 +57,32 @@ public class BsqFormatter implements ICoinFormatter {
     // Input of a group separator (1,123,45) lead to an validation error.
     // Note: BtcFormat was intended to be used, but it lead to many problems (automatic format to mBit,
     // no way to remove grouping separator). It seems to be not optimal for user input formatting.
-    private MonetaryFormat coinFormat;
+    @Getter
+    private MonetaryFormat monetaryFormat;
     private DecimalFormat amountFormat;
     private DecimalFormat marketCapFormat;
     private final MonetaryFormat btcCoinFormat;
 
     @Inject
     public BsqFormatter() {
-        this.coinFormat = BisqEnvironment.getParameters().getMonetaryFormat();
+        this.monetaryFormat = BisqEnvironment.getParameters().getMonetaryFormat();
         this.coinFormatter = new ImmutableCoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
 
         GlobalSettings.localeProperty().addListener((observable, oldValue, newValue) -> switchToLocale(newValue));
         switchToLocale(GlobalSettings.getLocale());
 
-        btcCoinFormat = coinFormat;
+        btcCoinFormat = monetaryFormat;
 
         final String baseCurrencyCode = BisqEnvironment.getBaseCurrencyNetwork().getCurrencyCode();
         switch (baseCurrencyCode) {
             case "BTC":
-                coinFormat = new MonetaryFormat().shift(6).code(6, "BSQ").minDecimals(2);
+                monetaryFormat = new MonetaryFormat().shift(6).code(6, "BSQ").minDecimals(2);
                 break;
             default:
                 throw new RuntimeException("baseCurrencyCode not defined. baseCurrencyCode=" + baseCurrencyCode);
         }
 
         amountFormat.setMinimumFractionDigits(2);
-    }
-
-    @Override
-    public MonetaryFormat getMonetaryFormat() {
-        return coinFormat;
     }
 
     private void switchToLocale(Locale locale) {
@@ -112,11 +109,11 @@ public class BsqFormatter implements ICoinFormatter {
     }
 
     public String formatBSQSatoshis(long satoshi) {
-        return FormattingUtils.formatCoin(satoshi, coinFormat);
+        return FormattingUtils.formatCoin(satoshi, monetaryFormat);
     }
 
     public String formatBSQSatoshisWithCode(long satoshi) {
-        return FormattingUtils.formatCoinWithCode(satoshi, coinFormat);
+        return FormattingUtils.formatCoinWithCode(satoshi, monetaryFormat);
     }
 
     public String formatBTCSatoshis(long satoshi) {
