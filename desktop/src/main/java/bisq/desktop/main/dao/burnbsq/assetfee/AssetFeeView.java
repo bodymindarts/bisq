@@ -34,6 +34,7 @@ import bisq.core.dao.governance.asset.StatefulAsset;
 import bisq.core.dao.governance.proposal.TxException;
 import bisq.core.locale.CurrencyUtil;
 import bisq.core.locale.Res;
+import bisq.core.util.ParsingUtils;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 
@@ -273,7 +274,7 @@ public class AssetFeeView extends ActivatableView<GridPane, Void> implements Bsq
     }
 
     private Coin getListingFee() {
-        return bsqFormatter.parseToCoin(feeAmountInputTextField.getText());
+        return ParsingUtils.parseToCoin(feeAmountInputTextField.getText(), bsqFormatter);
     }
 
     private void doPublishFeeTx(Transaction transaction) {

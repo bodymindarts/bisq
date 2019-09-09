@@ -28,7 +28,6 @@ import bisq.core.util.ParsingUtils;
 import bisq.core.util.validation.BtcAddressValidator;
 import bisq.core.util.validation.InputValidator;
 
-import bisq.common.app.DevEnv;
 import bisq.common.util.MathUtils;
 
 import org.bitcoinj.core.Coin;
@@ -49,9 +48,6 @@ import org.jetbrains.annotations.NotNull;
 @Slf4j
 @Singleton
 public class BsqFormatter implements ICoinFormatter {
-    @SuppressWarnings("PointlessBooleanExpression")
-    private static final boolean useBsqAddressFormat = true || !DevEnv.isDevMode();
-    private final String prefix = "B";
     private final ImmutableCoinFormatter coinFormatter;
 
     protected int scale = 3;
@@ -149,7 +145,7 @@ public class BsqFormatter implements ICoinFormatter {
                 // In case we add a new param old clients will not know that enum and fall back to UNDEFINED.
                 return Res.get("shared.na");
             case BSQ:
-                return formatCoinWithCode(parseToCoin(value));
+                return formatCoinWithCode(ParsingUtils.parseToCoin(value, this));
             case BTC:
                 return formatBTCWithCode(parseToBTC(value));
             case PERCENT:
@@ -167,7 +163,7 @@ public class BsqFormatter implements ICoinFormatter {
     public Coin parseParamValueToCoin(Param param, String inputValue) {
         switch (param.getParamType()) {
             case BSQ:
-                return parseToCoin(inputValue);
+                return ParsingUtils.parseToCoin(inputValue, this);
             case BTC:
                 return parseToBTC(inputValue);
             default:
@@ -227,9 +223,5 @@ public class BsqFormatter implements ICoinFormatter {
 
     public String formatCoinWithCode(long value) {
         return coinFormatter.formatCoinWithCode(value);
-    }
-
-    public Coin parseToCoin(String input) {
-        return ParsingUtils.parseToCoin(input, this);
     }
 }

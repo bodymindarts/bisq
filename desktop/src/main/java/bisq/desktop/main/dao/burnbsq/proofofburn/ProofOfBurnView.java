@@ -36,6 +36,7 @@ import bisq.core.dao.governance.proofofburn.ProofOfBurnService;
 import bisq.core.dao.governance.proposal.TxException;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
+import bisq.core.util.ParsingUtils;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.validation.InputValidator;
@@ -273,7 +274,7 @@ public class ProofOfBurnView extends ActivatableView<GridPane, Void> implements 
     }
 
     private Coin getAmountFee() {
-        return bsqFormatter.parseToCoin(amountInputTextField.getText());
+        return ParsingUtils.parseToCoin(amountInputTextField.getText(), bsqFormatter);
     }
 
     private void doPublishFeeTx(Transaction transaction, String preImageAsString) {

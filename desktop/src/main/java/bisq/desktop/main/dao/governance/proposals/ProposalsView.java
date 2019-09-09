@@ -53,6 +53,7 @@ import bisq.core.dao.state.model.governance.Proposal;
 import bisq.core.dao.state.model.governance.Vote;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
+import bisq.core.util.ParsingUtils;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 
@@ -463,7 +464,7 @@ public class ProposalsView extends ActivatableView<GridPane, Void> implements Bs
     }
 
     private void onVote() {
-        Coin stake = bsqFormatter.parseToCoin(stakeInputTextField.getText());
+        Coin stake = ParsingUtils.parseToCoin(stakeInputTextField.getText(), bsqFormatter);
         try {
             // We create a dummy tx to get the miningFee for displaying it at the confirmation popup
             Tuple2<Coin, Integer> miningFeeAndTxSize = daoFacade.getBlindVoteMiningFeeAndTxSize(stake);

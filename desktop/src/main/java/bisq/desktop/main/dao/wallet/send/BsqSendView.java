@@ -45,6 +45,7 @@ import bisq.core.btc.wallet.TxBroadcaster;
 import bisq.core.btc.wallet.WalletsManager;
 import bisq.core.dao.state.model.blockchain.TxType;
 import bisq.core.locale.Res;
+import bisq.core.util.ParsingUtils;
 import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.coin.ICoinFormatter;
 import bisq.core.util.coin.ImmutableCoinFormatter;
@@ -239,7 +240,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
             // TODO break up in methods
             if (GUIUtil.isReadyForTxBroadcast(p2PService, walletsSetup)) {
                 String receiversAddressString = bsqAddressHelper.getAddressFromBsqAddress(receiversAddressInputTextField.getText()).toString();
-                Coin receiverAmount = bsqFormatter.parseToCoin(amountInputTextField.getText());
+                Coin receiverAmount = ParsingUtils.parseToCoin(amountInputTextField.getText(), bsqFormatter);
                 try {
                     Transaction preparedSendTx = bsqWalletService.getPreparedSendBsqTx(receiversAddressString, receiverAmount);
                     Transaction txWithBtcFee = btcWalletService.completePreparedSendBsqTx(preparedSendTx, true);
