@@ -76,10 +76,6 @@ public class DisplayUtils {
         }
     }
 
-    public static String formatDurationAsWords(long durationMillis) {
-        return FormattingUtils.formatDurationAsWords(durationMillis, false, true);
-    }
-
     public static String formatAccountAge(long durationMillis) {
         durationMillis = Math.max(0, durationMillis);
         String day = Res.get("time.day").toLowerCase();

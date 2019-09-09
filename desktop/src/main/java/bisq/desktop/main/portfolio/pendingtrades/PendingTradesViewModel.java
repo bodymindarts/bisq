@@ -31,6 +31,7 @@ import bisq.core.trade.Contract;
 import bisq.core.trade.Trade;
 import bisq.core.trade.closed.ClosedTradableManager;
 import bisq.core.user.User;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.coin.ImmutableCoinFormatter;
 import bisq.core.util.coin.BsqFormatter;
 import bisq.core.util.validation.BtcAddressValidator;
@@ -222,7 +223,7 @@ public class PendingTradesViewModel extends ActivatableWithDataModel<PendingTrad
     }
 
     public String getRemainingTradeDurationAsWords() {
-        return DisplayUtils.formatDurationAsWords(Math.max(0, getRemainingTradeDuration()));
+        return FormattingUtils.formatDurationAsWords(Math.max(0, getRemainingTradeDuration()));
     }
 
     public double getRemainingTradeDurationAsPercentage() {

@@ -185,6 +185,10 @@ public class FormattingUtils {
         return decimalFormat.format(MathUtils.roundDouble(value * 100.0, 2)).replace(",", ".");
     }
 
+    public static String formatDurationAsWords(long durationMillis) {
+        return formatDurationAsWords(durationMillis, false, true);
+    }
+
     public static String formatDurationAsWords(long durationMillis, boolean showSeconds, boolean showZeroValues) {
         String format = "";
         String second = Res.get("time.second");

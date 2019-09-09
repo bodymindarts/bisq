@@ -168,15 +168,6 @@ public class BsqFormatter implements ICoinFormatter {
         }
     }
 
-    private int parseParamValueToBlocks(Param param, String inputValue) {
-        switch (param.getParamType()) {
-            case BLOCK:
-                return Integer.parseInt(inputValue);
-            default:
-                throw new IllegalArgumentException("Unsupported paramType. param: " + param);
-        }
-    }
-
     public String parseParamValueToString(Param param, String inputValue) throws ProposalValidationException {
         switch (param.getParamType()) {
             case UNDEFINED:
@@ -198,6 +189,15 @@ public class BsqFormatter implements ICoinFormatter {
             default:
                 log.warn("Param type {} not handled in switch case at parseParamValueToString", param.getParamType());
                 return Res.get("shared.na");
+        }
+    }
+
+    private int parseParamValueToBlocks(Param param, String inputValue) {
+        switch (param.getParamType()) {
+            case BLOCK:
+                return Integer.parseInt(inputValue);
+            default:
+                throw new IllegalArgumentException("Unsupported paramType. param: " + param);
         }
     }
 
