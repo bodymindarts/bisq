@@ -27,6 +27,7 @@ import bisq.desktop.main.dao.wallet.BsqBalanceUtil;
 import bisq.desktop.main.funds.FundsView;
 import bisq.desktop.main.funds.deposit.DepositView;
 import bisq.desktop.main.overlays.popups.Popup;
+import bisq.desktop.util.BsqAddressHelper;
 import bisq.desktop.util.GUIUtil;
 import bisq.desktop.util.Layout;
 import bisq.desktop.util.validation.BsqAddressValidator;
@@ -77,6 +78,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
     private final WalletsSetup walletsSetup;
     private final P2PService p2PService;
     private final BsqFormatter bsqFormatter;
+    private final BsqAddressHelper bsqAddressHelper;
     private final ImmutableCoinFormatter btcFormatter;
     private final Navigation navigation;
     private final BsqBalanceUtil bsqBalanceUtil;
@@ -110,6 +112,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
                         BsqBalanceUtil bsqBalanceUtil,
                         BsqValidator bsqValidator,
                         BtcValidator btcValidator,
+                        BsqAddressHelper bsqAddressHelper,
                         BsqAddressValidator bsqAddressValidator,
                         BtcAddressValidator btcAddressValidator) {
         this.bsqWalletService = bsqWalletService;
@@ -118,6 +121,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
         this.walletsSetup = walletsSetup;
         this.p2PService = p2PService;
         this.bsqFormatter = bsqFormatter;
+        this.bsqAddressHelper = bsqAddressHelper;
         this.btcFormatter = btcFormatter;
         this.navigation = navigation;
         this.bsqBalanceUtil = bsqBalanceUtil;
@@ -234,7 +238,7 @@ public class BsqSendView extends ActivatableView<GridPane, Void> implements BsqB
         sendBsqButton.setOnAction((event) -> {
             // TODO break up in methods
             if (GUIUtil.isReadyForTxBroadcast(p2PService, walletsSetup)) {
-                String receiversAddressString = bsqFormatter.getAddressFromBsqAddress(receiversAddressInputTextField.getText()).toString();
+                String receiversAddressString = bsqAddressHelper.getAddressFromBsqAddress(receiversAddressInputTextField.getText()).toString();
                 Coin receiverAmount = bsqFormatter.parseToCoin(amountInputTextField.getText());
                 try {
                     Transaction preparedSendTx = bsqWalletService.getPreparedSendBsqTx(receiversAddressString, receiverAmount);

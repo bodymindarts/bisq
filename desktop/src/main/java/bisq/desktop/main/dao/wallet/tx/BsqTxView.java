@@ -24,6 +24,7 @@ import bisq.desktop.components.AutoTooltipLabel;
 import bisq.desktop.components.AutoTooltipTableColumn;
 import bisq.desktop.components.HyperlinkWithIcon;
 import bisq.desktop.main.dao.wallet.BsqBalanceUtil;
+import bisq.desktop.util.BsqAddressHelper;
 import bisq.desktop.util.DisplayUtils;
 import bisq.desktop.util.FormBuilder;
 import bisq.desktop.util.GUIUtil;
@@ -92,6 +93,7 @@ public class BsqTxView extends ActivatableView<GridPane, Void> implements BsqBal
     private final DaoFacade daoFacade;
     private final DaoStateService daoStateService;
     private final BsqFormatter bsqFormatter;
+    private final BsqAddressHelper bsqAddressHelper;
     private final BsqWalletService bsqWalletService;
     private final BtcWalletService btcWalletService;
     private final BsqBalanceUtil bsqBalanceUtil;
@@ -121,7 +123,7 @@ public class BsqTxView extends ActivatableView<GridPane, Void> implements BsqBal
                       Preferences preferences,
                       BtcWalletService btcWalletService,
                       BsqBalanceUtil bsqBalanceUtil,
-                      BsqFormatter bsqFormatter) {
+                      BsqFormatter bsqFormatter, BsqAddressHelper bsqAddressHelper) {
         this.daoFacade = daoFacade;
         this.daoStateService = daoStateService;
         this.bsqFormatter = bsqFormatter;
@@ -129,6 +131,7 @@ public class BsqTxView extends ActivatableView<GridPane, Void> implements BsqBal
         this.preferences = preferences;
         this.btcWalletService = btcWalletService;
         this.bsqBalanceUtil = bsqBalanceUtil;
+        this.bsqAddressHelper = bsqAddressHelper;
     }
 
     @Override
@@ -315,7 +318,7 @@ public class BsqTxView extends ActivatableView<GridPane, Void> implements BsqBal
                             daoFacade,
                             // Use tx.getIncludedInBestChainAt() when available, otherwise use tx.getUpdateTime()
                             transaction.getIncludedInBestChainAt() != null ? transaction.getIncludedInBestChainAt() : transaction.getUpdateTime(),
-                            bsqFormatter);
+                            bsqAddressHelper);
                 })
                 .collect(Collectors.toList());
         observableList.setAll(items);

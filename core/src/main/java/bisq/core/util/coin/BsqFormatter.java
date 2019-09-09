@@ -31,8 +31,6 @@ import bisq.core.util.validation.InputValidator;
 import bisq.common.app.DevEnv;
 import bisq.common.util.MathUtils;
 
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.AddressFormatException;
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.MonetaryFormat;
 
@@ -44,7 +42,6 @@ import java.text.NumberFormat;
 
 import java.util.Locale;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.jetbrains.annotations.NotNull;
@@ -73,8 +70,8 @@ public class BsqFormatter implements ICoinFormatter {
         this.coinFormat = BisqEnvironment.getParameters().getMonetaryFormat();
         this.coinFormatter = new ImmutableCoinFormatter(BisqEnvironment.getParameters().getMonetaryFormat());
 
-        GlobalSettings.localeProperty().addListener((observable, oldValue, newValue) -> setFormatter(newValue));
-        setFormatter(GlobalSettings.getLocale());
+        GlobalSettings.localeProperty().addListener((observable, oldValue, newValue) -> switchToLocale(newValue));
+        switchToLocale(GlobalSettings.getLocale());
 
         btcCoinFormat = coinFormat;
 
@@ -95,7 +92,7 @@ public class BsqFormatter implements ICoinFormatter {
         return coinFormat;
     }
 
-    private void setFormatter(Locale locale) {
+    private void switchToLocale(Locale locale) {
         amountFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);
         amountFormat.setMinimumFractionDigits(2);
         amountFormat.setMaximumFractionDigits(2);
@@ -103,30 +100,6 @@ public class BsqFormatter implements ICoinFormatter {
         marketCapFormat = (DecimalFormat) NumberFormat.getNumberInstance(locale);
         marketCapFormat = new DecimalFormat();
         marketCapFormat.setMaximumFractionDigits(0);
-    }
-
-    /**
-     * Returns the base-58 encoded String representation of this
-     * object, including version and checksum bytes.
-     */
-    public String getBsqAddressStringFromAddress(Address address) {
-        final String addressString = address.toString();
-        if (useBsqAddressFormat)
-            return prefix + addressString;
-        else
-            return addressString;
-
-    }
-
-    public Address getAddressFromBsqAddress(String encoded) {
-        if (useBsqAddressFormat)
-            encoded = encoded.substring(prefix.length(), encoded.length());
-
-        try {
-            return Address.fromBase58(BisqEnvironment.getParameters(), encoded);
-        } catch (AddressFormatException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public String formatAmountWithGroupSeparatorAndCode(Coin amount) {
@@ -162,7 +135,7 @@ public class BsqFormatter implements ICoinFormatter {
         return FormattingUtils.formatCoinWithCode(coin, btcCoinFormat);
     }
 
-    public String formatBTC(Coin coin) {
+    private String formatBTC(Coin coin) {
         return FormattingUtils.formatCoin(coin.value, btcCoinFormat);
     }
 
@@ -202,7 +175,7 @@ public class BsqFormatter implements ICoinFormatter {
         }
     }
 
-    public int parseParamValueToBlocks(Param param, String inputValue) {
+    private int parseParamValueToBlocks(Param param, String inputValue) {
         switch (param.getParamType()) {
             case BLOCK:
                 return Integer.parseInt(inputValue);
