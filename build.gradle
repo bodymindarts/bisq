@@ -227,7 +227,7 @@ configure(project(':p2p')) {
 }
 
 configure(project('bsqtrading')) {
-    mainClassName = 'bisq.Main'
+    mainClassName = 'bisq.bsqtrading.Main'
 
     dependencies {
       compileOnly "org.projectlombok:lombok:$lombokVersion"
