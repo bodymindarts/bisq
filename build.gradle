@@ -89,7 +89,8 @@ configure(subprojects) {
 }
 
 
-configure([project(':desktop'),
+configure([project(':bsqtrading'),
+           project(':desktop'),
            project(':monitor'),
            project(':relay'),
            project(':seednode'),
@@ -161,7 +162,6 @@ configure(project(':assets')) {
     }
 }
 
-
 configure(project(':common')) {
     apply plugin: 'com.google.protobuf'
 
@@ -226,6 +226,14 @@ configure(project(':p2p')) {
     }
 }
 
+configure(project('bsqtrading')) {
+    mainClassName = 'bisq.Main'
+
+    dependencies {
+      compileOnly "org.projectlombok:lombok:$lombokVersion"
+      annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+  }
+}
 
 configure(project(':core')) {
     dependencies {

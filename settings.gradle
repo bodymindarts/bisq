@@ -1,3 +1,4 @@
+include 'bsqtrading'
 include 'assets'
 include 'common'
 include 'p2p'
