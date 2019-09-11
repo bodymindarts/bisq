@@ -121,29 +121,6 @@ public class BSFormatter {
         }
     }
 
-    /**
-     * Converts to a fiat with max. 2 decimal places. Last place gets rounded.
-     * 0.234 -> 0.23
-     * 0.235 -> 0.24
-     *
-     * @param input
-     * @return
-     */
-
-    public static Fiat parseToFiatWithPrecision(String input, String currencyCode) {
-        if (input != null && input.length() > 0) {
-            try {
-                return parseToFiat(new BigDecimal(ParsingUtils.cleanDoubleInput(input)).setScale(2, BigDecimal.ROUND_HALF_UP).toString(),
-                        currencyCode);
-            } catch (Throwable t) {
-                log.warn("Exception at parseToFiatWithPrecision: " + t.toString());
-                return Fiat.valueOf(currencyCode, 0);
-            }
-
-        }
-        return Fiat.valueOf(currencyCode, 0);
-    }
-
     public static String getDirectionWithCodeDetailed(OfferPayload.Direction direction, String currencyCode) {
         if (CurrencyUtil.isFiatCurrency(currencyCode))
             return (direction == OfferPayload.Direction.BUY) ? Res.get("shared.buyingBTCWith", currencyCode) : Res.get("shared.sellingBTCFor", currencyCode);
