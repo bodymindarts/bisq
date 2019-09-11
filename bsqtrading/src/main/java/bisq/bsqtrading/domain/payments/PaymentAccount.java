@@ -1,9 +1,11 @@
 package bisq.bsqtrading.domain.payments;
 
+import bisq.bsqtrading.domain.primitives.CountryCode;
+
 public interface PaymentAccount {
     PaymentAccountId getId();
-    String getCountryCode();
-    String getBankId();
-    String getPaymentMethod();
+    PaymentMethod getPaymentMethod();
+    CountryCode getCountryCode();
+    BankId getBankId();
 }
 
