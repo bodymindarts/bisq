@@ -44,6 +44,7 @@ import bisq.core.trade.Trade;
 import bisq.core.user.Preferences;
 import bisq.core.util.BSFormatter;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.validation.InputValidator;
 
 import bisq.network.p2p.P2PService;
@@ -206,8 +207,8 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
         }
 
         amountRange = btcFormatter.formatCoin(offer.getMinAmount()) + " - " + btcFormatter.formatCoin(offer.getAmount());
-        price = BSFormatter.formatPrice(dataModel.tradePrice);
-        marketPriceMargin = BSFormatter.formatToPercent(offer.getMarketPriceMargin());
+        price = FormattingUtils.formatPrice(dataModel.tradePrice);
+        marketPriceMargin = FormattingUtils.formatToPercent(offer.getMarketPriceMargin());
         paymentLabel = Res.get("takeOffer.fundsBox.paymentLabel", offer.getShortId());
 
         checkNotNull(dataModel.getAddressEntry(), "dataModel.getAddressEntry() must not be null");
@@ -317,7 +318,7 @@ class TakeOfferViewModel extends ActivatableWithDataModel<TakeOfferDataModel> im
 
                 tradeFeeInBsqWithFiat.set(Res.get("createOffer.tradeFee.fiatAndPercent",
                         feeInFiatAsString,
-                        BSFormatter.formatToPercentWithSymbol(percent)));
+                        FormattingUtils.formatToPercentWithSymbol(percent)));
             }
         }
         tradeFeeDescription.set(DevEnv.isDaoActivated() ? Res.get("createOffer.tradeFee.descriptionBSQEnabled") :

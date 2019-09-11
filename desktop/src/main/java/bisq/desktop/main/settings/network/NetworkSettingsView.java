@@ -37,6 +37,7 @@ import bisq.core.filter.FilterManager;
 import bisq.core.locale.Res;
 import bisq.core.user.Preferences;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
 import bisq.network.p2p.network.Statistic;
@@ -277,8 +278,8 @@ public class NetworkSettingsView extends ActivatableViewAndModel<GridPane, Activ
         totalTrafficTextField.textProperty().bind(EasyBind.combine(Statistic.totalSentBytesProperty(),
                 Statistic.totalReceivedBytesProperty(),
                 (sent, received) -> Res.get("settings.net.sentReceived",
-                        BSFormatter.formatBytes((long) sent),
-                        BSFormatter.formatBytes((long) received))));
+                        FormattingUtils.formatBytes((long) sent),
+                        FormattingUtils.formatBytes((long) received))));
 
         sortedList.comparatorProperty().bind(tableView.comparatorProperty());
         tableView.setItems(sortedList);

@@ -48,6 +48,7 @@ import bisq.core.trade.closed.ClosedTradableManager;
 import bisq.core.user.Preferences;
 import bisq.core.user.User;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
 import bisq.network.p2p.P2PService;
@@ -176,9 +177,9 @@ class OfferBookViewModel extends ActivatableViewModel {
                 final OfferBookListItem item = highestAmountOffer.get();
                 if (!item.getOffer().isRange() && containsRangeAmount) {
                     maxPlacesForAmount.set(formatAmount(item.getOffer(), false)
-                            .length() * 2 + BSFormatter.RANGE_SEPARATOR.length());
+                            .length() * 2 + FormattingUtils.RANGE_SEPARATOR.length());
                     maxPlacesForVolume.set(formatVolume(item.getOffer(), false)
-                            .length() * 2 + BSFormatter.RANGE_SEPARATOR.length());
+                            .length() * 2 + FormattingUtils.RANGE_SEPARATOR.length());
                 } else {
                     maxPlacesForAmount.set(formatAmount(item.getOffer(), false).length());
                     maxPlacesForVolume.set(formatVolume(item.getOffer(), false).length());
@@ -360,7 +361,7 @@ class OfferBookViewModel extends ActivatableViewModel {
     }
 
     String getAbsolutePriceMargin(Offer offer) {
-        return BSFormatter.formatPercentagePrice(Math.abs(offer.getMarketPriceMargin()));
+        return FormattingUtils.formatPercentagePrice(Math.abs(offer.getMarketPriceMargin()));
     }
 
     private String formatPrice(Offer offer, boolean decimalAligned) {
@@ -370,12 +371,12 @@ class OfferBookViewModel extends ActivatableViewModel {
     private String formatMarketPriceMargin(Offer offer, boolean decimalAligned) {
         String postFix = "";
         if (offer.isUseMarketBasedPrice()) {
-            postFix = " (" + BSFormatter.formatPercentagePrice(offer.getMarketPriceMargin()) + ")";
+            postFix = " (" + FormattingUtils.formatPercentagePrice(offer.getMarketPriceMargin()) + ")";
 
         }
 
         if (decimalAligned) {
-            postFix = BSFormatter.fillUpPlacesWithEmptyStrings(postFix, maxPlacesForMarketPriceMargin.get());
+            postFix = FormattingUtils.fillUpPlacesWithEmptyStrings(postFix, maxPlacesForMarketPriceMargin.get());
         }
 
         return postFix;

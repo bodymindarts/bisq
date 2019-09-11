@@ -37,6 +37,7 @@ import bisq.core.locale.Res;
 import bisq.core.offer.Offer;
 import bisq.core.trade.Contract;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 import bisq.core.util.ParsingUtils;
 
 import bisq.common.UserThread;
@@ -267,7 +268,7 @@ public class DisputeSummaryWindow extends Overlay<DisputeSummaryWindow> {
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradeAmount"),
                 formatter.formatCoinWithCode(contract.getTradeAmount()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradePrice"),
-                BSFormatter.formatPrice(contract.getTradePrice()));
+                FormattingUtils.formatPrice(contract.getTradePrice()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradeVolume"),
                 DisplayUtils.formatVolumeWithCode(contract.getTradeVolume()));
         String securityDeposit = Res.getWithColAndCap("shared.buyer") +

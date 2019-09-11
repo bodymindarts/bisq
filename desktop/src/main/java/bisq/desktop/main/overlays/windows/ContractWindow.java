@@ -34,6 +34,7 @@ import bisq.core.payment.payload.PaymentAccountPayload;
 import bisq.core.payment.payload.PaymentMethod;
 import bisq.core.trade.Contract;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.common.UserThread;
 import bisq.common.crypto.PubKeyRing;
@@ -139,7 +140,7 @@ public class ContractWindow extends Overlay<ContractWindow> {
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.offerType"),
                 DisplayUtils.getDirectionBothSides(offer.getDirection(), currencyCode));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradePrice"),
-                BSFormatter.formatPrice(contract.getTradePrice()));
+                FormattingUtils.formatPrice(contract.getTradePrice()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, Res.get("shared.tradeAmount"),
                 formatter.formatCoinWithCode(contract.getTradeAmount()));
         addConfirmationLabelLabel(gridPane, ++rowIndex, DisplayUtils.formatVolumeLabel(currencyCode, ":"),

@@ -38,6 +38,7 @@ import bisq.core.trade.Trade;
 import bisq.core.trade.TradeChatSession;
 import bisq.core.user.Preferences;
 import bisq.core.util.BSFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.NodeAddress;
 
@@ -537,7 +538,7 @@ public class PendingTradesView extends ActivatableViewAndModel<VBox, PendingTrad
                             public void updateItem(final PendingTradesListItem item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null && !empty)
-                                    setGraphic(new AutoTooltipLabel(BSFormatter.formatPrice(item.getPrice())));
+                                    setGraphic(new AutoTooltipLabel(FormattingUtils.formatPrice(item.getPrice())));
                                 else
                                     setGraphic(null);
                             }

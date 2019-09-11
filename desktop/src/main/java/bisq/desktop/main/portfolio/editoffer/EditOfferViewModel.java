@@ -32,6 +32,7 @@ import bisq.core.provider.price.PriceFeedService;
 import bisq.core.user.Preferences;
 import bisq.core.util.BSFormatter;
 import bisq.core.util.BsqFormatter;
+import bisq.core.util.FormattingUtils;
 
 import bisq.network.p2p.P2PService;
 
@@ -73,12 +74,12 @@ class EditOfferViewModel extends MutableOfferViewModel<EditOfferDataModel> {
 
     public void onInvalidateMarketPriceMargin() {
         marketPriceMargin.set("0.00%");
-        marketPriceMargin.set(BSFormatter.formatToPercent(dataModel.getMarketPriceMargin()));
+        marketPriceMargin.set(FormattingUtils.formatToPercent(dataModel.getMarketPriceMargin()));
     }
 
     public void onInvalidatePrice() {
-        price.set(BSFormatter.formatPrice(null));
-        price.set(BSFormatter.formatPrice(dataModel.getPrice().get()));
+        price.set(FormattingUtils.formatPrice(null));
+        price.set(FormattingUtils.formatPrice(dataModel.getPrice().get()));
     }
 
     public boolean isSecurityDepositValid() {
