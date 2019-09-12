@@ -1,10 +1,6 @@
 package bisq.bsqtrading.domain.payments;
 
-import java.util.UUID;
-
 import lombok.Getter;
-
-
 
 import bisq.bsqtrading.domain.primitives.CountryCode;
 import bisq.bsqtrading.domain.primitives.Id;

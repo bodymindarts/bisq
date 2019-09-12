@@ -1,7 +1,8 @@
 package bisq.bsqtrading.domain.offer;
 
 public class OfferPrice {
-    private static final OfferPrice marketOffer = new OfferPrice(0);
+    private static final long MARKET_OFFER_PRICE = -1;
+    private static final OfferPrice marketOffer = new OfferPrice(MARKET_OFFER_PRICE);
 
     public static OfferPrice marketOfferPrice() {
       return marketOffer;
@@ -9,11 +10,11 @@ public class OfferPrice {
 
     private final long price;
 
-    public OfferPrice(long price) {
+    private OfferPrice(long price) {
         this.price = price;
     }
 
     public boolean isMarketOffer() {
-        return price == 0;
+        return price == MARKET_OFFER_PRICE;
     }
 }
