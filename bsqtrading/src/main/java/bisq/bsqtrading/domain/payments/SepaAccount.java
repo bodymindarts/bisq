@@ -7,14 +7,15 @@ import lombok.Getter;
 
 
 import bisq.bsqtrading.domain.primitives.CountryCode;
+import bisq.bsqtrading.domain.primitives.Id;
 
 public class SepaAccount implements PaymentAccount{
     public static PaymentAccount createSepaAccount(CountryCode countryCode, BankId bankId) {
-        return new SepaAccount(new PaymentAccountId(UUID.randomUUID().toString()), countryCode, bankId, PaymentMethod.SEPA);
+        return new SepaAccount(Id.generateNewId(), countryCode, bankId, PaymentMethod.SEPA);
     }
 
     @Getter
-    private final PaymentAccountId id;
+    private final Id<PaymentAccount> id;
     @Getter
     private final CountryCode countryCode;
     @Getter
@@ -22,7 +23,7 @@ public class SepaAccount implements PaymentAccount{
     @Getter
     private final PaymentMethod paymentMethod;
 
-    private SepaAccount(PaymentAccountId id, CountryCode countryCode, BankId bankId, PaymentMethod paymentMethod) {
+    private SepaAccount(Id<PaymentAccount> id, CountryCode countryCode, BankId bankId, PaymentMethod paymentMethod) {
         this.id = id;
         this.countryCode = countryCode;
         this.bankId = bankId;

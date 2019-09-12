@@ -8,14 +8,15 @@ import static org.junit.Assert.assertTrue;
 
 
 
-import bisq.bsqtrading.domain.payments.PaymentAccountId;
+import bisq.bsqtrading.domain.payments.PaymentAccount;
 import bisq.bsqtrading.domain.primitives.Currency;
+import bisq.bsqtrading.domain.primitives.Id;
 
 public class CreateOfferTest {
     @Test
     public void testThing() {
-        Mediator.Id mediatorId = new Mediator.Id("bla");
-        PaymentAccountId accountId = new PaymentAccountId("account");
+        Id<Mediator> mediatorId = Id.generateNewId();
+        Id<PaymentAccount> accountId = Id.generateNewId();
         CreateOfferParams params = new CreateOfferParams(Direction.SELL, OfferPrice.marketOfferPrice(),10,10, Currency.USD,Currency.BTC, List.of(mediatorId), accountId);
         new CreateOffer(params).execute();
         assertTrue(true);
