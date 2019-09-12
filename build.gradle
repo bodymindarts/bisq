@@ -230,6 +230,7 @@ configure(project('bsqtrading')) {
     mainClassName = 'bisq.bsqtrading.Main'
 
     dependencies {
+      compile "com.google.guava:guava:$guavaVersion"
       compileOnly "org.projectlombok:lombok:$lombokVersion"
       annotationProcessor "org.projectlombok:lombok:$lombokVersion"
   }
