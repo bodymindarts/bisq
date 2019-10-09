@@ -74,6 +74,7 @@ import java.security.PublicKey;
 
 import java.time.Clock;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -86,12 +87,17 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import java.lang.reflect.Array;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Nullable;
+
+
+
 
 @Slf4j
 public class P2PDataStorage implements MessageListener, ConnectionListener, PersistedDataHost {
@@ -229,7 +235,9 @@ public class P2PDataStorage implements MessageListener, ConnectionListener, Pers
         if (networkEnvelope instanceof BroadcastMessage) {
             connection.getPeersNodeAddressOptional().ifPresent(peersNodeAddress -> {
                 if (networkEnvelope instanceof AddDataMessage) {
-                    addProtectedStorageEntry(((AddDataMessage) networkEnvelope).getProtectedStorageEntry(), peersNodeAddress, null, false);
+                    ProtectedStorageEntry msg = ((AddDataMessage) networkEnvelope).getProtectedStorageEntry();
+                    msg.originalBytes = networkEnvelope.originalBytes;
+                    addProtectedStorageEntry(msg, peersNodeAddress, null, false);
                 } else if (networkEnvelope instanceof RemoveDataMessage) {
                     remove(((RemoveDataMessage) networkEnvelope).getProtectedStorageEntry(), peersNodeAddress, false);
                 } else if (networkEnvelope instanceof RemoveMailboxDataMessage) {
@@ -388,6 +396,24 @@ public class P2PDataStorage implements MessageListener, ConnectionListener, Pers
 
         boolean containsKey = map.containsKey(hashOfPayload);
         if (containsKey) {
+            ProtectedStorageEntry lastEntry = map.get(hashOfPayload);
+            if( protectedStorageEntry.originalBytes != null) {
+                if (lastEntry.originalBytes == null || lastEntry.originalBytes.length != protectedStorageEntry.originalBytes.length) {
+                    log.warn("REPRO - updating payload (last entry was probably from seed, not from network)");
+                    map.put(hashOfPayload, protectedStorageEntry);
+                } else {
+                    if (!Arrays.equals(lastEntry.originalBytes, protectedStorageEntry.originalBytes)) {
+                        log.warn("REPRO - BYTES OF LAST MESSAGE != BYTES OF THIS MESSAGE -> different serialization but same hash");
+                        log.warn(lastEntry.getProtectedStoragePayload().toString());
+                        log.warn(protectedStorageEntry.getProtectedStoragePayload().toString());
+                        log.warn(Arrays.toString(lastEntry.originalBytes));
+                        log.warn(Arrays.toString(protectedStorageEntry.originalBytes));
+                    } else {
+                        log.warn("REPRO - BYTES ARE ==");
+                    }
+                }
+            }
+
             result = result && checkIfStoredDataPubKeyMatchesNewDataPubKey(protectedStorageEntry.getOwnerPubKey(), hashOfPayload);
         }
 

@@ -47,6 +47,8 @@ import bisq.common.proto.network.NetworkEnvelope;
 import bisq.common.proto.network.NetworkProtoResolver;
 import bisq.common.util.Utilities;
 
+import com.google.protobuf.CodedInputStream;
+
 import javax.inject.Inject;
 
 import com.google.common.util.concurrent.MoreExecutors;
@@ -67,6 +69,7 @@ import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
@@ -710,7 +713,23 @@ public class Connection implements HasCapabilities, Runnable, MessageListener {
                     }
 
                     // Reading the protobuffer message from the inputStream
-                    protobuf.NetworkEnvelope proto = protobuf.NetworkEnvelope.parseDelimitedFrom(protoInputStream);
+                    int firstByte = protoInputStream.read();
+                    int size;
+                    protobuf.NetworkEnvelope proto = null;
+                    byte[] bytes = null;
+                    if (firstByte != -1) {
+                        size = CodedInputStream.readRawVarint32(firstByte, protoInputStream);
+                        int off = 0;
+                        bytes = new byte[size];
+                        while (off < size) {
+                            int read = protoInputStream.read(bytes,off,size-off);
+                            if (read < 0) {
+                                break;
+                            }
+                            off += read;
+                        }
+                        proto = protobuf.NetworkEnvelope.parseFrom(bytes);
+                    }
 
                     if (proto == null) {
                         if (protoInputStream.read() == -1)
@@ -722,9 +741,10 @@ public class Connection implements HasCapabilities, Runnable, MessageListener {
                     }
 
                     NetworkEnvelope networkEnvelope = networkProtoResolver.fromProto(proto);
+                    networkEnvelope.originalBytes=bytes;
                     lastReadTimeStamp = now;
                     log.debug("<< Received networkEnvelope of type: {}", networkEnvelope.getClass().getSimpleName());
-                    int size = proto.getSerializedSize();
+                    size = proto.getSerializedSize();
                     // We comment out that part as only debug and trace log level is used. For debugging purposes
                     // we leave the code though.
                         /*if (networkEnvelope instanceof Pong || networkEnvelope instanceof RefreshOfferMessage) {

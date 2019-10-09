@@ -388,42 +388,42 @@ public final class OfferPayload implements ProtectedStoragePayload, ExpirablePay
     @Override
     public String toString() {
         return "OfferPayload{" +
-                "\n     id='" + id + '\'' +
-                ",\n     date=" + new Date(date) +
-                ",\n     ownerNodeAddress=" + ownerNodeAddress +
-                ",\n     pubKeyRing=" + pubKeyRing +
-                ",\n     direction=" + direction +
-                ",\n     price=" + price +
-                ",\n     marketPriceMargin=" + marketPriceMargin +
-                ",\n     useMarketBasedPrice=" + useMarketBasedPrice +
-                ",\n     amount=" + amount +
-                ",\n     minAmount=" + minAmount +
-                ",\n     baseCurrencyCode='" + baseCurrencyCode + '\'' +
-                ",\n     counterCurrencyCode='" + counterCurrencyCode + '\'' +
-                ",\n     paymentMethodId='" + paymentMethodId + '\'' +
-                ",\n     makerPaymentAccountId='" + makerPaymentAccountId + '\'' +
-                ",\n     offerFeePaymentTxId='" + offerFeePaymentTxId + '\'' +
-                ",\n     countryCode='" + countryCode + '\'' +
-                ",\n     acceptedCountryCodes=" + acceptedCountryCodes +
-                ",\n     bankId='" + bankId + '\'' +
-                ",\n     acceptedBankIds=" + acceptedBankIds +
-                ",\n     versionNr='" + versionNr + '\'' +
-                ",\n     blockHeightAtOfferCreation=" + blockHeightAtOfferCreation +
-                ",\n     txFee=" + txFee +
-                ",\n     makerFee=" + makerFee +
-                ",\n     isCurrencyForMakerFeeBtc=" + isCurrencyForMakerFeeBtc +
-                ",\n     buyerSecurityDeposit=" + buyerSecurityDeposit +
-                ",\n     sellerSecurityDeposit=" + sellerSecurityDeposit +
-                ",\n     maxTradeLimit=" + maxTradeLimit +
-                ",\n     maxTradePeriod=" + maxTradePeriod +
-                ",\n     useAutoClose=" + useAutoClose +
-                ",\n     useReOpenAfterAutoClose=" + useReOpenAfterAutoClose +
-                ",\n     lowerClosePrice=" + lowerClosePrice +
-                ",\n     upperClosePrice=" + upperClosePrice +
-                ",\n     isPrivateOffer=" + isPrivateOffer +
-                ",\n     hashOfChallenge='" + hashOfChallenge + '\'' +
-                ",\n     extraDataMap=" + extraDataMap +
-                ",\n     protocolVersion=" + protocolVersion +
-                "\n}";
+                "id='" + id + '\'' +
+                ", date=" + new Date(date) +
+                ", deAddress=" + ownerNodeAddress +
+                ", pubKeyRing=" + pubKeyRing +
+                ", direction=" + direction +
+                ", price=" + price +
+                ", marketPriceMargin=" + marketPriceMargin +
+                ", useMarketBasedPrice=" + useMarketBasedPrice +
+                ", amount=" + amount +
+                ", minAmount=" + minAmount +
+                ", baseCurrencyCode='" + baseCurrencyCode + '\'' +
+                ", counterCurrencyCode='" + counterCurrencyCode + '\'' +
+                ", paymentMethodId='" + paymentMethodId + '\'' +
+                ", makerPaymentAccountId='" + makerPaymentAccountId + '\'' +
+                ", offerFeePaymentTxId='" + offerFeePaymentTxId + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", acceptedCountryCodes=" + acceptedCountryCodes +
+                ", bankId='" + bankId + '\'' +
+                ", acceptedBankIds=" + acceptedBankIds +
+                ", versionNr='" + versionNr + '\'' +
+                ", blockHeightAtOfferCreation=" + blockHeightAtOfferCreation +
+                ", txFee=" + txFee +
+                ", makerFee=" + makerFee +
+                ", isCurrencyForMakerFeeBtc=" + isCurrencyForMakerFeeBtc +
+                ", buyerSecurityDeposit=" + buyerSecurityDeposit +
+                ", sellerSecurityDeposit=" + sellerSecurityDeposit +
+                ", maxTradeLimit=" + maxTradeLimit +
+                ", maxTradePeriod=" + maxTradePeriod +
+                ", useAutoClose=" + useAutoClose +
+                ", useReOpenAfterAutoClose=" + useReOpenAfterAutoClose +
+                ", lowerClosePrice=" + lowerClosePrice +
+                ", upperClosePrice=" + upperClosePrice +
+                ", isPrivateOffer=" + isPrivateOffer +
+                ", hashOfChallenge='" + hashOfChallenge + '\'' +
+                ", extraDataMap=" + extraDataMap +
+                ", protocolVersion=" + protocolVersion +
+                "}";
     }
 }

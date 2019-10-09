@@ -35,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @EqualsAndHashCode
 @Slf4j
 public class ProtectedStorageEntry implements NetworkPayload, PersistablePayload {
+    public byte[] originalBytes;
     private final ProtectedStoragePayload protectedStoragePayload;
     private final byte[] ownerPubKeyBytes;
     transient private final PublicKey ownerPubKey;

@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 public abstract class NetworkEnvelope implements Envelope {
 
     protected final int messageVersion;
+    public byte[] originalBytes;
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
