@@ -404,10 +404,11 @@ public class P2PDataStorage implements MessageListener, ConnectionListener, Pers
                 } else {
                     if (!Arrays.equals(lastEntry.originalBytes, protectedStorageEntry.originalBytes)) {
                         log.warn("REPRO - BYTES OF LAST MESSAGE != BYTES OF THIS MESSAGE -> different serialization but same hash");
-                        log.warn(lastEntry.getProtectedStoragePayload().toString());
-                        log.warn(protectedStorageEntry.getProtectedStoragePayload().toString());
-                        log.warn(Arrays.toString(lastEntry.originalBytes));
-                        log.warn(Arrays.toString(protectedStorageEntry.originalBytes));
+                        for (int n = 0;n<lastEntry.originalBytes.length;n++) {
+                            if( lastEntry.originalBytes[n] != protectedStorageEntry.originalBytes[n]) {
+                                log.warn("Bytes differ in pos {} of {}", n, lastEntry.originalBytes.length);
+                            }
+                        }
                     } else {
                         log.warn("REPRO - BYTES ARE ==");
                     }
