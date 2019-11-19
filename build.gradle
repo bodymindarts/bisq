@@ -1,8 +1,10 @@
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.1'
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
         classpath 'com.google.gradle:osdetector-gradle-plugin:1.6.0'
         classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.2'
@@ -21,7 +23,16 @@ configure(rootProject) {
     }
 }
 
-configure(subprojects) {
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+configure(subprojects - project(':android')) {
     apply plugin: 'kotlin'
     apply plugin: 'java'
     apply plugin: 'com.google.osdetector'
@@ -73,11 +84,6 @@ configure(subprojects) {
         springVersion = '4.3.6.RELEASE'
 
         os = osdetector.os == 'osx' ? 'mac' : osdetector.os == 'windows' ? 'win' : osdetector.os
-    }
-
-    repositories {
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
@@ -469,5 +475,41 @@ configure(project(':grpc')) {
         testCompile "com.natpryce:make-it-easy:$easyVersion"
         testCompileOnly "org.projectlombok:lombok:$lombokVersion"
         testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    }
+}
+
+configure(project(':android')) {
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+
+    android {
+      compileSdkVersion 29
+      buildToolsVersion "29.0.2"
+      defaultConfig {
+        applicationId "bisq.android"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+      }
+      buildTypes {
+        release {
+          minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+          }
+        }
+    }
+
+    dependencies {
+      implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
+        implementation 'androidx.appcompat:appcompat:1.1.0'
+        implementation 'androidx.core:core-ktx:1.1.0'
+        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     }
 }
